@@ -12,6 +12,7 @@ CONTRIBUTING.md
 README.md
 REPOSITORY-MANIFEST.txt
 docs/adr/0001-use-monorepo.md
+docs/adr/0002-staged-application-persistence.md
 docs/ai/accepted-risk-log.md
 docs/ai/ai-development-workflow.md
 docs/ai/implementation-agent-prompt.md
@@ -34,6 +35,7 @@ docs/standards/README.md
 docs/standards/api/http-api.md
 docs/standards/architecture/integration.md
 docs/standards/architecture/layering.md
+docs/standards/coding/azure-functions.md
 docs/standards/coding/dotnet.md
 docs/standards/coding/frontend.md
 docs/standards/coding/general.md
@@ -51,6 +53,8 @@ infrastructure/terraform/README.md
 scripts/test-backend.sh
 scripts/test-frontend.sh
 scripts/validate.sh
+src/backend/AGENTS.md
 src/backend/README.md
+src/frontend/AGENTS.md
 src/frontend/README.md
 tests/README.md
