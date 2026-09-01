@@ -1,0 +1,35 @@
+# .NET
+bin/
+obj/
+*.user
+
+# Node
+node_modules/
+dist/
+coverage/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+*.pfx
+*.pem
+*.key
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+*.tfplan
+
+# IDE / OS
+.vs/
+.vscode/settings.json
+.idea/
+.DS_Store
+Thumbs.db
+
+# AI temporary working context
+docs/ai/tmp/
+.ai/context/

@@ -1,0 +1,90 @@
+name: AI-assisted development task
+description: Structured development task suitable for AI-assisted planning, implementation, and review.
+title: "[Task]: "
+labels: ["ai-candidate"]
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: What outcome should the user or system achieve?
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Relevant product and technical context. Do not invent missing rules.
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: Testable conditions that define when the task is complete.
+      placeholder: |
+        - [ ] ...
+        - [ ] ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: outofscope
+    attributes:
+      label: Out of scope
+      description: What is intentionally not part of this task?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: tasklevel
+    attributes:
+      label: Task level
+      options:
+        - Small / low risk
+        - Standard
+        - High-risk / architectural
+    validations:
+      required: true
+
+  - type: dropdown
+    id: plan
+    attributes:
+      label: Implementation plan
+      options:
+        - Not required
+        - Short plan required
+        - Full plan required
+    validations:
+      required: true
+
+  - type: textarea
+    id: affected
+    attributes:
+      label: Likely affected areas
+      description: Backend, frontend, integration, infrastructure, API, data, tests, documentation, etc.
+
+  - type: textarea
+    id: risks
+    attributes:
+      label: Risks, dependencies, and open questions
+
+  - type: textarea
+    id: validation
+    attributes:
+      label: Expected validation
+      description: Which tests or validation steps should demonstrate that the change is correct?
+
+  - type: checkboxes
+    id: readiness
+    attributes:
+      label: Readiness check
+      options:
+        - label: A human has reviewed the product scope and acceptance criteria.
+          required: true
+        - label: A developer has confirmed the task level and planning requirement.
+          required: true
+        - label: Known risks and uncertainties are documented.
+          required: true
