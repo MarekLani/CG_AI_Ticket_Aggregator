@@ -26,11 +26,13 @@ When working in a directory that contains a more specific `AGENTS.md`, read and 
 Area-specific standards:
 
 - all code: `docs/standards/coding/general.md`
-- backend: `docs/standards/coding/dotnet.md`, `docs/standards/architecture/layering.md`, `docs/standards/api/http-api.md`
+- backend core: `docs/standards/coding/dotnet.md`, `docs/standards/coding/azure-functions.md`, `docs/standards/architecture/layering.md`
+- HTTP/API changes: `docs/standards/api/http-api.md`
 - frontend core: `docs/standards/coding/frontend.md`
 - user-facing layout, interaction, or visual behavior: `docs/standards/ui/design-system.md`
 - accessibility-sensitive UI changes: `docs/standards/ui/accessibility.md`
 - integrations: `docs/standards/architecture/integration.md`
+- persistence/EF Core changes: `docs/adr/0002-staged-application-persistence.md`
 - tests: `docs/standards/testing/general.md` plus the relevant area-specific test standard
 - containers: `docs/standards/infrastructure/containers.md`
 - Terraform / Azure: `docs/standards/infrastructure/terraform.md`, `docs/standards/infrastructure/azure.md`
