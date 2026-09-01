@@ -12,7 +12,7 @@ Planner ─────────┼──> Source adapters/connectors ──>
 GitHub Issues ───┘
 ```
 
-A persistence/cache layer and background synchronization may be added when justified by requirements. They are not assumed as mandatory for the first RM vertical slice.
+A persistence/cache layer and background synchronization may be added when justified by requirements. They are not mandatory for the first RM vertical slice. The staged persistence decision and preliminary PostgreSQL/EF Core direction are recorded in `docs/adr/0002-staged-application-persistence.md`.
 
 ## Architectural principles
 
@@ -31,8 +31,8 @@ A persistence/cache layer and background synchronization may be added when justi
 The following require explicit issue/ADR decisions before implementation:
 - exact Azure compute service;
 - whether frontend and backend share one or multiple deployable containers;
-- persistence/cache requirement and technology;
-- background synchronization topology and cadence;
+- exact persistence use case, data model and synchronization topology when persistence is introduced;
+- background synchronization cadence;
 - authentication/authorization model;
 - connectivity from Azure to RM source;
 - secret storage/runtime identity design.
