@@ -21,17 +21,23 @@ Before starting work, read:
 5. standards relevant to the affected area;
 6. relevant files under `docs/architecture/` and `docs/adr/`.
 
+When working in a directory that contains a more specific `AGENTS.md`, read and follow it in addition to this root file.
+
 Area-specific standards:
 
 - all code: `docs/standards/coding/general.md`
 - backend: `docs/standards/coding/dotnet.md`, `docs/standards/architecture/layering.md`, `docs/standards/api/http-api.md`
-- frontend: `docs/standards/coding/frontend.md`, `docs/standards/ui/design-system.md`, `docs/standards/ui/accessibility.md`
+- frontend core: `docs/standards/coding/frontend.md`
+- user-facing layout, interaction, or visual behavior: `docs/standards/ui/design-system.md`
+- accessibility-sensitive UI changes: `docs/standards/ui/accessibility.md`
 - integrations: `docs/standards/architecture/integration.md`
 - tests: `docs/standards/testing/general.md` plus the relevant area-specific test standard
 - containers: `docs/standards/infrastructure/containers.md`
 - Terraform / Azure: `docs/standards/infrastructure/terraform.md`, `docs/standards/infrastructure/azure.md`
-- security: `docs/standards/security.md`
-- logging and metrics: `docs/standards/observability.md`
+- security-sensitive changes: `docs/standards/security.md`
+- logging, telemetry, and metrics: `docs/standards/observability.md`
+
+Load only the standards relevant to the task. Do not preload unrelated standards merely because they exist in the repository.
 
 ## General rules
 
