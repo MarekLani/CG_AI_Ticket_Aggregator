@@ -2,7 +2,7 @@
 
 ## Repository purpose
 
-This repository contains **Unified Work Items**, an internal read-oriented web application that aggregates work items from RM/helpdesk, Microsoft Planner, and GitHub Issues.
+This repository contains **Unified Work Items**, an internal read-oriented web application that aggregates work items from Helpdesk, Microsoft Planner, and GitHub Issues.
 
 Read `docs/product/solution-overview.md` before planning, implementing, or reviewing changes.
 
@@ -63,13 +63,13 @@ Load only the standards relevant to the task. Do not preload unrelated standards
 - Maintain one authoritative place for each decision or rule. Reference it from other documents instead of duplicating the same explanation.
 - Prefer updating an existing relevant document over creating a new file for closely related information.
 
-## RM-specific rules
+## Helpdesk-specific rules
 
-- `I_POZIAD` is the unique external identifier of an RM requirement.
-- The first RM integration reads from `VW_RM_POZIAD`.
-- Do not infer the meaning of similarly named RM status fields from column names alone.
+- `I_POZIAD` is the unique external identifier of a Helpdesk work item.
+- The first Helpdesk integration reads from `VW_RM_POZIAD`.
+- Do not infer the meaning of similarly named Helpdesk status fields from column names alone.
 - The initial field mapping is documented in `docs/architecture/data-flows.md`.
-- Add additional RM fields only when an issue defines a concrete use case and the field semantics are known.
+- Add additional Helpdesk fields only when an issue defines a concrete use case and the field semantics are known.
 
 ## Stop conditions
 
