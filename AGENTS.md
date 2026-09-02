@@ -34,6 +34,8 @@ Area-specific standards:
 - integrations: `docs/standards/architecture/integration.md`
 - persistence/EF Core changes: `docs/adr/0002-staged-application-persistence.md`
 - platform requirements: `docs/architecture/infrastructure-requirements.md`
+- delivery strategy and environments: `docs/architecture/deployment.md`
+- GitHub Actions changes: `docs/standards/cicd/github-actions.md`
 - tests: `docs/standards/testing/general.md` plus the relevant area-specific test standard
 - containers: `docs/standards/infrastructure/containers.md`
 - security-sensitive changes: `docs/standards/security.md`
@@ -79,6 +81,7 @@ Stop and ask the responsible developer when:
 - a required mapping or source-system semantic is not explicitly documented;
 - the issue or plan conflicts with a standard or ADR;
 - implementation requires a new architectural choice that has not been approved;
+- a CI/CD change depends on an undefined deployment target, credential model, tag/release convention, or environment behavior;
 - a secret or protected environment is required;
 - required tests or validation cannot be executed;
 - the scope expands materially beyond the approved issue or plan.

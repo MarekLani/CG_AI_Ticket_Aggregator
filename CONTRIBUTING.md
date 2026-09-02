@@ -4,14 +4,16 @@
 
 Do not start non-trivial work from an untracked chat instruction. Convert the requirement into a reviewed GitHub Issue first.
 
-## Branch naming
+## Git strategy
+
+Repository policy requires `main` to be the protected integration branch. Work happens on short-lived branches created from the current `main`; no long-lived `develop` or release branches are planned.
 
 Preferred patterns:
 - `feature/<issue>-short-description`
 - `fix/<issue>-short-description`
 - `docs/<issue>-short-description`
 
-Keep branches short-lived and scoped to one issue or one coherent part of a larger issue.
+Open a pull request back to `main` and keep the branch scoped to one issue or one coherent part of a larger issue. CI/CD trigger and environment rules are defined in `docs/architecture/deployment.md`.
 
 ## Pull requests
 
