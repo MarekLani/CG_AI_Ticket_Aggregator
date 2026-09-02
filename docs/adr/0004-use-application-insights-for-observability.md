@@ -7,6 +7,8 @@
 
 The application has a React browser client and a .NET isolated Azure Functions backend. It needs correlated full-stack diagnostics while keeping trusted server telemetry separate from telemetry produced in an untrusted browser environment.
 
+Separate frontend and backend Application Insights resources isolate untrusted browser telemetry from trusted backend operational telemetry while preserving consolidated querying and distributed trace correlation.
+
 ## Decision
 
 Use Azure Monitor Application Insights as the application observability platform.
