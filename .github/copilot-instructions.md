@@ -10,4 +10,4 @@ Before planning, implementing, or reviewing:
 - use the linked GitHub issue as the authoritative source of requested behavior;
 - use the latest human-approved canonical `Implementation Plan` issue comment when one is required.
 
-Do not invent business rules, RM field semantics, status mappings, or Azure architecture choices. Do not handle secrets or production/customer data.
+Do not invent business rules, Helpdesk source-field semantics, status mappings, or Azure architecture choices. Do not handle secrets or production/customer data.

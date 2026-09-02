@@ -2,13 +2,13 @@
 
 Unified Work Items is an internal web application that provides a single read-oriented view of work items originating in multiple systems.
 
-The initial source is the existing RM/helpdesk application exposed through the `VW_RM_POZIAD` view. Microsoft Planner tasks and GitHub Issues are planned as later connectors. Source systems remain the systems of record; this application normalizes selected fields for search, filtering, and operational overview.
+The initial source is the existing Helpdesk application exposed through the `VW_RM_POZIAD` view. Microsoft Planner tasks and GitHub Issues are planned as later connectors. Source systems remain the systems of record; this application normalizes selected fields for search, filtering, and operational overview.
 
 ## Initial product goal
 
-Provide a simple web page where users can see and filter important open work across RM, Planner, and GitHub without checking each source separately.
+Provide a simple web page where users can see and filter important open work across Helpdesk, Planner, and GitHub without checking each source separately.
 
-The first vertical slice intentionally covers only RM:
+The first vertical slice intentionally covers only Helpdesk:
 
 `VW_RM_POZIAD -> backend connector -> normalized WorkItem -> HTTP API -> React list`
 
@@ -33,7 +33,7 @@ Start with `AGENTS.md` before using any coding agent in this repository.
 
 - Backend: .NET 10 / Azure Functions isolated worker
 - Frontend: React + TypeScript + Vite
-- Integration: RM first; Planner and GitHub later
+- Integration: Helpdesk first; Planner and GitHub later
 - Target hosting: Azure
 - CI/CD: GitHub Actions
 

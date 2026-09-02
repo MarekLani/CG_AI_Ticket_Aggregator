@@ -1,11 +1,11 @@
 # Data flows
 
-## Initial RM read flow
+## Initial Helpdesk read flow
 
 ```text
 VW_RM_POZIAD
-  -> RM connector query/projection
-  -> RM source DTO
+  -> Helpdesk connector query/projection
+  -> Helpdesk source DTO
   -> explicit mapper
   -> normalized WorkItem
   -> API response
@@ -14,7 +14,7 @@ VW_RM_POZIAD
 
 Initial mapping candidate:
 
-| WorkItem concept | RM field |
+| WorkItem concept | Helpdesk field |
 |---|---|
 | externalId | `I_POZIAD` |
 | title | `N_POZIAD` |

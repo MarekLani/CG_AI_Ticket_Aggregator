@@ -10,8 +10,8 @@
 - Make connectors testable without calling real production systems.
 - Never invent source-field semantics. Unknown semantics are an open question.
 
-## RM
+## Helpdesk
 
-- `I_POZIAD` is the unique RM external identifier.
+- `I_POZIAD` is the unique Helpdesk external identifier.
 - First integration is read-only from `VW_RM_POZIAD`.
 - Project only fields needed by the current use case; do not `SELECT *` in application code.
