@@ -14,7 +14,7 @@ GitHub Issues ───┘
 
 A persistence/cache layer may be added when justified. It is not required for the first Helpdesk vertical slice. See ADR 0002.
 
-Infrastructure implementation lives in a separate repository as decided in ADR 0001.
+Infrastructure implementation lives in a separate repository as decided in ADR 0001. Application identity architecture is defined in ADR 0003.
 
 ## Architectural principles
 
@@ -22,7 +22,6 @@ Infrastructure implementation lives in a separate repository as decided in ADR 0
 - source-specific logic stays behind connector boundaries;
 - UI consumes a source-neutral API model;
 - external dependencies are wrapped and testable;
-- Microsoft Entra ID / Microsoft identity platform is the application identity baseline;
 - secrets are never committed;
 - agents must not invent business mappings or source-system semantics.
 

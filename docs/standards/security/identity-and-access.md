@@ -1,11 +1,6 @@
 # Identity and access standard
 
-## Baseline
-
-- Microsoft Entra ID / Microsoft identity platform is the standard identity platform for application authentication and protected API access.
-- Use standards-based OpenID Connect for interactive sign-in and OAuth 2.0 access tokens for API access. Do not introduce custom authentication or token formats.
-- Represent protected APIs through Entra app registrations. Expose delegated scopes for user-context access and application permissions/app roles only when app-only access is required.
-- Exact tenant model, app-registration topology, scopes/app roles, and business authorization roles require explicit approved design.
+Identity architecture is defined in ADR 0003. This document defines implementation rules for that architecture.
 
 ## User and delegated access
 

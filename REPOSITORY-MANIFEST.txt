@@ -13,6 +13,7 @@ README.md
 REPOSITORY-MANIFEST.txt
 docs/adr/0001-separate-application-and-infrastructure-repositories.md
 docs/adr/0002-staged-application-persistence.md
+docs/adr/0003-use-microsoft-entra-id-for-application-identity.md
 docs/ai/accepted-risk-log.md
 docs/ai/ai-development-workflow.md
 docs/ai/implementation-agent-prompt.md
