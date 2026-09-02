@@ -7,12 +7,12 @@ Repository currently contains engineering context and AI workflow wiring. Applic
 ## Target logical architecture
 
 ```text
-Helpdesk ────────┐
+RM/helpdesk ─────┐
 Planner ─────────┼──> Source adapters/connectors ──> Unified application model ──> HTTP API ──> React UI
 GitHub Issues ───┘
 ```
 
-A persistence/cache layer may be added when justified. It is not required for the first helpdesk vertical slice. See ADR 0002.
+A persistence/cache layer may be added when justified. It is not required for the first RM vertical slice. See ADR 0002.
 
 Infrastructure implementation lives in a separate repository as decided in ADR 0001.
 
@@ -30,4 +30,4 @@ Infrastructure implementation lives in a separate repository as decided in ADR 0
 - exact persistence use case and synchronization model when persistence is introduced;
 - background synchronization cadence;
 - authentication/authorization model;
-- application requirements for connectivity to the helpdesk source.
+- application requirements for connectivity to the RM source.
