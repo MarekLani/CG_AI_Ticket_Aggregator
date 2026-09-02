@@ -5,7 +5,7 @@
 
 ## Context
 
-The first Unified Work Items vertical slice is read-only and can retrieve RM work items through the source connector, map them to the unified model, and return them through the HTTP API without owning persistent application state.
+The first Unified Work Items vertical slice is read-only and can retrieve Helpdesk work items through the source connector, map them to the unified model, and return them through the HTTP API without owning persistent application state.
 
 Adding a database immediately would introduce schema management, migrations, local database setup, deployment dependencies, credentials, and operational work before there is a concrete persistence requirement.
 
@@ -50,7 +50,7 @@ This is a default direction, not a requirement to add PostgreSQL before a persis
 
 EF Core manages only the schema owned by Unified Work Items.
 
-RM/Oracle and other source-system schemas are externally owned. The application may read them through connectors, but must not manage them with EF Core migrations.
+The Helpdesk Oracle schema and other source-system schemas are externally owned. The application may read them through connectors, but must not manage them with EF Core migrations.
 
 ### Migration execution
 
