@@ -21,8 +21,7 @@ Before planning, implementing or reviewing backend changes, read:
 - security-sensitive behavior: `/docs/standards/security.md`
 - logging, metrics or diagnostics: `/docs/standards/observability.md`
 - application persistence or EF Core: `/docs/adr/0002-staged-application-persistence.md`
-- changes affecting hosting, networking, identity, secrets/configuration, persistence connectivity or other platform needs: `/docs/architecture/infrastructure-requirements.md`
-- application container build/runtime behavior: `/docs/standards/infrastructure/containers.md`
+- deployment/hosting requirements: `/docs/architecture/deployment.md` and `/docs/architecture/infrastructure-requirements.md`
 
 ## Backend rules
 
@@ -30,7 +29,6 @@ Before planning, implementing or reviewing backend changes, read:
 - Keep source-system SDK/database types behind integration boundaries.
 - Do not introduce application persistence until an approved issue satisfies the persistence decision in ADR 0002.
 - Do not run production schema migrations from Function startup or invocation code.
-- Do not add Azure/Terraform resource implementation to this repository; express new platform needs through the infrastructure requirements contract and coordinate them in the dedicated infrastructure repository.
 - Avoid unrelated refactoring and new dependencies outside approved scope.
 
 ## Validation
