@@ -39,7 +39,7 @@ Area-specific standards:
 - tests: `docs/standards/testing/general.md` plus the relevant area-specific test standard
 - containers: `docs/standards/infrastructure/containers.md`
 - security-sensitive changes: `docs/standards/security/general.md`
-- identity, authentication, or authorization changes: `docs/standards/security/general.md`, `docs/standards/security/identity-and-access.md`
+- identity, authentication, or authorization changes: `docs/adr/0003-use-microsoft-entra-id-for-application-identity.md`, `docs/standards/security/general.md`, `docs/standards/security/identity-and-access.md`
 - logging, telemetry, and metrics: `docs/standards/observability.md`
 
 Load only the standards relevant to the task. Do not preload unrelated standards merely because they exist in the repository.
