@@ -31,29 +31,30 @@ Start with `AGENTS.md` before using any coding agent in this repository.
 
 ## Intended technology areas
 
-- Backend: .NET 10 / ASP.NET Core
-- Frontend: React + TypeScript
+- Backend: .NET 10 / Azure Functions isolated worker
+- Frontend: React + TypeScript + Vite
 - Integration: RM first; Planner and GitHub later
-- Packaging: containers
-- Infrastructure as code: Terraform
+- Packaging: application/container artifacts as required by the approved deployment path
 - Target hosting: Azure
-- CI/CD: GitHub Actions
+- Application CI/CD: GitHub Actions
+- Azure infrastructure and Terraform: maintained in a separate infrastructure repository
 
-Exact Azure service choices, persistence choices, and deployment topology must be decided through explicit issues and ADRs rather than inferred by an agent.
+Persistence and deployment requirements must be decided through explicit issues and ADRs rather than inferred by an agent. The application-side infrastructure contract is documented in `docs/architecture/infrastructure-requirements.md`.
 
 ## Repository layout
 
 - `src/backend/` — backend application
 - `src/frontend/` — frontend application
-- `infrastructure/terraform/` — Terraform configuration, introduced when infrastructure work begins
 - `docs/product/` — durable product context
-- `docs/architecture/` — current architecture and data flows
+- `docs/architecture/` — current application architecture, data flows, deployment boundary, and infrastructure requirements
 - `docs/adr/` — durable architecture decisions
-- `docs/standards/` — engineering standards
+- `docs/standards/` — application engineering standards
 - `docs/ai/` — AI workflow, prompts, and templates
-- `.github/` — issue forms, pull-request template, and CI
-- `scripts/` — repeatable validation commands
+- `.github/` — issue forms, pull-request template, and application CI
+- `scripts/` — repeatable application/repository validation commands
+
+Azure resource definitions, Terraform configuration/state, networking topology, and infrastructure deployment pipelines intentionally do not live in this repository.
 
 ## Bootstrap state
 
-This repository is intentionally a process-and-context bootstrap. Application code, Dockerfiles, Terraform resources, and deployment workflows should be introduced incrementally through GitHub Issues during the implementation and training flow.
+This repository is intentionally a process-and-context bootstrap. Application code, deployment artifacts, and application workflows should be introduced incrementally through GitHub Issues during the implementation and training flow.
