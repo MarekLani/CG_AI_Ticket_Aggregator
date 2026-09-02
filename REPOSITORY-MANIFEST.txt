@@ -14,6 +14,7 @@ REPOSITORY-MANIFEST.txt
 docs/adr/0001-separate-application-and-infrastructure-repositories.md
 docs/adr/0002-staged-application-persistence.md
 docs/adr/0003-use-microsoft-entra-id-for-application-identity.md
+docs/adr/0004-use-application-insights-for-observability.md
 docs/ai/accepted-risk-log.md
 docs/ai/ai-development-workflow.md
 docs/ai/implementation-agent-prompt.md
@@ -43,7 +44,9 @@ docs/standards/coding/dotnet.md
 docs/standards/coding/frontend.md
 docs/standards/coding/general.md
 docs/standards/infrastructure/containers.md
-docs/standards/observability.md
+docs/standards/observability/backend.md
+docs/standards/observability/frontend.md
+docs/standards/observability/general.md
 docs/standards/security/general.md
 docs/standards/security/identity-and-access.md
 docs/standards/testing/backend-tests.md

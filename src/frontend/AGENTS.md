@@ -21,7 +21,7 @@ Also read relevant architecture documents and ADRs for the affected feature.
 - tests: `/docs/standards/testing/general.md` plus the relevant frontend test standard if present;
 - security-sensitive behavior: `/docs/standards/security/general.md`;
 - identity, authentication, or authorization: `/docs/standards/security/general.md` and `/docs/standards/security/identity-and-access.md`;
-- logging, telemetry, or diagnostics: `/docs/standards/observability.md`.
+- logging, tracing, telemetry, or diagnostics: `/docs/adr/0004-use-application-insights-for-observability.md`, `/docs/standards/observability/general.md`, and `/docs/standards/observability/frontend.md`.
 
 Do not load unrelated standards merely because the change is in the frontend.
 

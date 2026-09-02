@@ -56,10 +56,7 @@ Follow `docs/adr/0002-staged-application-persistence.md`.
 
 ## Observability
 
-- Use structured logging with stable event/message templates.
-- Log enough context to identify the operation, source and result without logging sensitive payloads.
-- Background synchronization should make success, failure and duration observable when implemented.
-- Follow `docs/standards/observability.md` for logging and metrics changes.
+Follow ADR 0004 and `docs/standards/observability/general.md` plus `docs/standards/observability/backend.md` for logging, tracing, metrics, Application Insights, and OpenTelemetry behavior.
 
 ## Testing
 

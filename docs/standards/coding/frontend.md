@@ -32,7 +32,7 @@ Do not move code to `shared/` only because it might be reused later.
 
 ## Mandatory rules
 
-- UI communicates only with the application HTTP API, never directly with RM, Planner, or GitHub.
+- UI communicates only with the application HTTP API, never directly with Helpdesk, Planner, or GitHub.
 - Keep API access outside presentation components.
 - Use TanStack Query for server state, request state, caching, and invalidation.
 - Prefer component-local state or URL state for UI state. Add global client-state management only when explicitly justified.
@@ -71,5 +71,5 @@ Do not report a validation step as successful unless it was actually executed su
 - accessibility-sensitive UI behavior: `docs/standards/ui/accessibility.md`;
 - HTTP contract or API integration changes: `docs/standards/api/http-api.md`;
 - test changes: `docs/standards/testing/general.md` plus the relevant area-specific test standard;
-- security-sensitive behavior: `docs/standards/security.md`;
-- logging, telemetry, or diagnostics: `docs/standards/observability.md`.
+- security-sensitive behavior: `docs/standards/security/general.md`;
+- logging, telemetry, or diagnostics: `docs/adr/0004-use-application-insights-for-observability.md`, `docs/standards/observability/general.md`, and `docs/standards/observability/frontend.md`.
