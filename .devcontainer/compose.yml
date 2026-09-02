@@ -1,0 +1,9 @@
+name: unified-work-items-dev
+
+services:
+  workspace:
+    image: mcr.microsoft.com/devcontainers/dotnet:10.0-noble
+    command: sleep infinity
+    init: true
+    volumes:
+      - ..:/workspace:cached

@@ -1,5 +1,9 @@
 # Container standard
 
+## Scope
+
+Applies to application/runtime container images. The supported local developer container is a separate concern governed by ADR 0006 and `docs/standards/development/dev-container.md`.
+
 - Containerization is introduced only after the first local vertical slice works.
 - Use multi-stage builds where appropriate.
 - Run as a non-root user when supported by the chosen base/runtime image.

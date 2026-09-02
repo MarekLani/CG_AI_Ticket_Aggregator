@@ -1,3 +1,6 @@
+.devcontainer/compose.yml
+.devcontainer/devcontainer.json
+.devcontainer/post-create.sh
 .editorconfig
 .github/CODEOWNERS
 .github/ISSUE_TEMPLATE/ai-assisted-task.yml
@@ -16,6 +19,7 @@ docs/adr/0002-staged-application-persistence.md
 docs/adr/0003-use-microsoft-entra-id-for-application-identity.md
 docs/adr/0004-use-application-insights-for-observability.md
 docs/adr/0005-use-layered-automated-testing-strategy.md
+docs/adr/0006-use-vs-code-dev-container-for-local-development.md
 docs/ai/accepted-risk-log.md
 docs/ai/ai-development-workflow.md
 docs/ai/implementation-agent-prompt.md
@@ -44,6 +48,7 @@ docs/standards/coding/azure-functions.md
 docs/standards/coding/dotnet.md
 docs/standards/coding/frontend.md
 docs/standards/coding/general.md
+docs/standards/development/dev-container.md
 docs/standards/infrastructure/containers.md
 docs/standards/observability/backend.md
 docs/standards/observability/frontend.md
