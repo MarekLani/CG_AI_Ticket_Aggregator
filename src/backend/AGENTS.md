@@ -17,7 +17,7 @@ Before planning, implementing or reviewing backend changes, read:
 
 - HTTP/API changes: `/docs/standards/api/http-api.md`
 - source integrations or synchronization: `/docs/standards/architecture/integration.md`
-- backend tests: `/docs/standards/testing/general.md` and `/docs/standards/testing/backend-tests.md`
+- backend tests: `/docs/adr/0005-use-layered-automated-testing-strategy.md`, `/docs/standards/testing/general.md`, and `/docs/standards/testing/backend-tests.md`
 - security-sensitive behavior: `/docs/standards/security/general.md`
 - identity, authentication, or authorization: `/docs/standards/security/general.md` and `/docs/standards/security/identity-and-access.md`
 - logging, tracing, metrics or diagnostics: `/docs/adr/0004-use-application-insights-for-observability.md`, `/docs/standards/observability/general.md`, and `/docs/standards/observability/backend.md`
