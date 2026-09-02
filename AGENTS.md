@@ -33,9 +33,9 @@ Area-specific standards:
 - accessibility-sensitive UI changes: `docs/standards/ui/accessibility.md`
 - integrations: `docs/standards/architecture/integration.md`
 - persistence/EF Core changes: `docs/adr/0002-staged-application-persistence.md`
+- application changes affecting hosting, networking, identity, configuration, or other platform needs: `docs/architecture/infrastructure-requirements.md`
 - tests: `docs/standards/testing/general.md` plus the relevant area-specific test standard
 - containers: `docs/standards/infrastructure/containers.md`
-- Terraform / Azure: `docs/standards/infrastructure/terraform.md`, `docs/standards/infrastructure/azure.md`
 - security-sensitive changes: `docs/standards/security.md`
 - logging, telemetry, and metrics: `docs/standards/observability.md`
 
@@ -48,7 +48,9 @@ Load only the standards relevant to the task. Do not preload unrelated standards
 - Do not invent business rules, status mappings, priorities, defaults, or connector semantics.
 - Prefer existing patterns and dependencies.
 - Do not perform unrelated refactoring.
-- Do not change public API contracts, persistence models, deployment topology, or infrastructure without explicit approved scope.
+- Do not change public API contracts, persistence models, deployment topology, or infrastructure requirements without explicit approved scope.
+- This repository does not own Terraform or Azure resource implementation. Do not add or invent VNets, subnets, CIDR ranges, routes, private endpoints, DNS zones, firewall rules, Terraform state, Azure RBAC topology, or similar infrastructure details here.
+- When an application change creates a new platform requirement, update `docs/architecture/infrastructure-requirements.md` when appropriate and coordinate the corresponding change in the dedicated infrastructure repository.
 - Add or update tests for changed behavior.
 - Do not weaken validation, tests, security checks, or CI merely to make a change pass.
 - Never commit secrets, credentials, tokens, private keys, or production/customer data.
