@@ -33,7 +33,7 @@ Start with `AGENTS.md` before using any coding agent in this repository.
 
 - Backend: .NET 10 / Azure Functions isolated worker
 - Frontend: React + TypeScript + Vite
-- Integration: helpdesk first; Planner and GitHub later
+- Integration: RM first; Planner and GitHub later
 - Target hosting: Azure
 - CI/CD: GitHub Actions
 
