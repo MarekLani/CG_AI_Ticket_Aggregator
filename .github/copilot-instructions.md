@@ -11,3 +11,5 @@ Before planning, implementing, or reviewing:
 - use the latest human-approved canonical `Implementation Plan` issue comment when one is required.
 
 Do not invent business rules, RM field semantics, status mappings, or Azure architecture choices. Do not handle secrets or production/customer data.
+
+This repository does not own Azure/Terraform infrastructure implementation. When application work creates or changes a platform requirement, follow `docs/architecture/infrastructure-requirements.md` and coordinate the corresponding change in the dedicated infrastructure repository.
