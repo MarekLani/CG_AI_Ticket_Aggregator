@@ -34,6 +34,7 @@ Area-specific standards:
 - integrations: `docs/standards/architecture/integration.md`
 - persistence/EF Core changes: `docs/adr/0002-staged-application-persistence.md`
 - platform requirements: `docs/architecture/infrastructure-requirements.md`
+- delivery/CI/CD: `docs/architecture/deployment.md`
 - tests: `docs/standards/testing/general.md` plus the relevant area-specific test standard
 - containers: `docs/standards/infrastructure/containers.md`
 - security-sensitive changes: `docs/standards/security.md`
@@ -63,6 +64,13 @@ Load only the standards relevant to the task. Do not preload unrelated standards
 - Maintain one authoritative place for each decision or rule. Reference it from other documents instead of duplicating the same explanation.
 - Prefer updating an existing relevant document over creating a new file for closely related information.
 
+## CI/CD
+
+- GitHub Actions is the CI/CD platform; follow the trigger and environment rules in `docs/architecture/deployment.md`.
+- Do not add generic feature-branch push triggers or change environment/release triggers without approved scope.
+- If substantial workflow logic becomes duplicated across CI/CD pipelines, flag the reuse opportunity and ask before extracting reusable workflows, composite actions, or shared pipeline components.
+- Do not invent deployment targets, credential models, tag conventions, or release behavior that has not been defined.
+
 ## Helpdesk-specific rules
 
 - `I_POZIAD` is the unique external identifier of a Helpdesk work item.
@@ -79,6 +87,7 @@ Stop and ask the responsible developer when:
 - a required mapping or source-system semantic is not explicitly documented;
 - the issue or plan conflicts with a standard or ADR;
 - implementation requires a new architectural choice that has not been approved;
+- a CI/CD change depends on an undefined deployment target, credential model, tag/release convention, or environment behavior;
 - a secret or protected environment is required;
 - required tests or validation cannot be executed;
 - the scope expands materially beyond the approved issue or plan.
