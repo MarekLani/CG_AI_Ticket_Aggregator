@@ -17,4 +17,4 @@ The frontend consumes only the application HTTP API. It must not call RM, Planne
 
 ## Infrastructure
 
-Terraform under `infrastructure/terraform/` owns Azure resources for this application once introduced. Application code must not provision cloud resources at runtime.
+Azure/Terraform infrastructure is outside this repository. See ADR 0001.

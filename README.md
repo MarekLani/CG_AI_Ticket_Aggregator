@@ -29,31 +29,28 @@ Key rules:
 
 Start with `AGENTS.md` before using any coding agent in this repository.
 
-## Intended technology areas
+## Technology
 
-- Backend: .NET 10 / ASP.NET Core
-- Frontend: React + TypeScript
+- Backend: .NET 10 / Azure Functions isolated worker
+- Frontend: React + TypeScript + Vite
 - Integration: RM first; Planner and GitHub later
-- Packaging: containers
-- Infrastructure as code: Terraform
 - Target hosting: Azure
 - CI/CD: GitHub Actions
 
-Exact Azure service choices, persistence choices, and deployment topology must be decided through explicit issues and ADRs rather than inferred by an agent.
+Azure/Terraform infrastructure is maintained in a separate repository. See ADR 0001.
 
 ## Repository layout
 
 - `src/backend/` — backend application
 - `src/frontend/` — frontend application
-- `infrastructure/terraform/` — Terraform configuration, introduced when infrastructure work begins
-- `docs/product/` — durable product context
-- `docs/architecture/` — current architecture and data flows
-- `docs/adr/` — durable architecture decisions
-- `docs/standards/` — engineering standards
+- `docs/product/` — product context
+- `docs/architecture/` — application architecture and data flows
+- `docs/adr/` — architecture decisions
+- `docs/standards/` — application engineering standards
 - `docs/ai/` — AI workflow, prompts, and templates
 - `.github/` — issue forms, pull-request template, and CI
 - `scripts/` — repeatable validation commands
 
 ## Bootstrap state
 
-This repository is intentionally a process-and-context bootstrap. Application code, Dockerfiles, Terraform resources, and deployment workflows should be introduced incrementally through GitHub Issues during the implementation and training flow.
+Application code and deployment workflows are intentionally introduced incrementally through GitHub Issues during the implementation and training flow.

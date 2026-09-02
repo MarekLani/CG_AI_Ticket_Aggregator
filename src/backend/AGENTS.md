@@ -21,7 +21,7 @@ Before planning, implementing or reviewing backend changes, read:
 - security-sensitive behavior: `/docs/standards/security.md`
 - logging, metrics or diagnostics: `/docs/standards/observability.md`
 - application persistence or EF Core: `/docs/adr/0002-staged-application-persistence.md`
-- deployment/hosting behavior: relevant files under `/docs/architecture/`, `/docs/adr/` and `/docs/standards/infrastructure/`
+- deployment/hosting requirements: `/docs/architecture/deployment.md` and `/docs/architecture/infrastructure-requirements.md`
 
 ## Backend rules
 

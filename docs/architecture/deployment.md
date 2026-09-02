@@ -1,19 +1,13 @@
 # Deployment architecture
 
+This repository owns application build, validation, packaging, and application deployment workflows.
+
+Azure resource provisioning, networking, Terraform, and infrastructure deployment are owned by the separate infrastructure repository. See ADR 0001.
+
 ## Direction
 
-The application will be containerized and deployed to Azure. Terraform will define the target infrastructure and GitHub Actions will perform validation and deployment.
+- Backend: Azure Functions v4 / .NET 10 isolated worker.
+- Frontend: React/Vite build served over HTTPS.
+- Exact Azure hosting and networking choices remain infrastructure decisions unless the application requires a specific capability.
 
-## Deliberately undecided
-
-The bootstrap does not choose a specific Azure compute service or full topology. The infrastructure issue must compare the minimal viable options against requirements such as networking to RM, authentication, cost, operational complexity and training value.
-
-## Delivery progression
-
-1. local developer execution;
-2. first manual container build/run;
-3. first intentionally simple Azure deployment to validate the runtime path;
-4. Terraform representation of the approved Azure resources;
-5. CI validation of application and Terraform;
-6. controlled CD from GitHub Actions using federated identity rather than long-lived cloud credentials where supported;
-7. incremental deployment as features are merged.
+Application platform needs are recorded in `docs/architecture/infrastructure-requirements.md`.

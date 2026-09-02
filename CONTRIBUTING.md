@@ -9,7 +9,6 @@ Do not start non-trivial work from an untracked chat instruction. Convert the re
 Preferred patterns:
 - `feature/<issue>-short-description`
 - `fix/<issue>-short-description`
-- `infra/<issue>-short-description`
 - `docs/<issue>-short-description`
 
 Keep branches short-lived and scoped to one issue or one coherent part of a larger issue.

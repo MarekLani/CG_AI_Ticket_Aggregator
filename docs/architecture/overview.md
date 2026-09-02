@@ -12,27 +12,22 @@ Planner ─────────┼──> Source adapters/connectors ──>
 GitHub Issues ───┘
 ```
 
-A persistence/cache layer and background synchronization may be added when justified by requirements. They are not mandatory for the first RM vertical slice. The staged persistence decision and preliminary PostgreSQL/EF Core direction are recorded in `docs/adr/0002-staged-application-persistence.md`.
+A persistence/cache layer may be added when justified. It is not required for the first RM vertical slice. See ADR 0002.
+
+Infrastructure implementation lives in a separate repository as decided in ADR 0001.
 
 ## Architectural principles
 
-- source-specific logic stays behind connector boundaries;
 - source systems remain systems of record;
+- source-specific logic stays behind connector boundaries;
 - UI consumes a source-neutral API model;
-- source-specific values are preserved where normalization would lose information;
-- no business mapping is inferred from column/field names alone;
 - external dependencies are wrapped and testable;
-- secrets are supplied by runtime/environment mechanisms, never committed;
-- deployment is containerized and targets Azure;
-- infrastructure is defined with Terraform once the target Azure topology is explicitly approved.
+- secrets are never committed;
+- agents must not invent business mappings or source-system semantics.
 
-## Open architectural decisions
+## Open decisions
 
-The following require explicit issue/ADR decisions before implementation:
-- exact Azure compute service;
-- whether frontend and backend share one or multiple deployable containers;
-- exact persistence use case, data model and synchronization topology when persistence is introduced;
+- exact persistence use case and synchronization model when persistence is introduced;
 - background synchronization cadence;
 - authentication/authorization model;
-- connectivity from Azure to RM source;
-- secret storage/runtime identity design.
+- application requirements for connectivity to the RM source.
