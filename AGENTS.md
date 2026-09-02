@@ -38,7 +38,8 @@ Area-specific standards:
 - GitHub Actions changes: `docs/standards/cicd/github-actions.md`
 - tests: `docs/standards/testing/general.md` plus the relevant area-specific test standard
 - containers: `docs/standards/infrastructure/containers.md`
-- security-sensitive changes: `docs/standards/security.md`
+- security-sensitive changes: `docs/standards/security/general.md`
+- identity, authentication, or authorization changes: `docs/adr/0003-use-microsoft-entra-id-for-application-identity.md`, `docs/standards/security/general.md`, `docs/standards/security/identity-and-access.md`
 - logging, telemetry, and metrics: `docs/standards/observability.md`
 
 Load only the standards relevant to the task. Do not preload unrelated standards merely because they exist in the repository.
@@ -81,6 +82,7 @@ Stop and ask the responsible developer when:
 - a required mapping or source-system semantic is not explicitly documented;
 - the issue or plan conflicts with a standard or ADR;
 - implementation requires a new architectural choice that has not been approved;
+- identity work requires an undefined tenant model, app-registration topology, permission/scope, app role, claim mapping, or business authorization rule;
 - a CI/CD change depends on an undefined deployment target, credential model, tag/release convention, or environment behavior;
 - a secret or protected environment is required;
 - required tests or validation cannot be executed;

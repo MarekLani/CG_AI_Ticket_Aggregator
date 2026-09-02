@@ -19,7 +19,8 @@ Also read relevant architecture documents and ADRs for the affected feature.
 - accessibility-sensitive UI behavior: `/docs/standards/ui/accessibility.md`;
 - API contract or HTTP integration: `/docs/standards/api/http-api.md`;
 - tests: `/docs/standards/testing/general.md` plus the relevant frontend test standard if present;
-- security-sensitive behavior: `/docs/standards/security.md`;
+- security-sensitive behavior: `/docs/standards/security/general.md`;
+- identity, authentication, or authorization: `/docs/standards/security/general.md` and `/docs/standards/security/identity-and-access.md`;
 - logging, telemetry, or diagnostics: `/docs/standards/observability.md`.
 
 Do not load unrelated standards merely because the change is in the frontend.
