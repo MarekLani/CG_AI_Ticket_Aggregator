@@ -15,6 +15,7 @@ docs/adr/0001-separate-application-and-infrastructure-repositories.md
 docs/adr/0002-staged-application-persistence.md
 docs/adr/0003-use-microsoft-entra-id-for-application-identity.md
 docs/adr/0004-use-application-insights-for-observability.md
+docs/adr/0005-use-layered-automated-testing-strategy.md
 docs/ai/accepted-risk-log.md
 docs/ai/ai-development-workflow.md
 docs/ai/implementation-agent-prompt.md

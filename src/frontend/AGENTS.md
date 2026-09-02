@@ -18,7 +18,7 @@ Also read relevant architecture documents and ADRs for the affected feature.
 - layout, interaction, or visual behavior: `/docs/standards/ui/design-system.md`;
 - accessibility-sensitive UI behavior: `/docs/standards/ui/accessibility.md`;
 - API contract or HTTP integration: `/docs/standards/api/http-api.md`;
-- tests: `/docs/standards/testing/general.md` plus the relevant frontend test standard if present;
+- tests: `/docs/adr/0005-use-layered-automated-testing-strategy.md`, `/docs/standards/testing/general.md`, and `/docs/standards/testing/frontend-tests.md`;
 - security-sensitive behavior: `/docs/standards/security/general.md`;
 - identity, authentication, or authorization: `/docs/standards/security/general.md` and `/docs/standards/security/identity-and-access.md`;
 - logging, tracing, telemetry, or diagnostics: `/docs/adr/0004-use-application-insights-for-observability.md`, `/docs/standards/observability/general.md`, and `/docs/standards/observability/frontend.md`.

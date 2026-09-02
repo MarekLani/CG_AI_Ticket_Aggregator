@@ -36,7 +36,7 @@ Area-specific standards:
 - platform requirements: `docs/architecture/infrastructure-requirements.md`
 - delivery strategy and environments: `docs/architecture/deployment.md`
 - GitHub Actions changes: `docs/standards/cicd/github-actions.md`
-- tests: `docs/standards/testing/general.md` plus the relevant area-specific test standard
+- tests: `docs/adr/0005-use-layered-automated-testing-strategy.md`, `docs/standards/testing/general.md`, plus the relevant area-specific test standard
 - containers: `docs/standards/infrastructure/containers.md`
 - security-sensitive changes: `docs/standards/security/general.md`
 - identity, authentication, or authorization changes: `docs/adr/0003-use-microsoft-entra-id-for-application-identity.md`, `docs/standards/security/general.md`, `docs/standards/security/identity-and-access.md`
@@ -84,6 +84,7 @@ Stop and ask the responsible developer when:
 - implementation requires a new architectural choice that has not been approved;
 - identity work requires an undefined tenant model, app-registration topology, permission/scope, app role, claim mapping, or business authorization rule;
 - observability work requires an undefined sampling, retention, alerting, availability/SLA, telemetry-backend, collector, or sensitive-data collection policy;
+- testing work requires an undefined coverage threshold, live integration environment, E2E cadence/browser matrix, or new testing approach outside ADR 0005;
 - a CI/CD change depends on an undefined deployment target, credential model, tag/release convention, or environment behavior;
 - a secret or protected environment is required;
 - required tests or validation cannot be executed;

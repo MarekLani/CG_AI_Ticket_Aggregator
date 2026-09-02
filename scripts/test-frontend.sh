@@ -7,4 +7,4 @@ fi
 cd src/frontend
 npm ci
 npm run build
-if npm run | grep -qE '^  test'; then npm test -- --run; fi
+npm run test
