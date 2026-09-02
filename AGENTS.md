@@ -56,6 +56,13 @@ Load only the standards relevant to the task. Do not preload unrelated standards
 - Never commit secrets, credentials, tokens, private keys, or production/customer data.
 - Use synthetic or anonymized test data only.
 
+## Documentation
+
+- Capture durable architectural, product, and engineering decisions when they materially affect future work.
+- Keep documentation concise and proportional to the project; do not document generic technology knowledge or obvious implementation details.
+- Maintain one authoritative place for each decision or rule. Reference it from other documents instead of duplicating the same explanation.
+- Prefer updating an existing relevant document over creating a new file for closely related information.
+
 ## RM-specific rules
 
 - `I_POZIAD` is the unique external identifier of an RM requirement.
