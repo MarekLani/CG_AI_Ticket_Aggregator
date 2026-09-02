@@ -13,8 +13,6 @@ Preferred patterns:
 
 Keep branches short-lived and scoped to one issue or one coherent part of a larger issue.
 
-Azure/Terraform infrastructure implementation is handled in the dedicated infrastructure repository. Application changes that create new platform requirements should link the corresponding infrastructure issue or pull request.
-
 ## Pull requests
 
 Open a draft PR early for standard/high-risk work. The PR must reference the issue, identify the approved implementation plan when required, list validation performed and call out remaining risks.
