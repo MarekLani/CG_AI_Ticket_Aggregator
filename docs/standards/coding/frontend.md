@@ -32,7 +32,7 @@ Do not move code to `shared/` only because it might be reused later.
 
 ## Mandatory rules
 
-- UI communicates only with the application HTTP API, never directly with RM, Planner, or GitHub.
+- UI communicates only with the application HTTP API, never directly with Helpdesk, Planner, or GitHub.
 - Keep API access outside presentation components.
 - Use TanStack Query for server state, request state, caching, and invalidation.
 - Prefer component-local state or URL state for UI state. Add global client-state management only when explicitly justified.
