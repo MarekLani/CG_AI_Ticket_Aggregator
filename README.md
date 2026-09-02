@@ -39,8 +39,19 @@ Start with `AGENTS.md` before using any coding agent in this repository.
 
 Azure/Terraform infrastructure is maintained in a separate repository. See ADR 0001.
 
+## Local development
+
+The supported reproducible local-development baseline is the repository VS Code Dev Container. Prerequisites are VS Code with Dev Containers support and a compatible Docker engine.
+
+Open the repository in VS Code and choose **Dev Containers: Reopen in Container**. The environment provides .NET 10, Node.js 22, Azure Functions Core Tools v4, and Docker/Compose access. It forwards the expected future development ports `5173` for Vite and `7071` for Azure Functions.
+
+PostgreSQL is intentionally not started yet because application persistence is still deferred by ADR 0002. When persistence is introduced, local PostgreSQL will run as a separate container rather than inside the development container.
+
+See ADR 0006 and `docs/standards/development/dev-container.md` for the local-development contract.
+
 ## Repository layout
 
+- `.devcontainer/` — supported reproducible local development environment
 - `src/backend/` — backend application
 - `src/frontend/` — frontend application
 - `docs/product/` — product context
