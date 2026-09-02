@@ -15,10 +15,6 @@ The source-neutral application layer must not depend directly on Oracle/RM, Micr
 
 The frontend consumes only the application HTTP API. It must not call RM, Planner or GitHub directly.
 
-## Infrastructure boundary
+## Infrastructure
 
-This repository does not contain the Azure/Terraform infrastructure implementation.
-
-Application code and architecture define required platform capabilities in `docs/architecture/infrastructure-requirements.md`. The dedicated infrastructure repository owns the Azure resources, networking, Terraform, identity/RBAC infrastructure, and environment topology used to satisfy those requirements.
-
-Application code must not provision cloud resources at runtime.
+Azure/Terraform infrastructure is outside this repository. See ADR 0001.
