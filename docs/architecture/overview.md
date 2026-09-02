@@ -22,6 +22,7 @@ Infrastructure implementation lives in a separate repository as decided in ADR 0
 - source-specific logic stays behind connector boundaries;
 - UI consumes a source-neutral API model;
 - external dependencies are wrapped and testable;
+- Microsoft Entra ID / Microsoft identity platform is the application identity baseline;
 - secrets are never committed;
 - agents must not invent business mappings or source-system semantics.
 
@@ -29,5 +30,5 @@ Infrastructure implementation lives in a separate repository as decided in ADR 0
 
 - exact persistence use case and synchronization model when persistence is introduced;
 - background synchronization cadence;
-- authentication/authorization model;
+- exact Entra tenant/app-registration topology and authorization scopes/roles;
 - application requirements for connectivity to the Helpdesk source.

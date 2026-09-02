@@ -43,7 +43,8 @@ docs/standards/coding/frontend.md
 docs/standards/coding/general.md
 docs/standards/infrastructure/containers.md
 docs/standards/observability.md
-docs/standards/security.md
+docs/standards/security/general.md
+docs/standards/security/identity-and-access.md
 docs/standards/testing/backend-tests.md
 docs/standards/testing/frontend-tests.md
 docs/standards/testing/general.md

@@ -18,7 +18,8 @@ Before planning, implementing or reviewing backend changes, read:
 - HTTP/API changes: `/docs/standards/api/http-api.md`
 - source integrations or synchronization: `/docs/standards/architecture/integration.md`
 - backend tests: `/docs/standards/testing/general.md` and `/docs/standards/testing/backend-tests.md`
-- security-sensitive behavior: `/docs/standards/security.md`
+- security-sensitive behavior: `/docs/standards/security/general.md`
+- identity, authentication, or authorization: `/docs/standards/security/general.md` and `/docs/standards/security/identity-and-access.md`
 - logging, metrics or diagnostics: `/docs/standards/observability.md`
 - application persistence or EF Core: `/docs/adr/0002-staged-application-persistence.md`
 - deployment/hosting requirements: `/docs/architecture/deployment.md` and `/docs/architecture/infrastructure-requirements.md`

@@ -6,6 +6,7 @@ This document contains application requirements that the separate infrastructure
 
 - Backend runtime: Azure Functions v4, .NET 10 isolated worker, HTTPS, externalized configuration/secrets, and application telemetry support.
 - Frontend runtime: serve the React/Vite build over HTTPS.
+- Identity: support Microsoft Entra ID integration and managed identity for Azure workloads where required; exact identity resources and RBAC remain infrastructure-owned.
 - Source connectivity: backend access to the helpdesk Oracle source; outbound HTTPS to GitHub and Microsoft Graph when those connectors are enabled.
 - Persistence: none for the first vertical slice. If persistence is introduced, the platform must provide PostgreSQL connectivity. This repository owns the EF Core schema/migrations; the infrastructure repository owns the PostgreSQL service and its platform configuration.
 
