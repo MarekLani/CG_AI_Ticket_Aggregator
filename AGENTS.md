@@ -40,7 +40,7 @@ Area-specific standards:
 - containers: `docs/standards/infrastructure/containers.md`
 - security-sensitive changes: `docs/standards/security/general.md`
 - identity, authentication, or authorization changes: `docs/adr/0003-use-microsoft-entra-id-for-application-identity.md`, `docs/standards/security/general.md`, `docs/standards/security/identity-and-access.md`
-- logging, telemetry, and metrics: `docs/standards/observability.md`
+- logging, tracing, telemetry, or metrics: `docs/adr/0004-use-application-insights-for-observability.md`, `docs/standards/observability/general.md`, plus the relevant backend/frontend observability standard
 
 Load only the standards relevant to the task. Do not preload unrelated standards merely because they exist in the repository.
 
@@ -83,6 +83,7 @@ Stop and ask the responsible developer when:
 - the issue or plan conflicts with a standard or ADR;
 - implementation requires a new architectural choice that has not been approved;
 - identity work requires an undefined tenant model, app-registration topology, permission/scope, app role, claim mapping, or business authorization rule;
+- observability work requires an undefined sampling, retention, alerting, availability/SLA, telemetry-backend, collector, or sensitive-data collection policy;
 - a CI/CD change depends on an undefined deployment target, credential model, tag/release convention, or environment behavior;
 - a secret or protected environment is required;
 - required tests or validation cannot be executed;

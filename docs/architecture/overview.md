@@ -14,7 +14,7 @@ GitHub Issues ───┘
 
 A persistence/cache layer may be added when justified. It is not required for the first Helpdesk vertical slice. See ADR 0002.
 
-Infrastructure implementation lives in a separate repository as decided in ADR 0001. Application identity architecture is defined in ADR 0003.
+Infrastructure implementation lives in a separate repository as decided in ADR 0001. Application identity architecture is defined in ADR 0003. Application observability architecture is defined in ADR 0004.
 
 ## Architectural principles
 
@@ -30,4 +30,5 @@ Infrastructure implementation lives in a separate repository as decided in ADR 0
 - exact persistence use case and synchronization model when persistence is introduced;
 - background synchronization cadence;
 - exact Entra tenant/app-registration topology and authorization scopes/roles;
+- observability sampling, retention, alerting, dashboards, and availability/SLA policy;
 - application requirements for connectivity to the Helpdesk source.

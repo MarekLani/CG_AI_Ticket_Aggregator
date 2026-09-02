@@ -71,5 +71,5 @@ Do not report a validation step as successful unless it was actually executed su
 - accessibility-sensitive UI behavior: `docs/standards/ui/accessibility.md`;
 - HTTP contract or API integration changes: `docs/standards/api/http-api.md`;
 - test changes: `docs/standards/testing/general.md` plus the relevant area-specific test standard;
-- security-sensitive behavior: `docs/standards/security.md`;
-- logging, telemetry, or diagnostics: `docs/standards/observability.md`.
+- security-sensitive behavior: `docs/standards/security/general.md`;
+- logging, telemetry, or diagnostics: `docs/adr/0004-use-application-insights-for-observability.md`, `docs/standards/observability/general.md`, and `docs/standards/observability/frontend.md`.
