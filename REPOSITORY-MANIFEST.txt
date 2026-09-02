@@ -1,3 +1,4 @@
+.devcontainer/compose.yml
 .devcontainer/devcontainer.json
 .devcontainer/post-create.sh
 .editorconfig

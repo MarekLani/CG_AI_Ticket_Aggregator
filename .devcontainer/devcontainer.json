@@ -1,6 +1,9 @@
 {
   "name": "Unified Work Items",
-  "image": "mcr.microsoft.com/devcontainers/dotnet:10.0-noble",
+  "dockerComposeFile": "compose.yml",
+  "service": "workspace",
+  "workspaceFolder": "/workspace",
+  "shutdownAction": "stopCompose",
   "features": {
     "ghcr.io/devcontainers/features/node:2": {
       "version": "22"
