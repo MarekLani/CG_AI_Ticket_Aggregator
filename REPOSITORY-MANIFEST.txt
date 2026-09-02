@@ -36,6 +36,7 @@ docs/standards/README.md
 docs/standards/api/http-api.md
 docs/standards/architecture/integration.md
 docs/standards/architecture/layering.md
+docs/standards/cicd/github-actions.md
 docs/standards/coding/azure-functions.md
 docs/standards/coding/dotnet.md
 docs/standards/coding/frontend.md
