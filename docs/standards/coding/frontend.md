@@ -48,9 +48,11 @@ Do not move code to `shared/` only because it might be reused later.
 
 ## Dependencies
 
-Before adding a frontend dependency, verify that the required capability is not already provided by React, Material UI, MUI X, TanStack Query, React Router, or existing project code.
-
-Significant new dependencies must be called out in the implementation plan when one is required.
+- Use npm as the frontend package manager and commit `src/frontend/package-lock.json`.
+- Keep `package-lock.json` in sync with `package.json`; repository automation and CI use `npm ci` for reproducible installs.
+- Do not switch package managers without explicit approval.
+- Before adding a frontend dependency, verify that the required capability is not already provided by React, Material UI, MUI X, TanStack Query, React Router, or existing project code.
+- Significant new dependencies must be called out in the implementation plan when one is required.
 
 ## Validation
 

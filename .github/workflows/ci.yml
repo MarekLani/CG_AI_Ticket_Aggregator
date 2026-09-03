@@ -7,6 +7,9 @@ on:
   push:
     branches: [main]
 
+permissions:
+  contents: read
+
 jobs:
   repository-validation:
     runs-on: ubuntu-latest
@@ -17,24 +20,28 @@ jobs:
 
   backend:
     runs-on: ubuntu-latest
-    if: ${{ hashFiles('src/backend/**/*.csproj', 'src/backend/**/*.sln', '*.sln') != '' }}
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v4
+      - name: Set up .NET
+        if: ${{ hashFiles('src/backend/**/*.csproj', 'src/backend/**/*.sln', 'src/backend/**/*.slnx', '*.sln', '*.slnx') != '' }}
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '10.0.x'
       - name: Build and test backend
+        if: ${{ hashFiles('src/backend/**/*.csproj', 'src/backend/**/*.sln', 'src/backend/**/*.slnx', '*.sln', '*.slnx') != '' }}
         run: ./scripts/test-backend.sh
 
   frontend:
     runs-on: ubuntu-latest
-    if: ${{ hashFiles('src/frontend/package.json') != '' }}
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Set up Node.js
+        if: ${{ hashFiles('src/frontend/package.json') != '' }}
+        uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: npm
           cache-dependency-path: src/frontend/package-lock.json
       - name: Build and test frontend
+        if: ${{ hashFiles('src/frontend/package.json') != '' }}
         run: ./scripts/test-frontend.sh
