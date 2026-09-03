@@ -68,3 +68,10 @@ src/backend/README.md
 src/frontend/AGENTS.md
 src/frontend/README.md
 tests/README.md
+training/presentations/00_index.html
+training/presentations/01_git_github_actions.html
+training/presentations/02_terraform_iac.html
+training/presentations/03_containers_devcontainer_azure_hosting.html
+training/presentations/04_application_stack_and_delivery.html
+training/presentations/AGENTS.md
+training/presentations/README.md
