@@ -1,0 +1,64 @@
+<!doctype html><html lang="sk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Terraform a Infrastructure as Code</title><style>
+:root{
+  --bg:#0b1020; --bg2:#111a33; --card:#16213d; --card2:#0f172a; --text:#eef4ff; --muted:#b9c7dd;
+  --accent:#4fd1c5; --accent2:#ffb86b; --danger:#ff7a90; --ok:#8bd17c; --line:#30405f;
+}
+*{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at 15% 10%,#18345e 0,#0b1020 36%,#070b16 100%);color:var(--text);font-family:Segoe UI,Inter,Arial,sans-serif;overflow:hidden}
+.deck{height:100vh;width:100vw;position:relative}.slide{display:none;height:100vh;width:100vw;padding:58px 76px 70px;position:relative;overflow:hidden}.slide.active{display:block}.slide::before{content:"";position:absolute;inset:-80px -120px auto auto;width:460px;height:460px;border-radius:50%;background:rgba(79,209,197,.10);filter:blur(2px)}
+.kicker{font-size:20px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:18px}.title .kicker{font-size:22px}h1{font-size:68px;line-height:1.02;margin:0 0 26px;font-weight:800;max-width:1050px}h2{font-size:48px;line-height:1.08;margin:0 0 28px;font-weight:780;max-width:1080px}h3{font-size:30px;margin:0 0 14px}p{font-size:25px;line-height:1.42;color:var(--muted);max-width:1080px}.lead{font-size:30px;color:#dce8ff;max-width:1040px}.small{font-size:18px;color:#9fb0ca}.muted{color:var(--muted)}strong,b{color:#fff}.accent{color:var(--accent)}.orange{color:var(--accent2)}
+.grid{display:grid;gap:22px}.grid.two{grid-template-columns:1fr 1fr}.grid.three{grid-template-columns:repeat(3,1fr)}.grid.four{grid-template-columns:repeat(4,1fr)}.card{background:linear-gradient(160deg,rgba(22,33,61,.96),rgba(11,16,32,.92));border:1px solid rgba(255,255,255,.09);border-radius:24px;padding:26px 28px;box-shadow:0 12px 30px rgba(0,0,0,.2)}.card h3{color:#fff}.card p,.card li{font-size:21px}.card.highlight{border-color:rgba(79,209,197,.45);box-shadow:0 0 0 1px rgba(79,209,197,.14),0 16px 36px rgba(0,0,0,.25)}.card.warn{border-color:rgba(255,184,107,.45)}
+ul{margin:0;padding-left:25px}li{font-size:25px;line-height:1.36;margin:10px 0;color:var(--muted)}li::marker{color:var(--accent)}
+.flow{display:flex;align-items:stretch;gap:15px;margin-top:18px}.node{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:20px 22px;min-width:150px;flex:1;text-align:center;font-size:22px;color:#eaf2ff}.arrow{align-self:center;color:var(--accent);font-size:34px;font-weight:800}.stack{display:flex;flex-direction:column;gap:14px}.pill{display:inline-block;border:1px solid rgba(79,209,197,.35);background:rgba(79,209,197,.1);border-radius:999px;padding:8px 15px;margin:5px 6px 5px 0;font-size:18px;color:#dffdfa}.tag{display:inline-flex;align-items:center;gap:8px;border-radius:999px;background:rgba(255,255,255,.09);padding:9px 14px;font-size:18px;color:#d7e5fb;margin:4px}.code{font-family:Consolas,Monaco,monospace;background:#050814;border:1px solid #273550;border-radius:18px;padding:22px;color:#d5e7ff;white-space:pre-wrap;font-size:20px;line-height:1.35}.diagram{border:1px solid rgba(255,255,255,.1);border-radius:28px;padding:24px;background:rgba(255,255,255,.035)}
+.compare{width:100%;border-collapse:separate;border-spacing:0 12px;font-size:21px}.compare th{text-align:left;color:#fff;padding:8px 14px}.compare td{background:rgba(255,255,255,.055);border-top:1px solid rgba(255,255,255,.09);border-bottom:1px solid rgba(255,255,255,.09);padding:14px;color:var(--muted)}.compare td:first-child{border-left:1px solid rgba(255,255,255,.09);border-radius:14px 0 0 14px;color:#fff;font-weight:650}.compare td:last-child{border-right:1px solid rgba(255,255,255,.09);border-radius:0 14px 14px 0}.check{color:var(--ok);font-weight:800}.x{color:var(--danger);font-weight:800}.quote{font-size:36px;line-height:1.25;color:#fff;max-width:1000px}.quote:before{content:'“';color:var(--accent);font-size:72px;vertical-align:-20px;margin-right:4px}.quote:after{content:'”';color:var(--accent);font-size:72px;vertical-align:-20px;margin-left:4px}
+.footer{position:absolute;left:76px;right:76px;bottom:32px;display:flex;justify-content:space-between;color:#788aa8;font-size:15px}.progress{position:absolute;left:0;bottom:0;height:5px;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0}.controls{position:fixed;right:22px;bottom:18px;display:flex;gap:8px;z-index:10}.controls button{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.15);color:#fff;border-radius:12px;padding:8px 12px;cursor:pointer}.slideNo{position:fixed;left:22px;bottom:20px;color:#7890ad;font-size:14px;z-index:10}.sources li{font-size:18px}.titleMark{position:absolute;right:76px;top:60px;color:rgba(255,255,255,.16);font-size:112px;font-weight:900;letter-spacing:-.08em}
+@media print{body{overflow:visible;background:#0b1020}.slide{display:block;page-break-after:always;height:100vh}.controls,.slideNo,.progress{display:none}}
+</style></head><body><main class="deck"><section class="slide title">
+<div class="titleMark">02</div><div class="kicker">Terraform / IaC</div><h1>Terraform a Infrastructure as Code</h1><p class="lead">Ako bezpečne opisovať a meniť Azure infraštruktúru bez toho, aby sme miešali infra implementáciu do aplikačného repozitára.</p><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
+</section>
+<section class="slide ">
+<div class="kicker">Prečo IaC</div><h2>Infraštruktúra má byť verzovaná rovnako ako aplikácia</h2><div class="grid two"><div class="card warn"><h3>Ručné klikanie</h3><ul><li>ťažko opakovateľné;</li><li>slabá auditovateľnosť;</li><li>prostredia sa časom rozídu.</li></ul></div><div class="card highlight"><h3>Terraform</h3><ul><li>definuje cieľový stav;</li><li>ukáže plán zmeny pred apply;</li><li>stav a história sú kontrolované.</li></ul></div></div><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
+</section>
+<section class="slide ">
+<div class="kicker">Základný model</div><h2>Konfigurácia, provider, state, plan, apply</h2><div class="flow"><div class="node">.tf konfigurácia</div><div class="arrow">→</div><div class="node">provider AzureRM</div><div class="arrow">→</div><div class="node">state</div><div class="arrow">→</div><div class="node">plan</div><div class="arrow">→</div><div class="node">apply</div></div><p>Terraform nečíta iba kód. Porovnáva kód, stav a reálnu infraštruktúru.</p><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
+</section>
+<section class="slide ">
+<div class="kicker">State</div><h2>State nie je detail, ale kritická časť riešenia</h2><div class="grid three"><div class="card"><h3>Mapovanie</h3><p>Spája Terraform resource s reálnym Azure resource.</p></div><div class="card"><h3>Spolupráca</h3><p>Pre tím patrí do remote backendu, nie do lokálneho súboru v repozitári.</p></div><div class="card"><h3>Citlivosť</h3><p>Môže obsahovať hodnoty, ktoré treba chrániť podobne ako konfiguračné dáta.</p></div></div><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
+</section>
+<section class="slide ">
+<div class="kicker">Repo boundary</div><h2>U nás je infraštruktúra samostatný repozitár</h2><div class="grid two"><div class="card highlight"><h3>Application repo</h3><p>Kód aplikácie, architektúra aplikácie, aplikačné štandardy, runtime požiadavky, budúce DB migrácie.</p></div><div class="card"><h3>Infrastructure repo</h3><p>Terraform, Azure resources, networking, identity/RBAC platformy, environment konfigurácia a deployment infraštruktúry.</p></div></div><p class="small">Toto je zámerné architektonické rozhodnutie, nie náhodná organizácia súborov.</p><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
+</section>
+<section class="slide ">
+<div class="kicker">Aplikačné požiadavky</div><h2>Aplikačný repozitár neurčuje resource detaily, ale hovorí, čo potrebuje</h2><div class="flow"><div class="node">ADR / standards</div><div class="arrow">→</div><div class="node">infrastructure requirements</div><div class="arrow">→</div><div class="node">Terraform repo</div><div class="arrow">→</div><div class="node">Azure resources</div></div><p>Príklad: aplikácia vyžaduje samostatný frontend a backend Application Insights resource. Názvy, SKU a resource topology implementuje infra repo.</p><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
+</section>
+<section class="slide ">
+<div class="kicker">Prostredia</div><h2>Nepridávať prostredia skôr, ako majú účel</h2><div class="grid two"><div class="card"><h3>Teraz</h3><p>Primárny cieľ je dev prostredie a jednoduchý, vysvetliteľný delivery flow.</p></div><div class="card"><h3>Neskôr</h3><p>Produkčné nasadenie riešiť cez jasný release mechanizmus, typicky tag/release a samostatné schválenie.</p></div></div><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
+</section>
+<section class="slide ">
+<div class="kicker">Plan review</div><h2>Najdôležitejší moment nie je apply, ale čítanie plánu</h2><div class="code">terraform fmt
+terraform validate
+terraform plan
+
+# review:
++ čo vznikne
+~ čo sa zmení
+- čo sa odstráni</div><p>Plan má byť čitateľný artifact pre review, nie iba technický medzi-krok.</p><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
+</section>
+<section class="slide ">
+<div class="kicker">Moduly</div><h2>Modul nie je cieľ, ale nástroj na opakovanie</h2><div class="grid two"><div class="card warn"><h3>Príliš skoro</h3><p>Abstrakcia bez reálneho opakovania často zakryje jednoduchú infraštruktúru.</p></div><div class="card highlight"><h3>V správny čas</h3><p>Modul dáva zmysel, keď opakujeme rovnaký pattern alebo chceme vedome stabilizovať rozhranie.</p></div></div><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
+</section>
+<section class="slide ">
+<div class="kicker">Identita a tajomstvá</div><h2>Terraform nemá byť nosičom hesiel</h2><ul><li>Preferovať workload identity / OIDC medzi GitHub Actions a Azure.</li><li>Environment-specific hodnoty držať v GitHub Environments alebo Azure-native mechanizmoch.</li><li>Secret nikdy nekončí v commite, PR komentári ani v Terraform outpute bez dôvodu.</li></ul><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
+</section>
+<section class="slide ">
+<div class="kicker">Azure resources pre túto appku</div><h2>Čo bude infra repo pravdepodobne riešiť</h2><div class="grid three"><div class="card"><h3>Compute</h3><p>Azure Functions Flex pre backend, statický hosting alebo frontend hosting podľa zvoleného modelu.</p></div><div class="card"><h3>Observability</h3><p>Application Insights FE/BE + spoločný Log Analytics workspace.</p></div><div class="card"><h3>Identity</h3><p>Managed identities, RBAC, app registrations podľa finálneho identity modelu.</p></div></div><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
+</section>
+<section class="slide ">
+<div class="kicker">Cvičenie</div><h2>Čo si má účastník odniesť</h2><ul><li>rozlíšiť aplikačný a infraštruktúrny repozitár;</li><li>prečítať Terraform plan a pomenovať riziká;</li><li>pochopiť význam state;</li><li>vedieť vysvetliť, prečo infra zmena potrebuje review rovnako ako kód.</li></ul><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
+</section></main><div class="progress"></div><div class="slideNo"></div><div class="controls"><button data-prev>←</button><button data-next>→</button></div><script>
+const slides=[...document.querySelectorAll('.slide')];let i=0;const prog=document.querySelector('.progress');const num=document.querySelector('.slideNo');
+function show(n){i=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,k)=>s.classList.toggle('active',k===i));prog.style.width=((i+1)/slides.length*100)+'%';num.textContent=(i+1)+' / '+slides.length;history.replaceState(null,'','#'+(i+1));}
+function next(){show(i+1)} function prev(){show(i-1)}
+document.addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();next()} if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();prev()} if(e.key==='Home')show(0); if(e.key==='End')show(slides.length-1);});
+document.addEventListener('click',e=>{if(e.target.matches('[data-next]'))next(); if(e.target.matches('[data-prev]'))prev();});
+const start=parseInt(location.hash.slice(1),10);show(isNaN(start)?0:start-1);
+</script></body></html>

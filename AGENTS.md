@@ -23,6 +23,15 @@ Before starting work, read:
 
 When working in a directory that contains a more specific `AGENTS.md`, read and follow it in addition to this root file.
 
+### Training presentations are excluded from normal context
+
+`training/presentations/` is intentionally outside the normal planning, implementation, and review context.
+
+- Do not read, search, summarize, index, or use files under `training/presentations/` unless the current issue/task explicitly asks you to work on training presentations or related training material.
+- Presentation content is teaching material, not a canonical source of product, architecture, engineering, or implementation requirements.
+- Canonical project documentation under `docs/`, approved ADRs/standards, and the relevant GitHub issue/plan take precedence over presentation content.
+- When presentation work is explicitly requested, read `training/presentations/AGENTS.md` before editing that folder.
+
 Area-specific standards:
 
 - all code: `docs/standards/coding/general.md`
