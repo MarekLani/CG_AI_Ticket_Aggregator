@@ -4,6 +4,13 @@
 
 Applies to `src/backend/`.
 
+## Solution and SDK baseline
+
+- When the backend is initialized, use a root `UnifiedWorkItems.slnx` solution. Prefer the .NET 10 SLNX format; do not introduce a parallel or legacy `.sln` unless a concrete tooling compatibility requirement justifies it.
+- Create a root `global.json` with the first backend scaffold and pin the selected .NET 10 SDK used by the supported development environment. Do not invent an SDK patch version before the backend is initialized.
+- Keep the `global.json` SDK major version aligned with the Dev Container and CI .NET baseline.
+- Once `global.json` exists, local development and CI tooling must respect it; update the SDK baseline deliberately rather than relying on whichever compatible SDK happens to be installed.
+
 ## Mandatory
 
 - Target .NET 10 unless an explicit issue changes the runtime baseline.
