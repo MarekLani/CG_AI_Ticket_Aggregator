@@ -12,6 +12,7 @@ coverage/
 .env
 .env.*
 !.env.example
+local.settings.json
 *.pfx
 *.pem
 *.key

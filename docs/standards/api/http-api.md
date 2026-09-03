@@ -24,7 +24,7 @@ Applies to the HTTP contract exposed by the backend to the frontend and other AP
 - Return normal collection responses for collection queries, including when no items match.
 - Use appropriate HTTP status codes for invalid requests and resource-specific failures.
 - Return a consistent Problem Details response for API errors.
-- Do not expose stack traces, connection details, credentials, tokens, or other internal implementation information. Follow `docs/standards/security.md`.
+- Do not expose stack traces, connection details, credentials, tokens, or other internal implementation information. Follow `docs/standards/security/general.md`.
 
 ## Contract evolution
 

@@ -6,5 +6,7 @@ if [ ! -f src/frontend/package.json ]; then
 fi
 cd src/frontend
 npm ci
-npm run build
+npm run lint
+npm run typecheck
 npm run test
+npm run build
