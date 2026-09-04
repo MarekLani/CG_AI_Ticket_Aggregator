@@ -13,48 +13,132 @@ ul{margin:0;padding-left:25px}li{font-size:25px;line-height:1.36;margin:10px 0;c
 .footer{position:absolute;left:76px;right:76px;bottom:32px;display:flex;justify-content:space-between;color:#788aa8;font-size:15px}.progress{position:absolute;left:0;bottom:0;height:5px;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0}.controls{position:fixed;right:22px;bottom:18px;display:flex;gap:8px;z-index:10}.controls button{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.15);color:#fff;border-radius:12px;padding:8px 12px;cursor:pointer}.slideNo{position:fixed;left:22px;bottom:20px;color:#7890ad;font-size:14px;z-index:10}.sources li{font-size:18px}.titleMark{position:absolute;right:76px;top:60px;color:rgba(255,255,255,.16);font-size:112px;font-weight:900;letter-spacing:-.08em}
 @media print{body{overflow:visible;background:#0b1020}.slide{display:block;page-break-after:always;height:100vh}.controls,.slideNo,.progress{display:none}}
 </style></head><body><main class="deck"><section class="slide title">
-<div class="titleMark">02</div><div class="kicker">Terraform / IaC</div><h1>Terraform a Infrastructure as Code</h1><p class="lead">Ako bezpečne opisovať a meniť Azure infraštruktúru bez toho, aby sme miešali infra implementáciu do aplikačného repozitára.</p><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
+<div class="titleMark">02</div><div class="kicker">Terraform / IaC</div><h1>Terraform a Infrastructure as Code</h1><p class="lead">Praktický úvod do Terraformu: ako opisovať Azure infraštruktúru ako kód, bezpečne ju meniť a držať infra implementáciu mimo aplikačného repozitára.</p><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
 </section>
 <section class="slide ">
-<div class="kicker">Prečo IaC</div><h2>Infraštruktúra má byť verzovaná rovnako ako aplikácia</h2><div class="grid two"><div class="card warn"><h3>Ručné klikanie</h3><ul><li>ťažko opakovateľné;</li><li>slabá auditovateľnosť;</li><li>prostredia sa časom rozídu.</li></ul></div><div class="card highlight"><h3>Terraform</h3><ul><li>definuje cieľový stav;</li><li>ukáže plán zmeny pred apply;</li><li>stav a história sú kontrolované.</li></ul></div></div><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
+<div class="kicker">Prečo IaC</div><h2>Infraštruktúra má mať rovnakú disciplínu ako kód</h2><div class="grid two"><div class="card warn"><h3>Ručné klikanie</h3><ul><li>ťažko sa opakuje medzi prostrediami;</li><li>zmeny sa spätne ťažko vysvetľujú;</li><li>prostredia sa časom začnú rozchádzať.</li></ul></div><div class="card highlight"><h3>Infrastructure as Code</h3><ul><li>cieľový stav je zapísaný v súboroch;</li><li>zmena ide cez review a históriu;</li><li>prostredie sa dá obnoviť alebo upraviť kontrolovane.</li></ul></div></div><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
 </section>
 <section class="slide ">
-<div class="kicker">Základný model</div><h2>Konfigurácia, provider, state, plan, apply</h2><div class="flow"><div class="node">.tf konfigurácia</div><div class="arrow">→</div><div class="node">provider AzureRM</div><div class="arrow">→</div><div class="node">state</div><div class="arrow">→</div><div class="node">plan</div><div class="arrow">→</div><div class="node">apply</div></div><p>Terraform nečíta iba kód. Porovnáva kód, stav a reálnu infraštruktúru.</p><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
+<div class="kicker">Čo je Terraform</div><h2>Terraform porovnáva, čo chceme, s tým, čo existuje</h2><div class="flow"><div class="node">Terraform konfigurácia</div><div class="arrow">→</div><div class="node">provider</div><div class="arrow">→</div><div class="node">state</div><div class="arrow">→</div><div class="node">plan</div><div class="arrow">→</div><div class="node">apply</div></div><p>Terraform je deklaratívny nástroj. Nepíšeme postup „klikni sem, potom tam“. Popíšeme želaný stav a Terraform navrhne zmenu, ktorá k nemu vedie.</p><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
 </section>
 <section class="slide ">
-<div class="kicker">State</div><h2>State nie je detail, ale kritická časť riešenia</h2><div class="grid three"><div class="card"><h3>Mapovanie</h3><p>Spája Terraform resource s reálnym Azure resource.</p></div><div class="card"><h3>Spolupráca</h3><p>Pre tím patrí do remote backendu, nie do lokálneho súboru v repozitári.</p></div><div class="card"><h3>Citlivosť</h3><p>Môže obsahovať hodnoty, ktoré treba chrániť podobne ako konfiguračné dáta.</p></div></div><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
+<div class="kicker">Základné časti</div><h2>Z čoho sa Terraform skladá</h2><div class="grid three"><div class="card"><h3>Konfigurácia</h3><p>Súbory `.tf`, v ktorých definujeme resources, premenné, výstupy a moduly.</p></div><div class="card"><h3>Provider</h3><p>Doplnok, ktorý vie hovoriť s konkrétnym API — napríklad AzureRM pre Azure.</p></div><div class="card"><h3>State</h3><p>Mapa medzi Terraform konfiguráciou a reálnymi objektmi v cloude.</p></div><div class="card"><h3>Plan</h3><p>Návrh zmien: čo vznikne, čo sa upraví a čo sa odstráni.</p></div><div class="card"><h3>Apply</h3><p>Kontrolované vykonanie odsúhlaseného plánu.</p></div><div class="card"><h3>Modules</h3><p>Spôsob, ako opakovane použiť overený infra pattern.</p></div></div><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
 </section>
 <section class="slide ">
-<div class="kicker">Repo boundary</div><h2>U nás je infraštruktúra samostatný repozitár</h2><div class="grid two"><div class="card highlight"><h3>Application repo</h3><p>Kód aplikácie, architektúra aplikácie, aplikačné štandardy, runtime požiadavky, budúce DB migrácie.</p></div><div class="card"><h3>Infrastructure repo</h3><p>Terraform, Azure resources, networking, identity/RBAC platformy, environment konfigurácia a deployment infraštruktúry.</p></div></div><p class="small">Toto je zámerné architektonické rozhodnutie, nie náhodná organizácia súborov.</p><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
-</section>
-<section class="slide ">
-<div class="kicker">Aplikačné požiadavky</div><h2>Aplikačný repozitár neurčuje resource detaily, ale hovorí, čo potrebuje</h2><div class="flow"><div class="node">ADR / standards</div><div class="arrow">→</div><div class="node">infrastructure requirements</div><div class="arrow">→</div><div class="node">Terraform repo</div><div class="arrow">→</div><div class="node">Azure resources</div></div><p>Príklad: aplikácia vyžaduje samostatný frontend a backend Application Insights resource. Názvy, SKU a resource topology implementuje infra repo.</p><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
-</section>
-<section class="slide ">
-<div class="kicker">Prostredia</div><h2>Nepridávať prostredia skôr, ako majú účel</h2><div class="grid two"><div class="card"><h3>Teraz</h3><p>Primárny cieľ je dev prostredie a jednoduchý, vysvetliteľný delivery flow.</p></div><div class="card"><h3>Neskôr</h3><p>Produkčné nasadenie riešiť cez jasný release mechanizmus, typicky tag/release a samostatné schválenie.</p></div></div><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
-</section>
-<section class="slide ">
-<div class="kicker">Plan review</div><h2>Najdôležitejší moment nie je apply, ale čítanie plánu</h2><div class="code">terraform fmt
-terraform validate
-terraform plan
+<div class="kicker">HCL syntax</div><h2>Terraform konfigurácia je čitateľná, ale stále presná</h2><div class="grid two"><div class="card"><h3>Bloky</h3><p>Blok hovorí, aký typ veci definujeme: `terraform`, `provider`, `resource`, `variable`, `output` alebo `module`.</p></div><div class="card"><h3>Argumenty a výrazy</h3><p>Argument nastavuje vlastnosť. Výraz môže používať premenné, funkcie, podmienky alebo referencie na iné resources.</p></div></div><div class="code">resource "azurerm_resource_group" "main" {
+  name     = "rg-${var.project}-${var.environment}"
+  location = var.location
 
-# review:
-+ čo vznikne
-~ čo sa zmení
-- čo sa odstráni</div><p>Plan má byť čitateľný artifact pre review, nie iba technický medzi-krok.</p><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
+  tags = {
+    environment = var.environment
+    owner       = "platform"
+  }
+}</div><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
 </section>
 <section class="slide ">
-<div class="kicker">Moduly</div><h2>Modul nie je cieľ, ale nástroj na opakovanie</h2><div class="grid two"><div class="card warn"><h3>Príliš skoro</h3><p>Abstrakcia bez reálneho opakovania často zakryje jednoduchú infraštruktúru.</p></div><div class="card highlight"><h3>V správny čas</h3><p>Modul dáva zmysel, keď opakujeme rovnaký pattern alebo chceme vedome stabilizovať rozhranie.</p></div></div><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
+<div class="kicker">Provider</div><h2>Provider je most medzi Terraformom a konkrétnou platformou</h2><div class="code">terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 4.0"
+    }
+  }
+}
+
+provider "azurerm" {
+  features {}
+}</div><p>Provider verzujeme rovnako zámerne ako aplikačné závislosti. Náhodný upgrade providera môže zmeniť správanie plánov.</p><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
 </section>
 <section class="slide ">
-<div class="kicker">Identita a tajomstvá</div><h2>Terraform nemá byť nosičom hesiel</h2><ul><li>Preferovať workload identity / OIDC medzi GitHub Actions a Azure.</li><li>Environment-specific hodnoty držať v GitHub Environments alebo Azure-native mechanizmoch.</li><li>Secret nikdy nekončí v commite, PR komentári ani v Terraform outpute bez dôvodu.</li></ul><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
+<div class="kicker">Resources a referencie</div><h2>Resources sa navzájom prepájajú cez referencie</h2><div class="code">resource "azurerm_storage_account" "state" {
+  name                     = var.storage_account_name
+  resource_group_name      = azurerm_resource_group.main.name
+  location                 = azurerm_resource_group.main.location
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+}</div><p>Keď resource odkazuje na iný resource, Terraform z toho vie odvodiť závislosť. V mnohých prípadoch preto netreba písať `depends_on` ručne.</p><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
 </section>
 <section class="slide ">
-<div class="kicker">Azure resources pre túto appku</div><h2>Čo bude infra repo pravdepodobne riešiť</h2><div class="grid three"><div class="card"><h3>Compute</h3><p>Azure Functions Flex pre backend, statický hosting alebo frontend hosting podľa zvoleného modelu.</p></div><div class="card"><h3>Observability</h3><p>Application Insights FE/BE + spoločný Log Analytics workspace.</p></div><div class="card"><h3>Identity</h3><p>Managed identities, RBAC, app registrations podľa finálneho identity modelu.</p></div></div><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
+<div class="kicker">Premenné</div><h2>Premenné robia konfiguráciu použiteľnú pre viac prostredí</h2><div class="code">variable "environment" {
+  type        = string
+  description = "Deployment environment name."
+
+  validation {
+    condition     = contains(["dev", "prod"], var.environment)
+    error_message = "Environment must be dev or prod."
+  }
+}
+
+variable "location" {
+  type    = string
+  default = "westeurope"
+}</div><p>V kóde potom používame `var.environment` alebo `var.location`. Hodnoty sa dajú dodať cez `.tfvars`, CLI alebo premenné prostredia.</p><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
 </section>
 <section class="slide ">
-<div class="kicker">Cvičenie</div><h2>Čo si má účastník odniesť</h2><ul><li>rozlíšiť aplikačný a infraštruktúrny repozitár;</li><li>prečítať Terraform plan a pomenovať riziká;</li><li>pochopiť význam state;</li><li>vedieť vysvetliť, prečo infra zmena potrebuje review rovnako ako kód.</li></ul><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
-</section></main><div class="progress"></div><div class="slideNo"></div><div class="controls"><button data-prev>←</button><button data-next>→</button></div><script>
+<div class="kicker">tfvars</div><h2>Parametre prostredia nepatria natvrdo do resource blokov</h2><div class="grid two"><div class="card highlight"><h3>dev.tfvars</h3><div class="code">environment = "dev"
+location    = "westeurope"
+sku_name    = "FC1"</div></div><div class="card"><h3>prod.tfvars</h3><div class="code">environment = "prod"
+location    = "westeurope"
+sku_name    = "FC1"</div></div></div><p>Rovnaký modul môže dostať iné vstupy pre dev a prod. Pozor: súbory s tajomstvami nepatria do Gitu.</p><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
+</section>
+<section class="slide ">
+<div class="kicker">Locals, data, outputs</div><h2>Nie všetko je resource</h2><div class="grid three"><div class="card"><h3>locals</h3><p>Pomenujú odvodené hodnoty, napríklad spoločný prefix názvov.</p><div class="code">locals {
+  name_prefix = "uwi-${var.environment}"
+}</div></div><div class="card"><h3>data</h3><p>Načíta existujúci objekt, ktorý Terraform nemusí vlastniť.</p><div class="code">data "azurerm_client_config" "current" {}</div></div><div class="card"><h3>outputs</h3><p>Zverejnia hodnotu pre človeka, pipeline alebo nadväzujúci modul.</p><div class="code">output "api_url" {
+  value = azurerm_linux_function_app.api.default_hostname
+}</div></div></div><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
+</section>
+<section class="slide ">
+<div class="kicker">State</div><h2>State je citlivá prevádzková evidencia</h2><div class="grid three"><div class="card"><h3>Mapovanie</h3><p>Spája Terraform resource s reálnym Azure resource.</p></div><div class="card"><h3>Spolupráca</h3><p>Pre tím patrí do remote backendu so zamykaním, nie do lokálneho súboru v repozitári.</p></div><div class="card"><h3>Bezpečnosť</h3><p>Môže obsahovať citlivé hodnoty, preto potrebuje riadený prístup.</p></div></div><p>State neupravujeme ručne ako bežný JSON súbor. Zmeny v state sa robia iba vedome cez Terraform nástroje.</p><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
+</section>
+<section class="slide ">
+<div class="kicker">Bežný workflow</div><h2>Najprv čítame plán, až potom meníme infraštruktúru</h2><div class="code">terraform init      # pripraví working directory a providery
+terraform fmt       # zjednotí formát
+terraform validate  # skontroluje konfiguráciu
+terraform plan      # ukáže navrhované zmeny
+terraform apply     # vykoná odsúhlasenú zmenu</div><p>V tímovej práci je `plan` review artifact. Nemá len „prejsť“, ale má dávať zmysel.</p><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
+</section>
+<section class="slide ">
+<div class="kicker">Ako čítať plan</div><h2>Symboly v pláne sú dôležitejšie než dlhý výpis</h2><div class="grid three"><div class="card"><h3><span class="check">+</span> create</h3><p>Vznikne nový resource.</p></div><div class="card"><h3><span class="orange">~</span> update</h3><p>Existujúci resource sa zmení na mieste.</p></div><div class="card warn"><h3><span class="x">-</span> destroy</h3><p>Resource sa odstráni. Toto vždy čítať veľmi pozorne.</p></div></div><p>Pri infra review sa nepýtame len „prešla validácia?“, ale aj „sú tieto zmeny očakávané a bezpečné?“</p><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
+</section>
+<section class="slide ">
+<div class="kicker">Moduly</div><h2>Modul je rozhranie pre opakovateľný infra pattern</h2><div class="grid two"><div class="card warn"><h3>Príliš skoro</h3><p>Modul bez reálneho opakovania môže skryť jednoduchú infraštruktúru za zbytočnú abstrakciu.</p></div><div class="card highlight"><h3>V správny čas</h3><p>Modul dáva zmysel, keď opakujeme rovnaký pattern alebo chceme vedome stabilizovať rozhranie.</p></div></div><div class="code">module "app_insights" {
+  source      = "./modules/application-insights"
+  name_prefix = local.name_prefix
+  location    = var.location
+}</div><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
+</section>
+<section class="slide ">
+<div class="kicker">Repo boundary</div><h2>V našom projekte je infraštruktúra samostatný repozitár</h2><div class="grid two"><div class="card highlight"><h3>Aplikačný repozitár</h3><p>Kód aplikácie, aplikačná architektúra, štandardy, runtime požiadavky a budúce DB migrácie.</p></div><div class="card"><h3>Infraštruktúrny repozitár</h3><p>Terraform, Azure resources, networking, platformová identita/RBAC, konfigurácia prostredí a nasadenie infraštruktúry.</p></div></div><p class="small">Toto je zámerné architektonické rozdelenie. Aplikačný repozitár hovorí, čo potrebuje; infra repozitár rozhoduje, ako to presne nasadiť.</p><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
+</section>
+<section class="slide ">
+<div class="kicker">Požiadavky aplikácie</div><h2>Aplikácia nemá duplicitne opisovať Azure resources</h2><div class="flow"><div class="node">ADR / standards</div><div class="arrow">→</div><div class="node">infrastructure requirements</div><div class="arrow">→</div><div class="node">Terraform repo</div><div class="arrow">→</div><div class="node">Azure resources</div></div><p>Príklad: aplikácia potrebuje samostatné Application Insights resources pre frontend a backend. Konkrétne názvy, SKU a topológiu implementuje infra repozitár.</p><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
+</section>
+<section class="slide ">
+<div class="kicker">Alternatívy</div><h2>Terraform nie je jediný spôsob, ako robiť IaC v Azure</h2><table class="compare"><tr><th>Nástroj</th><th>Silná stránka</th><th>Kedy dáva zmysel</th></tr><tr><td>Azure Portal</td><td>Rýchle ručné overenie</td><td>Prototyp alebo diagnostika, nie opakovateľné nasadenie.</td></tr><tr><td>ARM templates</td><td>Natívny Azure deployment model</td><td>Keď potrebujeme nízkoúrovňový Azure template formát.</td></tr><tr><td>Bicep</td><td>Čitateľnejší Azure-native jazyk nad ARM</td><td>Silná voľba pre čisto Azure infraštruktúru.</td></tr><tr><td>Terraform</td><td>Široký provider ekosystém a konzistentný workflow</td><td>Keď chceme jeden IaC model pre Azure aj potenciálne ďalšie služby.</td></tr><tr><td>Pulumi</td><td>Infra v bežných programovacích jazykoch</td><td>Keď tím vedome chce programovací model namiesto deklaratívneho IaC jazyka.</td></tr></table><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
+</section>
+<section class="slide ">
+<div class="kicker">Terraform vs. Bicep</div><h2>Bicep je výborný pre Azure. Terraform vyhráva ako širší infra workflow.</h2><div class="grid two"><div class="card"><h3>Bicep</h3><ul><li>veľmi dobrá Azure-native skúsenosť;</li><li>bez samostatného state súboru;</li><li>rýchla podpora nových Azure resource typov;</li><li>jednoduchší jazyk pre tímy zamerané len na Azure.</li></ul></div><div class="card highlight"><h3>Terraform</h3><ul><li>rovnaký workflow pre viac providerov;</li><li>silný ekosystém modulov a providerov;</li><li>jasný plan/apply model;</li><li>dobrá zhoda s GitHub review a pipeline procesom.</li></ul></div></div><p>Pre tento projekt je dôležité mať konzistentný infra workflow v samostatnom repozitári. Preto pracujeme s Terraformom, aj keď Bicep ostáva relevantná Azure alternatíva.</p><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
+</section>
+<section class="slide ">
+<div class="kicker">Azure hosting model</div><h2>Terraform opisuje hosting. Nerozhoduje za nás, ktorý hosting je správny.</h2><div class="grid three"><div class="card highlight"><h3>Unified Work Items</h3><p>Backend cieli na Azure Functions Flex. Kontajnerizácia je hlavne vývojová a testovacia téma.</p></div><div class="card"><h3>Iné kontajnerové appky</h3><p>Ak je deployment artifact kontajnerový image, dáva zmysel Azure Container Apps.</p></div><div class="card"><h3>AKS</h3><p>Voľba pre prípady, kde potrebujeme plnú Kubernetes orchestráciu a jej prevádzkový model.</p></div></div><p>IaC má zachytiť architektonické rozhodnutie, nie tlačiť aplikáciu do konkrétneho compute modelu.</p><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
+</section>
+<section class="slide ">
+<div class="kicker">Bezpečnosť</div><h2>Terraform nemá byť nosičom hesiel</h2><ul><li>Preferovať workload identity / OIDC medzi GitHub Actions a Azure.</li><li>Hodnoty špecifické pre prostredie držať v riadených pipeline/environment mechanizmoch.</li><li>Secret nikdy nemá skončiť v commite, PR komentári, logu ani Terraform outpute bez veľmi dobrého dôvodu.</li><li>State backend musí mať obmedzený prístup a zamykanie proti súbežným zmenám.</li></ul><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
+</section>
+<section class="slide ">
+<div class="kicker">Azure resources pre túto aplikáciu</div><h2>Čo bude infra repozitár pravdepodobne riešiť</h2><div class="grid three"><div class="card"><h3>Compute</h3><p>Azure Functions Flex pre backend a zvolený model hostingu frontendu.</p></div><div class="card"><h3>Observability</h3><p>Application Insights pre frontend a backend plus spoločný Log Analytics workspace.</p></div><div class="card"><h3>Identity</h3><p>Managed identities, RBAC a app registrations podľa finálneho identity modelu.</p></div><div class="card"><h3>Networking</h3><p>Pripojenie k Helpdesk zdroju a prípadné privátne endpointy podľa požiadaviek prostredia.</p></div><div class="card"><h3>Configuration</h3><p>Environment konfigurácia bez ukladania tajomstiev do aplikačného kódu.</p></div><div class="card"><h3>Database</h3><p>PostgreSQL až vtedy, keď vznikne schválená potreba aplikačnej persistencie.</p></div></div><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
+</section>
+<section class="slide ">
+<div class="kicker">Cvičenie</div><h2>Čo si má účastník odniesť</h2><div class="grid two"><div class="card"><h3>Technicky</h3><ul><li>rozoznať resource, provider, variable, output a module;</li><li>prečítať základný Terraform plan;</li><li>rozumieť rozdielu medzi stable infra a aplikačným kódom.</li></ul></div><div class="card highlight"><h3>Procesne</h3><ul><li>meniť infraštruktúru cez branch, PR a review;</li><li>nevkladať secrets do kódu ani state bez kontroly;</li><li>vedieť, kedy je lepší Terraform, Bicep alebo jednoduchšia alternatíva.</li></ul></div></div><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
+</section>
+<section class="slide ">
+<div class="kicker">Pointa</div><h2>Terraform je spôsob, ako robiť zmeny infraštruktúry čitateľne a opakovateľne</h2><p class="quote">Najväčšia hodnota Terraformu nie je v tom, že vie vytvoriť resource. Je v tom, že zmena je viditeľná, reviewovateľná a zopakovateľná.</p><div class="footer"><span>Terraform / IaC</span><span>Technologická vsuvka · Unified Work Items</span></div>
+</section>
+<section class="slide ">
+<div class="kicker">Zdroje</div><h2>Na čom je postavené vysvetlenie</h2><ul class="sources"><li>Terraform language, providers, variables, state a CLI workflow — HashiCorp Developer</li><li>Terraform on Azure — Microsoft Azure documentation</li><li>Azure Bicep overview — Microsoft Learn</li><li>Projektové ADRs a štandardy Unified Work Items: oddelený infra repozitár, staged persistence, observability, identity a Dev Container baseline</li></ul><div class="footer"><span>Terraform / IaC</span><span>Zdroje</span></div>
+</section>
+</main><div class="slideNo"></div><div class="controls"><button data-prev>◀</button><button data-next>▶</button></div><div class="progress"></div><script>
 const slides=[...document.querySelectorAll('.slide')];let i=0;const prog=document.querySelector('.progress');const num=document.querySelector('.slideNo');
 function show(n){i=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,k)=>s.classList.toggle('active',k===i));prog.style.width=((i+1)/slides.length*100)+'%';num.textContent=(i+1)+' / '+slides.length;history.replaceState(null,'','#'+(i+1));}
 function next(){show(i+1)} function prev(){show(i-1)}
