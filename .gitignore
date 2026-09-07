@@ -24,6 +24,11 @@ local.settings.json
 crash.log
 *.tfplan
 
+# Terraform training exercise local files
+training/exercises/terraform/terraform.tfvars
+training/exercises/terraform/backend.tf
+training/exercises/terraform/backend.hcl
+
 # IDE / OS
 .vs/
 .vscode/settings.json
