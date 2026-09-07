@@ -52,7 +52,38 @@ docker logs ...</div><div class="footer"><span>Containers / Azure hosting</span>
 <section class="slide "><div class="kicker">Rozhodnutie pre túto appku</div><h2>Unified Work Items: Azure Functions Flex, nie Container Apps</h2><div class="grid two"><div class="card highlight"><h3>Prečo Flex</h3><ul><li>malá interná aplikácia;</li><li>API workload;</li><li>serverless prevádzkový model;</li><li>bez potreby vlastného runtime image.</li></ul></div><div class="card warn"><h3>Prečo nie Container Apps</h3><ul><li>nepotrebujeme vlastný image;</li><li>nepotrebujeme Dapr, sidecars ani revisions ako primárny dôvod;</li><li>nechceme zbytočnú zodpovednosť za image lifecycle.</li></ul></div></div><div class="footer"><span>Containers / Azure hosting</span><span>Technologická vsuvka · Unified Work Items</span></div></section>
 <section class="slide "><div class="kicker">Prepojenie s existujúcimi appkami</div><h2>Container Apps ukážeme tam, kde kontajner dáva zmysel</h2><p>Ak už v Azure bežia iné aplikácie ako kontajnery, je vhodné ich krátko použiť ako kontrast. Účastníci uvidia celý reťazec: Dockerfile, image, Azure Container Registry a Azure Container Apps.</p><div class="flow"><div class="node">Dockerfile</div><div class="arrow">→</div><div class="node">image</div><div class="arrow">→</div><div class="node">ACR</div><div class="arrow">→</div><div class="node">Container Apps</div></div><div class="footer"><span>Containers / Azure hosting</span><span>Technologická vsuvka · Unified Work Items</span></div></section>
 <section class="slide "><div class="kicker">Hlavná pointa</div><h2>Kontajnery používame tam, kde riešia konkrétny problém</h2><p class="quote">Moderný cloud vývoj neznamená kontajnerizovať všetko.</p><div class="grid three"><div class="card"><h3>Vývoj</h3><p>Dev Container a Docker Desktop.</p></div><div class="card"><h3>Testovanie</h3><p>Testcontainers pre izolované integračné testy.</p></div><div class="card"><h3>Produkcia</h3><p>Functions Flex alebo Container Apps podľa potrieb workloadu.</p></div></div><div class="footer"><span>Containers / Azure hosting</span><span>Technologická vsuvka · Unified Work Items</span></div></section>
-<section class="slide "><div class="kicker">Cvičenie</div><h2>Čo si má účastník odniesť</h2><ul><li>spustiť a zastaviť jednoduchý kontajner;</li><li>pochopiť rozdiel medzi image a bežiacim kontajnerom;</li><li>rozumieť portom, volume a premenným prostredia;</li><li>vedieť, kedy použiť Compose;</li><li>rozlíšiť Dev Container, runtime container a Azure hosting model.</li></ul><div class="footer"><span>Containers / Azure hosting</span><span>Technologická vsuvka · Unified Work Items</span></div></section>
+<section class="slide "><div class="kicker">Cvičenie · scenár</div><h2>Od cudzieho image k vlastnému kontajneru za 20 minút</h2><div class="flow"><div class="node">nginx:alpine</div><div class="arrow">→</div><div class="node">docker run</div><div class="arrow">→</div><div class="node">index.html + Dockerfile</div><div class="arrow">→</div><div class="node">vlastný image</div><div class="arrow">→</div><div class="node">nový container</div></div><div class="grid three" style="margin-top:24px"><div class="card"><h3>Bez aplikačnej zložitosti</h3><p>Žiadny .NET build ani databáza. Sústredíme sa iba na container koncepty.</p></div><div class="card highlight"><h3>Viditeľný výsledok</h3><p>Po každom kroku otvoríme <b>http://localhost:8080</b> a vidíme, čo práve beží.</p></div><div class="card"><h3>Hlavná pointa</h3><p>Image je nemenný artefakt. Zmena súboru na hoste nemení už bežiaci container.</p></div></div><div class="footer"><span>Containers / Azure hosting</span><span>Cvičenie · scenár</span></div></section>
+<section class="slide "><div class="kicker">Cvičenie · 1/3</div><h2>Spusť existujúci image a pozri sa na životný cyklus</h2><div class="grid two"><div class="card highlight"><h3>Spusti a over</h3><div class="code">docker pull nginx:alpine
+
+docker run --name web-base \
+  -p 8080:80 nginx:alpine
+
+docker ps
+docker logs web-base</div><p class="small">Otvor <b>http://localhost:8080</b>. Vysvetli si, čo znamená mapovanie <b>8080:80</b>.</p></div><div class="card"><h3>Zastav a odstráň</h3><div class="code">docker stop web-base
+docker ps
+docker ps -a
+docker rm web-base</div><ul><li>image zostáva lokálne;</li><li>container už neexistuje;</li><li>z toho istého image môže vzniknúť ďalší container.</li></ul></div></div><div class="footer"><span>Containers / Azure hosting</span><span>Cvičenie · lifecycle</span></div></section>
+<section class="slide "><div class="kicker">Cvičenie · 2/3</div><h2>Vytvor prvý vlastný image</h2><div class="grid two"><div class="card"><h3>Priprav dva súbory</h3><div class="code"># index.html
+&lt;h1&gt;My first container&lt;/h1&gt;
+&lt;p&gt;Created by: YOUR_NAME&lt;/p&gt;
+
+# Dockerfile
+FROM nginx:alpine
+COPY index.html /usr/share/nginx/html/index.html</div></div><div class="card highlight"><h3>Build a run</h3><div class="code">docker build -t ticket-lab:v1 .
+
+docker run --name ticket-lab \
+  -p 8080:80 ticket-lab:v1
+
+docker images
+docker ps</div><p class="small">Znovu otvor <b>http://localhost:8080</b>. Tentoraz stránku servuje image, ktorý si práve vytvoril.</p></div></div><div class="footer"><span>Containers / Azure hosting</span><span>Cvičenie · Dockerfile</span></div></section>
+<section class="slide "><div class="kicker">Cvičenie · 3/3</div><h2>Dokáž si, že bežiaci container sa sám nezmení</h2><div class="grid two"><div class="card warn"><h3>Experiment</h3><ol style="margin:0;padding-left:25px"><li>Zmeň text v <b>index.html</b>.</li><li>Refreshni prehliadač — stále vidíš starú verziu.</li><li>Vytvor nový image <b>ticket-lab:v2</b>.</li><li>Zastav a odstráň pôvodný container.</li><li>Spusť nový container z <b>v2</b>.</li></ol></div><div class="card highlight"><h3>Príkazy</h3><div class="code">docker build -t ticket-lab:v2 .
+docker stop ticket-lab
+docker rm ticket-lab
+
+docker run --name ticket-lab \
+  -p 8080:80 ticket-lab:v2
+
+docker images</div></div></div><p class="small">Cleanup: <b>docker stop ticket-lab && docker rm ticket-lab</b>. Diskusia: prečo je rovnaký nemenný image výhodný pri CI/CD a nasadzovaní do cloudu?</p><div class="footer"><span>Containers / Azure hosting</span><span>Cvičenie · immutable image</span></div></section>
 </main><div class="slideNo"></div><div class="controls"><button data-prev>←</button><button data-next>→</button></div><div class="progress"></div><script>
 const slides=[...document.querySelectorAll('.slide')];let i=0;const prog=document.querySelector('.progress');const num=document.querySelector('.slideNo');
 function show(n){i=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,k)=>s.classList.toggle('active',k===i));prog.style.width=((i+1)/slides.length*100)+'%';num.textContent=(i+1)+' / '+slides.length;history.replaceState(null,'','#'+(i+1));}
