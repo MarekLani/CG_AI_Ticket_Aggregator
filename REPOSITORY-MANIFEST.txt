@@ -22,6 +22,7 @@ docs/adr/0005-use-layered-automated-testing-strategy.md
 docs/adr/0006-use-vs-code-dev-container-for-local-development.md
 docs/ai/accepted-risk-log.md
 docs/ai/ai-development-workflow.md
+docs/ai/examples/launch-prompt-cookbook.md
 docs/ai/implementation-agent-prompt.md
 docs/ai/implementation-plan-lifecycle.md
 docs/ai/implementation-plan-template.md
