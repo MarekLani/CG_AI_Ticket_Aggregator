@@ -10,7 +10,8 @@ The launch prompt must specify exactly one mode:
 
 1. **Implement a small task directly from the issue** — use when a human has classified the task as small and low risk and no separate implementation plan is required.
 2. **Implement an approved implementation plan** — use for standard or high-risk work that has a human-approved canonical `Implementation Plan` comment in the linked issue.
-3. **Implement an approved remediation plan** — use only after review findings have been assessed by a human and the canonical `Remediation Plan` comment is approved.
+3. **Implement simple human-approved review fixes** — use only for findings that the responsible developer has explicitly marked `Accepted` in the canonical `Review Findings Assessment` and that do not require a separate `Remediation Plan`.
+4. **Implement an approved remediation plan** — use only after review findings have been assessed by a human and the canonical `Remediation Plan` comment is approved.
 
 ## Launch context and operational permissions
 
@@ -19,7 +20,7 @@ The task-specific launch prompt must identify:
 - the linked GitHub issue;
 - the selected work mode;
 - the approved implementation-plan or remediation-plan version when one is required;
-- the current pull request when implementing an approved remediation plan;
+- the current pull request when implementing simple accepted review fixes or an approved remediation plan;
 - the branch mode;
 - the working branch;
 - the base branch;
@@ -30,7 +31,7 @@ Git and GitHub write permissions are deny-by-default. Do not infer permission fr
 
 For initial implementation, commit, push, and draft-PR creation are treated as one publication permission set. Unless the launch prompt explicitly permits all three, do not commit, push, or create a pull request. Local file changes and validation do not imply permission to publish the work.
 
-For remediation mode, commit and push remain individually deny-by-default and no second pull request is created.
+For existing-PR fix modes, commit and push remain individually deny-by-default and no second pull request is created.
 
 ## Before making changes
 
@@ -40,7 +41,8 @@ Read and use, as applicable:
 - `docs/product/solution-overview.md`;
 - the linked GitHub issue, including acceptance criteria and relevant comments;
 - the latest approved `Implementation Plan`, if the task requires one;
-- the latest approved `Remediation Plan`, if you are implementing remediation;
+- the canonical `Review Findings Assessment`, when implementing review fixes or remediation;
+- the latest approved `Remediation Plan`, if you are implementing non-trivial remediation;
 - the relevant engineering standards under `docs/standards/`;
 - relevant architecture documentation and ADRs;
 - existing code, tests, patterns, and dependencies in the affected area.
@@ -83,7 +85,9 @@ Never mark the pull request ready for review, approve it, or merge it.
 
 If the complete publication permission set is not explicitly granted, do not commit, push, or create a pull request. After successful initial implementation and validation, prepare a proposed pull-request body using `.github/PULL_REQUEST_TEMPLATE.md` and return it with the implementation report instead.
 
-For remediation mode, work on the existing pull-request branch identified by the launch prompt. Do not create a second pull request. Commit or push remediation changes only when those operations are explicitly permitted, and never mark the existing PR ready for review, approve it, or merge it.
+For existing-PR fix modes, work on the existing pull-request branch identified by the launch prompt. Do not create a second pull request. Commit or push changes only when those operations are explicitly permitted, and never mark the existing PR ready for review, approve it, or merge it.
+
+When implementing simple human-approved review fixes, implement only findings explicitly marked `Accepted` for the current PR and do not include findings that are rejected, deferred, risk-accepted, need clarification, or require a separate remediation plan.
 
 ## Stop conditions
 
@@ -94,6 +98,7 @@ Stop and request a human decision if:
 - the implementation requires a new business or architectural decision that has not been approved;
 - the required change materially exceeds the approved scope;
 - the task-specific launch prompt does not provide the branch context required for the requested work;
+- a review-fix request does not have a canonical human `Review Findings Assessment` identifying the finding as `Accepted`;
 - a secret, production credential, private key, or production/customer data would be required;
 - required validation cannot be executed;
 - the implementation would require weakening an existing security, validation, or quality control.
@@ -110,6 +115,6 @@ Provide a concise implementation report containing:
 - documentation or ADRs that were added or updated;
 - branch, commit, push, and pull-request status.
 
-If a draft pull request was created, include its reference. If remediation was implemented in an existing pull request, include that PR reference. If successful initial implementation completed without pull-request creation, include the proposed pull-request body based on `.github/PULL_REQUEST_TEMPLATE.md`.
+If a draft pull request was created, include its reference. If review fixes or remediation were implemented in an existing pull request, include that PR reference. If successful initial implementation completed without pull-request creation, include the proposed pull-request body based on `.github/PULL_REQUEST_TEMPLATE.md`.
 
 Do not claim that a check passed unless it was actually executed successfully.
