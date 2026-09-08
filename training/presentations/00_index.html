@@ -1,15 +1,194 @@
-<!doctype html><html lang="sk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Updated technology stack presentations</title><style>
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cloud & AI Development — cesta školením</title>
+<style>
 :root{
-  --bg:#0b1020; --bg2:#111a33; --card:#16213d; --card2:#0f172a; --text:#eef4ff; --muted:#b9c7dd;
-  --accent:#4fd1c5; --accent2:#ffb86b; --danger:#ff7a90; --ok:#8bd17c; --line:#30405f;
+  --bg:#0b1020;--bg2:#111a33;--card:#16213d;--text:#eef4ff;--muted:#b9c7dd;
+  --accent:#4fd1c5;--accent2:#ffb86b;--danger:#ff7a90;--ok:#8bd17c;--line:#30405f;
 }
-*{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at 15% 10%,#18345e 0,#0b1020 36%,#070b16 100%);color:var(--text);font-family:Segoe UI,Inter,Arial,sans-serif;overflow:hidden}
-.deck{height:100vh;width:100vw;position:relative}.slide{display:none;height:100vh;width:100vw;padding:58px 76px 70px;position:relative;overflow:hidden}.slide.active{display:block}.slide::before{content:"";position:absolute;inset:-80px -120px auto auto;width:460px;height:460px;border-radius:50%;background:rgba(79,209,197,.10);filter:blur(2px)}
-.kicker{font-size:20px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:18px}.title .kicker{font-size:22px}h1{font-size:68px;line-height:1.02;margin:0 0 26px;font-weight:800;max-width:1050px}h2{font-size:48px;line-height:1.08;margin:0 0 28px;font-weight:780;max-width:1080px}h3{font-size:30px;margin:0 0 14px}p{font-size:25px;line-height:1.42;color:var(--muted);max-width:1080px}.lead{font-size:30px;color:#dce8ff;max-width:1040px}.small{font-size:18px;color:#9fb0ca}.muted{color:var(--muted)}strong,b{color:#fff}.accent{color:var(--accent)}.orange{color:var(--accent2)}
-.grid{display:grid;gap:22px}.grid.two{grid-template-columns:1fr 1fr}.grid.three{grid-template-columns:repeat(3,1fr)}.grid.four{grid-template-columns:repeat(4,1fr)}.card{background:linear-gradient(160deg,rgba(22,33,61,.96),rgba(11,16,32,.92));border:1px solid rgba(255,255,255,.09);border-radius:24px;padding:26px 28px;box-shadow:0 12px 30px rgba(0,0,0,.2);display:flex;flex-direction:column;justify-content:center}.card h3{color:#fff}.card p,.card li{font-size:21px}.card.highlight{border-color:rgba(79,209,197,.45);box-shadow:0 0 0 1px rgba(79,209,197,.14),0 16px 36px rgba(0,0,0,.25)}.card.warn{border-color:rgba(255,184,107,.45)}
-ul{margin:0;padding-left:25px}li{font-size:25px;line-height:1.36;margin:10px 0;color:var(--muted)}li::marker{color:var(--accent)}
-.flow{display:flex;align-items:stretch;gap:15px;margin-top:18px}.node{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:20px 22px;min-width:150px;flex:1;text-align:center;font-size:22px;color:#eaf2ff}.arrow{align-self:center;color:var(--accent);font-size:34px;font-weight:800}.stack{display:flex;flex-direction:column;gap:14px}.pill{display:inline-block;border:1px solid rgba(79,209,197,.35);background:rgba(79,209,197,.1);border-radius:999px;padding:8px 15px;margin:5px 6px 5px 0;font-size:18px;color:#dffdfa}.tag{display:inline-flex;align-items:center;gap:8px;border-radius:999px;background:rgba(255,255,255,.09);padding:9px 14px;font-size:18px;color:#d7e5fb;margin:4px}.code{font-family:Consolas,Monaco,monospace;background:#050814;border:1px solid #273550;border-radius:18px;padding:22px;color:#d5e7ff;white-space:pre-wrap;font-size:20px;line-height:1.35}.diagram{border:1px solid rgba(255,255,255,.1);border-radius:28px;padding:24px;background:rgba(255,255,255,.035)}
-.compare{width:100%;border-collapse:separate;border-spacing:0 12px;font-size:21px}.compare th{text-align:left;color:#fff;padding:8px 14px}.compare td{background:rgba(255,255,255,.055);border-top:1px solid rgba(255,255,255,.09);border-bottom:1px solid rgba(255,255,255,.09);padding:14px;color:var(--muted)}.compare td:first-child{border-left:1px solid rgba(255,255,255,.09);border-radius:14px 0 0 14px;color:#fff;font-weight:650}.compare td:last-child{border-right:1px solid rgba(255,255,255,.09);border-radius:0 14px 14px 0}.check{color:var(--ok);font-weight:800}.x{color:var(--danger);font-weight:800}.quote{font-size:36px;line-height:1.25;color:#fff;max-width:1000px}.quote:before{content:'“';color:var(--accent);font-size:72px;vertical-align:-20px;margin-right:4px}.quote:after{content:'”';color:var(--accent);font-size:72px;vertical-align:-20px;margin-left:4px}
-.footer{position:absolute;left:66px;right:76px;bottom:20px;display:flex;align-items:center;justify-content:space-between;color:#788aa8;font-size:15px}.progress{position:absolute;left:0;bottom:0;height:5px;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0}.controls{position:fixed;right:22px;bottom:18px;display:flex;gap:8px;z-index:10}.controls button{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.15);color:#fff;border-radius:12px;padding:8px 12px;cursor:pointer}.slideNo{position:fixed;left:22px;bottom:20px;color:#7890ad;font-size:14px;z-index:10}.sources li{font-size:18px}.titleMark{position:absolute;right:76px;top:60px;color:rgba(255,255,255,.16);font-size:112px;font-weight:900;letter-spacing:-.08em}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at 15% 10%,#18345e 0,#0b1020 36%,#070b16 100%);color:var(--text);font-family:Segoe UI,Inter,Arial,sans-serif;overflow:hidden}
+.deck{height:100vh;width:100vw;position:relative}
+.slide{display:none;height:100vh;width:100vw;padding:58px 76px 70px;position:relative;overflow:hidden}
+.slide.active{display:block}
+.slide::before{content:"";position:absolute;inset:-80px -120px auto auto;width:460px;height:460px;border-radius:50%;background:rgba(79,209,197,.10)}
+.kicker{font-size:20px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:18px}
+.title .kicker{font-size:22px}
+h1{font-size:68px;line-height:1.02;margin:0 0 26px;font-weight:800;max-width:1080px}
+h2{font-size:48px;line-height:1.08;margin:0 0 28px;font-weight:780;max-width:1120px}
+h3{font-size:29px;line-height:1.15;margin:0 0 12px;color:#fff}
+p{font-size:24px;line-height:1.4;color:var(--muted);max-width:1100px}
+.lead{font-size:30px;color:#dce8ff;max-width:1050px}
+.small{font-size:18px;color:#9fb0ca}
+strong,b{color:#fff}
+.grid{display:grid;gap:22px}.grid.two{grid-template-columns:repeat(2,1fr)}.grid.four{grid-template-columns:repeat(4,1fr)}
+.card{background:linear-gradient(160deg,rgba(22,33,61,.96),rgba(11,16,32,.92));border:1px solid rgba(255,255,255,.09);border-radius:24px;padding:25px 27px;box-shadow:0 12px 30px rgba(0,0,0,.2);display:flex;flex-direction:column;justify-content:center}
+.card.highlight{border-color:rgba(79,209,197,.45);box-shadow:0 0 0 1px rgba(79,209,197,.14),0 16px 36px rgba(0,0,0,.25)}
+.card.warn{border-color:rgba(255,184,107,.45)}
+.card p,.card li{font-size:20px}.card .small{font-size:17px}
+ul{margin:0;padding-left:24px}li{font-size:23px;line-height:1.34;margin:8px 0;color:var(--muted)}li::marker{color:var(--accent)}
+.flow{display:flex;align-items:stretch;gap:14px;margin-top:18px}.node{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:18px 20px;min-width:135px;flex:1;text-align:center;display:flex;align-items:center;justify-content:center;font-size:21px;color:#eaf2ff}.arrow{align-self:center;color:var(--accent);font-size:32px;font-weight:800}
+.step{position:relative;padding-top:46px;min-height:220px}.step .badge{position:absolute;top:16px;left:24px;font-size:14px;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);font-weight:800}.step h3{font-size:25px}.step p{font-size:19px;line-height:1.34}
+.module{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:15px 18px;border-radius:18px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.10);margin-top:12px}.module strong{font-size:20px}.module span{font-size:18px;color:var(--muted)}
+a{color:var(--accent);text-decoration:none;font-weight:700}a:hover{text-decoration:underline}
+.exercise{margin-top:22px;border:1px solid rgba(255,184,107,.42);background:rgba(255,184,107,.08);border-radius:22px;padding:18px 22px}.exercise .label{font-size:15px;letter-spacing:.07em;text-transform:uppercase;color:var(--accent2);font-weight:800;margin-bottom:7px}.exercise p{font-size:21px;line-height:1.34;margin:0;color:#e4eaf5}
+.chapter{display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:stretch}.chapter .card{min-height:310px}
+.tag{display:inline-flex;align-items:center;border-radius:999px;background:rgba(79,209,197,.10);border:1px solid rgba(79,209,197,.30);padding:8px 13px;font-size:17px;color:#dffdfa;margin:4px 5px 4px 0}
+.note{margin-top:18px;font-size:20px;color:#9fb0ca}
+.footer{position:absolute;left:66px;right:76px;bottom:20px;display:flex;align-items:center;justify-content:space-between;color:#788aa8;font-size:15px}
+.titleMark{position:absolute;right:76px;top:60px;color:rgba(255,255,255,.16);font-size:108px;font-weight:900;letter-spacing:-.08em}
+.progress{position:absolute;left:0;bottom:0;height:5px;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0;z-index:12}
+.controls{position:fixed;right:22px;bottom:18px;display:flex;gap:8px;z-index:20}.controls button{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.15);color:#fff;border-radius:12px;padding:8px 12px;cursor:pointer}.slideNo{position:fixed;left:22px;bottom:20px;color:#7890ad;font-size:14px;z-index:20}
 @media print{body{overflow:visible;background:#0b1020}.slide{display:block;page-break-after:always;height:100vh}.controls,.slideNo,.progress{display:none}}
- body{overflow:auto} .slide{display:block;height:auto;min-height:100vh} a{color:var(--accent);font-size:24px;text-decoration:none} a:hover{text-decoration:underline}</style></head><body><section class="slide active"><div class="kicker">Balík prezentácií</div><h1>Technologické vsuvky pre školenie</h1><p class="lead">Aktualizované podľa aktuálneho smerovania projektu Unified Work Items / CG_AI_Ticket_Aggregator.</p><div class="grid two" style="margin-top:32px"><div class="card"><h3>01</h3><a href="01_git_github_actions.html">Git, GitHub a GitHub Actions</a><p>Repo workflow, PR, CI/CD, branch stratégia a AI-assisted flow.</p></div><div class="card"><h3>02</h3><a href="02_terraform_iac.html">Terraform a Infrastructure as Code</a><p>IaC koncepty, state, plan/apply, repo boundary a Azure infra požiadavky.</p></div><div class="card"><h3>03</h3><a href="03_containers_devcontainer_azure_hosting.html">Kontajnery, Dev Container a Azure hosting</a><p>Docker, Compose, Docker-outside-of-Docker, Testcontainers, Functions Flex vs Container Apps.</p></div><div class="card"><h3>04</h3><a href="04_application_stack_and_delivery.html">Architektúra riešenia a postup implementácie</a><p>Logická architektúra, technologické voľby a implementačné kroky pripravené na neskoršie GitHub issues.</p></div></div><p class="small">Ovládanie v jednotlivých deckoch: šípky, PageUp/PageDown alebo medzerník. Tlač do PDF: browser print.</p></section></body></html>
+</style>
+</head>
+<body>
+<main class="deck">
+
+<section class="slide title">
+  <div class="titleMark">00</div>
+  <div class="kicker">Cloud & AI Development</div>
+  <h1>Cesta školením</h1>
+  <p class="lead">Od pochopenia riešenia cez AI-assisted development a lokálne prostredie až po infraštruktúru, hosting a automatizované doručenie.</p>
+  <div class="flow" style="margin-top:38px">
+    <div class="node">Kontext</div><div class="arrow">→</div>
+    <div class="node">Vývoj</div><div class="arrow">→</div>
+    <div class="node">Lokálne prostredie</div><div class="arrow">→</div>
+    <div class="node">Infraštruktúra</div><div class="arrow">→</div>
+    <div class="node">Delivery</div>
+  </div>
+  <div class="footer"><span>Unified Work Items workshop</span><span>Agenda a navigácia</span></div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Ako budeme pracovať</div>
+  <h2>Najprv koncept, potom praktické použitie</h2>
+  <div class="grid four">
+    <div class="card step highlight"><div class="badge">01</div><h3>Kontext & workflow</h3><p>Čo staviame, ako je riešenie navrhnuté a ako riadime zmeny cez GitHub a AI agentov.</p></div>
+    <div class="card step"><div class="badge">02</div><h3>Lokálny vývoj</h3><p>Kontajnery, Docker, Compose a Dev Container ako spoločné vývojové prostredie.</p></div>
+    <div class="card step"><div class="badge">03</div><h3>Infrastructure as Code</h3><p>Terraform, state, plan/apply a bezpečné vytváranie Azure infraštruktúry.</p></div>
+    <div class="card step"><div class="badge">04</div><h3>Hosting & delivery</h3><p>Kde aplikácia beží a ako sa build, testy a deployment prepájajú cez GitHub Actions.</p></div>
+  </div>
+  <div class="exercise"><div class="label">Rytmus školenia</div><p><b>Prezentácia → väčší praktický blok → ďalší koncept.</b> Nebudeme prerušovať výklad po pár slidoch, ale zároveň neodložíme všetky cvičenia až na úplný koniec.</p></div>
+  <p class="note">Čísla súborov 01–04 sú navigácia, nie pevné poradie školenia. K niektorým deckom sa zámerne vrátime.</p>
+  <div class="footer"><span>Štyri kapitoly</span><span>Presentation → exercise → next concept</span></div>
+</section>
+
+<section class="slide">
+  <div class="titleMark">01</div>
+  <div class="kicker">Kapitola 1</div>
+  <h2>Kontext, architektúra a spôsob práce</h2>
+  <div class="chapter">
+    <div class="card highlight">
+      <h3>Najprv: čo vlastne staviame?</h3>
+      <p>Začneme cieľom Unified Work Items, logickou architektúrou, vrstvami riešenia a technologickou mapou.</p>
+      <div class="module"><div><strong>Deck 04</strong><br><span>Architektúra a aplikačný stack</span></div><a href="04_application_stack_and_delivery.html">Otvoriť →</a></div>
+      <p class="small">Na začiatku používame najmä architektúrnu a technologickú časť; k implementačným detailom sa vraciame počas vývoja.</p>
+    </div>
+    <div class="card">
+      <h3>Potom: ako budeme meniť projekt?</h3>
+      <p>Git, Issues, branches, pull requesty a AI-assisted workflow vytvoria spôsob práce pre všetky ďalšie cvičenia.</p>
+      <div class="module"><div><strong>Deck 01</strong><br><span>Git, GitHub a AI workflow</span></div><a href="01_git_github_actions.html">Otvoriť →</a></div>
+      <div style="margin-top:15px"><span class="tag">Issue</span><span class="tag">Plan</span><span class="tag">Implementation</span><span class="tag">Draft PR</span></div>
+    </div>
+  </div>
+  <div class="exercise"><div class="label">Praktický blok</div><p>Prvá reálna zmena cez AI development flow: <b>issue → planning agent → schválenie plánu → implementation agent → validácia → Draft PR</b>.</p></div>
+  <div class="footer"><span>Kapitola 1</span><span>Context & development workflow</span></div>
+</section>
+
+<section class="slide">
+  <div class="titleMark">02</div>
+  <div class="kicker">Kapitola 2</div>
+  <h2>Lokálny vývoj a kontajnery</h2>
+  <div class="chapter">
+    <div class="card highlight">
+      <h3>Spoločné vývojové prostredie</h3>
+      <p>Po prvom AI development flow si vysvetlíme kontajnery prakticky: image, container, porty, volume, Docker Compose a Dev Container.</p>
+      <div class="module"><div><strong>Deck 03 — prvá časť</strong><br><span>Docker, Compose a Dev Container</span></div><a href="03_containers_devcontainer_azure_hosting.html">Otvoriť →</a></div>
+    </div>
+    <div class="card">
+      <h3>Prečo až teraz?</h3>
+      <ul>
+        <li>už poznáme repozitár a jeho workflow;</li>
+        <li>vieme, akú aplikáciu budeme vyvíjať;</li>
+        <li>kontajnery riešime ako praktický nástroj, nie izolovanú technológiu.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="exercise"><div class="label">Praktický blok</div><p>Otvoriť projekt v Dev Containeri, pracovať s Docker/Compose, spustiť dostupné služby a validáciu a porovnať hostiteľské vs. kontajnerové prostredie.</p></div>
+  <div class="footer"><span>Kapitola 2</span><span>Local development & containers</span></div>
+</section>
+
+<section class="slide">
+  <div class="titleMark">03</div>
+  <div class="kicker">Kapitola 3</div>
+  <h2>Infrastructure as Code</h2>
+  <div class="chapter">
+    <div class="card highlight">
+      <h3>Keď vieme, čo aplikácia potrebuje, môžeme pripraviť prostredie</h3>
+      <p>Terraform prichádza až po aplikačnom a lokálnom kontexte: teraz majú resources, state aj deployment požiadavky konkrétny význam.</p>
+      <div class="module"><div><strong>Deck 02</strong><br><span>Terraform a Infrastructure as Code</span></div><a href="02_terraform_iac.html">Otvoriť →</a></div>
+    </div>
+    <div class="card">
+      <h3>Hlavný mentálny model</h3>
+      <div class="flow" style="margin-top:8px"><div class="node">Config</div><div class="arrow">→</div><div class="node">Plan</div><div class="arrow">→</div><div class="node">Review</div><div class="arrow">→</div><div class="node">Apply</div></div>
+      <p class="small" style="margin-top:18px">Aplikačný repozitár definuje potreby aplikácie. Terraform implementácia infraštruktúry patrí do samostatného infra repozitára.</p>
+    </div>
+  </div>
+  <div class="exercise"><div class="label">Praktický blok</div><p>Práca s Terraform konfiguráciou a backendom pre state, autentifikácia, <b>init / validate / plan</b> a bezpečné vyhodnotenie navrhovanej zmeny.</p></div>
+  <div class="footer"><span>Kapitola 3</span><span>Infrastructure as Code</span></div>
+</section>
+
+<section class="slide">
+  <div class="titleMark">04</div>
+  <div class="kicker">Kapitola 4</div>
+  <h2>Hosting, CI/CD a uzavretie celej cesty</h2>
+  <div class="grid two">
+    <div class="card highlight">
+      <h3>Kde a ako aplikácia beží</h3>
+      <p>Vrátime sa ku kontajnerom a Azure hostingu až teraz, keď poznáme aplikáciu aj infraštruktúru.</p>
+      <div class="module"><div><strong>Deck 03 — druhá časť</strong><br><span>Azure hosting a runtime modely</span></div><a href="03_containers_devcontainer_azure_hosting.html">Otvoriť →</a></div>
+      <p class="small">Tu dáva zmysel porovnať Functions Flex, Container Apps a deployment artefakty v kontexte konkrétneho riešenia.</p>
+    </div>
+    <div class="card">
+      <h3>Ako sa zmena doručí</h3>
+      <p>Na záver sa vrátime ku GitHub Actions a spojíme build, testy, validáciu a deployment do jedného delivery flow.</p>
+      <div class="module"><div><strong>Deck 01 — GitHub Actions</strong><br><span>CI/CD a automatizácia</span></div><a href="01_git_github_actions.html">Otvoriť →</a></div>
+      <p class="small">Automatizáciu ukazujeme až po tom, ako účastníci rozumejú jednotlivým krokom, ktoré pipeline vykonáva.</p>
+    </div>
+  </div>
+  <div class="flow" style="margin-top:24px"><div class="node">Issue</div><div class="arrow">→</div><div class="node">Code</div><div class="arrow">→</div><div class="node">Test</div><div class="arrow">→</div><div class="node">Infrastructure</div><div class="arrow">→</div><div class="node">Deploy</div></div>
+  <div class="module" style="margin-top:20px"><div><strong>Rýchla navigácia</strong><br><span>Všetky pôvodné decky zostávajú dostupné priamo.</span></div><div><a href="01_git_github_actions.html">01</a>&nbsp;&nbsp; <a href="02_terraform_iac.html">02</a>&nbsp;&nbsp; <a href="03_containers_devcontainer_azure_hosting.html">03</a>&nbsp;&nbsp; <a href="04_application_stack_and_delivery.html">04</a></div></div>
+  <div class="footer"><span>Kapitola 4</span><span>Hosting & delivery</span></div>
+</section>
+
+</main>
+<div class="slideNo" id="slideNo"></div>
+<div class="controls"><button id="prev" aria-label="Predchádzajúci slide">←</button><button id="next" aria-label="Nasledujúci slide">→</button></div>
+<div class="progress" id="progress"></div>
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+let current=0;
+function show(index){
+  current=Math.max(0,Math.min(index,slides.length-1));
+  slides.forEach((slide,i)=>slide.classList.toggle('active',i===current));
+  document.getElementById('slideNo').textContent=`${current+1} / ${slides.length}`;
+  document.getElementById('progress').style.width=`${((current+1)/slides.length)*100}%`;
+}
+function next(){show(current+1)}
+function prev(){show(current-1)}
+document.getElementById('next').addEventListener('click',next);
+document.getElementById('prev').addEventListener('click',prev);
+document.addEventListener('keydown',event=>{
+  if(['ArrowRight','PageDown',' '].includes(event.key)){event.preventDefault();next();}
+  if(['ArrowLeft','PageUp'].includes(event.key)){event.preventDefault();prev();}
+  if(event.key==='Home'){event.preventDefault();show(0);}
+  if(event.key==='End'){event.preventDefault();show(slides.length-1);}
+});
+show(0);
+</script>
+</body>
+</html>
