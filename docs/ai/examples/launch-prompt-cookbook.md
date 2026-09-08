@@ -59,9 +59,9 @@ GitHub permissions: do not create another pull request and do not perform other 
 Do not mark the existing PR ready for review, approve it, or merge it.
 ```
 
-# 1. Issue authoring
+## 1. Issue authoring
 
-## 1.1 Prepare an issue draft from rough notes
+### 1.1 Prepare an issue draft from rough notes
 
 Use this when the requirement is not yet a reviewed GitHub issue.
 
@@ -76,7 +76,7 @@ and planning recommendation for human review.
 Do not create or update anything in GitHub.
 ```
 
-## 1.2 Create an issue after the draft was reviewed by a human
+### 1.2 Create an issue after the draft was reviewed by a human
 
 Use this only after you have reviewed and approved the issue content yourself.
 
@@ -97,9 +97,9 @@ Do not broaden, reinterpret, or otherwise change the approved scope. If GitHub r
 non-trivial content change, stop and report it instead of deciding on my behalf.
 ```
 
-# 2. Implementation planning
+## 2. Implementation planning
 
-## 2.1 Prepare a standard implementation plan
+### 2.1 Prepare a standard implementation plan
 
 ```text
 Prepare a draft implementation plan for GitHub issue #<ISSUE> using
@@ -112,7 +112,7 @@ Return the complete Draft `Implementation Plan` for human review.
 Do not implement code and do not write to GitHub.
 ```
 
-## 2.2 Prepare a high-risk / architectural implementation plan
+### 2.2 Prepare a high-risk / architectural implementation plan
 
 ```text
 Prepare a draft implementation plan for GitHub issue #<ISSUE> using
@@ -127,7 +127,7 @@ Return the complete Draft `Implementation Plan` for human review.
 Do not implement code and do not write to GitHub.
 ```
 
-## 2.3 Re-plan after a material change
+### 2.3 Re-plan after a material change
 
 Use this when an already approved implementation plan can no longer be followed materially.
 
@@ -143,9 +143,29 @@ Return the complete replacement `Implementation Plan` comment for human review.
 Do not implement code and do not write to GitHub.
 ```
 
-# 3. Initial implementation
+### 2.4 Record a plan after the responsible developer has approved it
 
-## 3.1 Implement a small task directly from the issue and create a draft PR
+This is a mechanical GitHub update, not agent approval. Use it only after you have personally reviewed and approved the plan.
+
+```text
+I have reviewed and approve the implementation plan for GitHub issue #<ISSUE> as
+`Implementation Plan` version <PLAN_VERSION>.
+
+Approved plan content:
+<APPROVED_PLAN_CONTENT>
+
+Using `docs/ai/implementation-plan-lifecycle.md`, create or update the single canonical
+`Implementation Plan` issue comment so it contains this approved plan and has status `Approved`.
+Do not change the approved implementation content except for mechanical lifecycle metadata
+required by the template, such as status, version, last-updated date, and change history.
+
+GitHub permission: create or update only the canonical `Implementation Plan` comment on issue #<ISSUE>.
+Do not implement code or make any other GitHub changes.
+```
+
+## 3. Initial implementation
+
+### 3.1 Implement a small task directly from the issue and create a draft PR
 
 ```text
 Implement GitHub issue #<ISSUE> using `docs/ai/implementation-agent-prompt.md`.
@@ -163,7 +183,7 @@ No other GitHub writes are allowed.
 Do not mark the PR ready for review, approve it, or merge it.
 ```
 
-## 3.2 Implement an approved standard/high-risk plan and create a draft PR
+### 3.2 Implement an approved standard/high-risk plan and create a draft PR
 
 ```text
 Implement GitHub issue #<ISSUE> using `docs/ai/implementation-agent-prompt.md`.
@@ -182,7 +202,7 @@ No other GitHub writes are allowed.
 Do not mark the PR ready for review, approve it, or merge it.
 ```
 
-## 3.3 Implement locally but do not publish
+### 3.3 Implement locally but do not publish
 
 Use this when you want to inspect the implementation before allowing commits or GitHub writes.
 
@@ -202,9 +222,9 @@ Run all relevant validation that can be executed.
 Return the implementation report and proposed pull-request body for human review.
 ```
 
-# 4. Pull-request review
+## 4. Pull-request review
 
-## 4.1 Review a PR and return findings only
+### 4.1 Review a PR and return findings only
 
 ```text
 Review pull request #<PR> using `docs/ai/review-agent-prompt.md` and
@@ -219,7 +239,7 @@ Return the review for human assessment.
 Do not modify code, approve or merge the PR, or post anything to GitHub.
 ```
 
-## 4.2 Review a PR and post the review to GitHub
+### 4.2 Review a PR and post the review to GitHub
 
 ```text
 Review pull request #<PR> using `docs/ai/review-agent-prompt.md` and
@@ -234,13 +254,30 @@ GitHub permission: post the resulting AI review to pull request #<PR>.
 Do not modify code, approve the PR, merge it, or make any other GitHub changes.
 ```
 
-# 5. Human assessment of review findings
+### 4.3 Re-review a PR after accepted fixes or remediation
+
+```text
+Re-review pull request #<PR> using `docs/ai/review-agent-prompt.md` and
+`docs/ai/review-checklist.md` after the latest fixes.
+
+Linked issue: #<ISSUE>.
+Task level: <TASK_LEVEL>.
+Approved implementation plan: <PLAN_REFERENCE_OR_NOT_REQUIRED>.
+Previous review and canonical `Review Findings Assessment` are available in the PR.
+Check whether the accepted findings were actually addressed and whether the fixes introduced
+new correctness, security, compatibility, operability, or scope problems.
+
+Return the complete current review for human assessment.
+Do not modify code, approve or merge the PR, or post anything to GitHub.
+```
+
+## 5. Human assessment of review findings
 
 There is intentionally no agent prompt that decides whether findings are accepted, rejected, deferred, or risk-accepted. Those decisions belong to the responsible developer.
 
 An agent can, however, mechanically format decisions that the human has already made.
 
-## 5.1 Format a `Review Findings Assessment` comment from human decisions
+### 5.1 Format a `Review Findings Assessment` comment from human decisions
 
 ```text
 For pull request #<PR>, prepare the canonical `Review Findings Assessment` comment.
@@ -263,7 +300,7 @@ GitHub permission: post this canonical `Review Findings Assessment` comment to P
 Do not make any other GitHub changes.
 ```
 
-# 6. Simple accepted review fixes
+## 6. Simple accepted review fixes
 
 Use this only when the canonical `Review Findings Assessment` marks findings as Accepted and the work is simple enough that the workflow does not require a separate `Remediation Plan`.
 
@@ -286,9 +323,11 @@ Run relevant validation and report exactly what was executed.
 Do not mark the PR ready for review, approve it, or merge it.
 ```
 
-# 7. Remediation planning
+## 7. Remediation planning
 
 Use a separate remediation plan only for human-accepted findings that require non-trivial bounded work in the current PR.
+
+### 7.1 Prepare a draft remediation plan
 
 ```text
 Prepare a draft remediation plan for pull request #<PR> using
@@ -302,7 +341,27 @@ Return the complete Draft `Remediation Plan` for human review.
 Do not implement code and do not write to GitHub.
 ```
 
-# 8. Approved remediation implementation
+### 7.2 Record a remediation plan after the responsible developer has approved it
+
+This is a mechanical GitHub update, not agent approval. Use it only after you have personally reviewed and approved the remediation plan.
+
+```text
+I have reviewed and approve the remediation plan for pull request #<PR> as
+`Remediation Plan` version <REMEDIATION_PLAN_VERSION>.
+
+Approved remediation plan content:
+<APPROVED_REMEDIATION_PLAN_CONTENT>
+
+Create or update the single canonical `Remediation Plan` comment in PR #<PR> so it contains
+this approved plan and has status `Approved`.
+Do not change the approved remediation content except for mechanical lifecycle metadata
+required by the remediation-plan template.
+
+GitHub permission: create or update only the canonical `Remediation Plan` comment on PR #<PR>.
+Do not implement remediation or make any other GitHub changes.
+```
+
+## 8. Approved remediation implementation
 
 ```text
 Implement the approved remediation for pull request #<PR> using
@@ -323,16 +382,18 @@ Run relevant validation and report exactly what was executed.
 Do not mark the PR ready for review, approve it, or merge it.
 ```
 
-# 9. Choosing the shortest suitable prompt
+## 9. Choosing the shortest suitable prompt
 
 Prefer the smallest launch prompt that makes the current run unambiguous:
 
 - use issue authoring only while the requirement is still being turned into a reviewed issue;
 - use planning only when the task level requires a plan or a human explicitly requests one;
+- record plan approval only after the responsible developer has actually approved it;
 - use direct implementation for a confirmed small/low-risk issue;
 - use approved-plan implementation for standard/high-risk work;
 - use PR review to produce findings, not to decide their disposition;
 - use simple accepted-review-fix mode only for bounded findings already accepted by a human;
-- use remediation planning and approved-remediation implementation only when accepted findings require non-trivial work.
+- use remediation planning and approved-remediation implementation only when accepted findings require non-trivial work;
+- record remediation-plan approval only after the responsible developer has actually approved it.
 
 Do not copy repository standards, ADRs, issue bodies, implementation plans, or PR diffs into the launch prompt when the agent can read them from their authoritative source.
