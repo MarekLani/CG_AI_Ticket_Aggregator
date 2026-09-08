@@ -1,6 +1,0 @@
-use_cli          = true
-use_azuread_auth = true
-
-storage_account_name = "<TRAINER_PROVIDED>"
-container_name       = "tfstate"
-key                  = "training/m01.tfstate"
