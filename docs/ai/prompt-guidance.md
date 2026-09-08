@@ -18,9 +18,9 @@ Task-specific launch prompts should be short. They should supply only informatio
 
 Do not infer write permission from available credentials, repository access, a checked-out branch, or the presence of GitHub CLI.
 
-For implementation runs, permissions are deny-by-default unless the launch prompt explicitly grants them. If commit, push, or draft-PR creation is not explicitly allowed, the implementation agent must not perform that operation.
+For implementation runs, permissions are deny-by-default unless the launch prompt explicitly grants them. For initial implementation, commit, push, and draft-PR creation form one publication permission set: unless all three are explicitly allowed, the implementation agent performs none of those operations.
 
-An implementation agent may create a pull request only as a draft, only after implementation and relevant validation have completed successfully, and only when the launch prompt explicitly permits commit, push, and draft-PR creation. Otherwise it prepares the proposed pull-request body without writing it to GitHub.
+An implementation agent may create a pull request only as a draft, only after implementation and relevant validation have completed successfully, and only when the launch prompt explicitly permits the complete publication permission set. Otherwise it prepares the proposed pull-request body without writing it to GitHub.
 
 ## Do not duplicate durable context
 
