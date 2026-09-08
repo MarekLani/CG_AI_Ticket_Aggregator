@@ -133,7 +133,21 @@ terraform apply     # vykoná odsúhlasenú zmenu</div><p>V tímovej práci je `
 <div class="kicker">Cvičenie · scenár</div><h2>Každý nasadí vlastný malý workload do Azure</h2><div class="grid three"><div class="card highlight"><h3>1 · Osobný sandbox</h3><p>Každý dostane krátke <b>participant_id</b> a vytvorí vlastný resource group <b>rg-tf-lab-&lt;id&gt;</b>.</p></div><div class="card"><h3>2 · Reálny workload</h3><p>Do resource group nasadíme Azure Container Instance s verejným image <b>mcr.microsoft.com/azuredocs/aci-helloworld</b> a portom 80.</p></div><div class="card"><h3>3 · State ako pointa</h3><p>Najprv použijeme lokálny state. Potom ho presunieme do spoločného Azure Blob backendu a znovu použijeme z čistého pracovného adresára.</p></div></div><p class="small">Lab je tréningový príklad. Produkčná Terraform implementácia Unified Work Items zostáva v samostatnom infraštruktúrnom repozitári.</p><div class="footer"><span>Terraform / IaC</span><span>Cvičenie · scenár</span></div>
 </section>
 <section class="slide ">
-<div class="kicker">Cvičenie · 1/3</div><h2>Najprv nasadenie s lokálnym state</h2><div class="grid two"><div class="card"><h3>Úloha v HCL</h3><ul><li>premenné <b>participant_id</b> a <b>location</b>;</li><li><b>azurerm_resource_group</b> s unikátnym názvom;</li><li><b>azurerm_container_group</b> s public IP a portom 80;</li><li>output s verejnou IP adresou kontajnera.</li></ul></div><div class="card highlight"><h3>Workflow</h3><div class="code">az login
+<div class="kicker">Cvičenie · autentifikácia</div><h2>Dve možnosti prístupu do Azure, rovnaký Terraform scenár</h2><div class="grid two"><div class="card highlight"><h3>A · Vlastný Entra účet</h3><p>Ak má účastník prístup do training subscription, použije svoj Azure CLI login.</p><div class="code">az login
+az account set --subscription &lt;TRAINING_SUBSCRIPTION&gt;
+
+# backend.user.hcl.example
+use_cli          = true
+use_azuread_auth = true</div></div><div class="card"><h3>B · Training service principal</h3><p>Ak osobný Azure prístup nemá, školiteľ poskytne krátkodobé SP credentials cez environment variables.</p><div class="code">ARM_TENANT_ID
+ARM_SUBSCRIPTION_ID
+ARM_CLIENT_ID
+ARM_CLIENT_SECRET
+
+# backend.service-principal.hcl.example
+use_azuread_auth = true</div></div></div><p class="small">Rovnaké SP credentials autentifikujú AzureRM provider aj state backend. Client secret nikdy nepatrí do Git-u ani backend.hcl; pre CI/CD používame OIDC / workload identity.</p><div class="footer"><span>Terraform / IaC</span><span>Cvičenie · autentifikácia</span></div>
+</section>
+<section class="slide ">
+<div class="kicker">Cvičenie · 1/3</div><h2>Najprv nasadenie s lokálnym state</h2><div class="grid two"><div class="card"><h3>Úloha v HCL</h3><ul><li>premenné <b>participant_id</b> a <b>location</b>;</li><li><b>azurerm_resource_group</b> s unikátnym názvom;</li><li><b>azurerm_container_group</b> s public IP a portom 80;</li><li>output s verejnou IP adresou kontajnera.</li></ul></div><div class="card highlight"><h3>Workflow</h3><div class="code"># najprv zvoľ autentifikáciu A alebo B
 terraform init
 terraform fmt
 terraform validate
@@ -142,16 +156,13 @@ terraform apply tfplan
 terraform output</div></div></div><p class="small">Po apply otvor IP adresu v prehliadači. Pozri si vzniknutý <b>terraform.tfstate</b>, ale neupravuj ho. Potom pridaj alebo zmeň jeden tag a sleduj rozdiel v ďalšom <b>plan</b>.</p><div class="footer"><span>Terraform / IaC</span><span>Cvičenie · lokálny state</span></div>
 </section>
 <section class="slide ">
-<div class="kicker">Cvičenie · 2/3</div><h2>Presuň ten istý state do Azure Blob backendu</h2><div class="grid two"><div class="card"><h3>Backend pripraví školiteľ</h3><ul><li>jeden spoločný Storage Account;</li><li>container <b>tfstate</b>;</li><li>RBAC pre účastníkov;</li><li>unikátny key pre každého: <b>training/&lt;participant_id&gt;.tfstate</b>.</li></ul></div><div class="card highlight"><h3>Migrácia</h3><div class="code">terraform {
+<div class="kicker">Cvičenie · 2/3</div><h2>Presuň ten istý state do Azure Blob backendu</h2><div class="grid two"><div class="card"><h3>Backend pripraví školiteľ</h3><ul><li>jeden spoločný Storage Account;</li><li>container <b>tfstate</b>;</li><li>RBAC pre účastníkov alebo training SP;</li><li>unikátny key pre každého: <b>training/&lt;participant_id&gt;.tfstate</b>.</li></ul></div><div class="card highlight"><h3>Migrácia</h3><div class="code">terraform {
   backend "azurerm" {}
 }
 
+# backend.hcl vznikne z user alebo SP example
 terraform init -migrate-state \
-  -backend-config="use_cli=true" \
-  -backend-config="use_azuread_auth=true" \
-  -backend-config="storage_account_name=&lt;TRAINER_PROVIDED&gt;" \
-  -backend-config="container_name=tfstate" \
-  -backend-config="key=training/&lt;participant_id&gt;.tfstate"</div></div></div><p class="small">Cieľ nie je vytvoriť novú infraštruktúru. Migrujeme evidenciu už existujúcich resources z lokálneho súboru do zdieľaného backendu.</p><div class="footer"><span>Terraform / IaC</span><span>Cvičenie · remote state</span></div>
+  -backend-config=backend.hcl</div></div></div><p class="small">Cieľ nie je vytvoriť novú infraštruktúru. Migrujeme evidenciu už existujúcich resources z lokálneho súboru do zdieľaného backendu; identity zostávajú podľa zvolenej možnosti A alebo B.</p><div class="footer"><span>Terraform / IaC</span><span>Cvičenie · remote state</span></div>
 </section>
 <section class="slide ">
 <div class="kicker">Cvičenie · 3/3</div><h2>Dokáž, že state môže použiť ďalší človek alebo pipeline</h2><div class="grid two"><div class="card highlight"><h3>Čistý adresár / druhý vývojár</h3><ol style="margin:0;padding-left:25px"><li>Skopíruj iba `.tf` konfiguráciu do čistého adresára.</li><li>Spusť <b>terraform init</b> s rovnakým backend key.</li><li>Spusť <b>terraform plan</b>.</li><li>Očakávanie: žiadne nové resources — Terraform pozná existujúci stav z Azure.</li></ol></div><div class="card"><h3>Kontrolovaná zmena</h3><ul><li>zmeň jeden tag;</li><li>pozri plán a apply;</li><li>vráť sa do prvého adresára a znova spusti plan;</li><li>diskusia: rovnaký princíp používa CI/CD s workload identity.</li></ul></div></div><div class="code" style="margin-top:18px"># na konci labu, stále s remote backendom
