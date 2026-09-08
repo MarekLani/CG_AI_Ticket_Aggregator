@@ -16,30 +16,91 @@ This folder is deliberately a **starter workbook, not a finished Azure solution*
 
 ## Prerequisites
 
-You need:
+Everyone needs:
 
 - Terraform installed;
-- Azure CLI installed;
-- access to the training Azure subscription;
 - a short participant ID assigned by the trainer, for example `m01`;
+- the trainer-provided training Azure subscription ID;
 - the trainer-provided Terraform state Storage Account name;
+- permission to create and delete the lab resources in the designated Azure scope;
 - Blob data-plane access to the shared `tfstate` container.
 
-Verify the tools and Azure context:
+The lab supports **two authentication options**. The trainer can choose one option for the whole group or mix them if needed.
+
+---
+
+# Authentication — choose one option
+
+## Option A — your own Microsoft Entra account
+
+Use this option when you have direct access to the training Azure subscription with your own account.
+
+You need Azure CLI installed. Authenticate and select the training subscription:
 
 ```bash
 terraform version
 az version
 az login
-az account show
-```
-
-If the training tenant exposes multiple subscriptions, explicitly select the one given by the trainer before continuing:
-
-```bash
 az account set --subscription "<TRAINING_SUBSCRIPTION_ID_OR_NAME>"
 az account show
 ```
+
+Terraform then uses your current Azure CLI / Microsoft Entra identity for both:
+
+- the `azurerm` provider that creates the resource group and Azure Container Instance;
+- the Azure Blob state backend after Part 2.
+
+For the remote state part, use `backend.user.hcl.example`, which contains:
+
+```hcl
+use_cli          = true
+use_azuread_auth = true
+```
+
+The trainer should grant your account the required Azure resource permissions for the lab and `Storage Blob Data Contributor` on the shared state container.
+
+## Option B — trainer-provided training service principal
+
+Use this option when you do **not** have direct Azure access with your own account.
+
+The trainer provides a short-lived training service principal with these four values:
+
+- tenant ID;
+- subscription ID;
+- client ID;
+- client secret.
+
+Set them as environment variables before running Terraform.
+
+### Bash / zsh
+
+```bash
+export ARM_TENANT_ID="<TRAINER_PROVIDED>"
+export ARM_SUBSCRIPTION_ID="<TRAINER_PROVIDED>"
+export ARM_CLIENT_ID="<TRAINER_PROVIDED>"
+export ARM_CLIENT_SECRET="<TRAINER_PROVIDED>"
+```
+
+### PowerShell
+
+```powershell
+$env:ARM_TENANT_ID = "<TRAINER_PROVIDED>"
+$env:ARM_SUBSCRIPTION_ID = "<TRAINER_PROVIDED>"
+$env:ARM_CLIENT_ID = "<TRAINER_PROVIDED>"
+$env:ARM_CLIENT_SECRET = "<TRAINER_PROVIDED>"
+```
+
+The same `ARM_*` credentials authenticate both the `azurerm` provider and the Azure Blob state backend. You do not need to put credentials into the `.tf` files.
+
+For the remote state part, use `backend.service-principal.hcl.example`. The file contains only the backend mode and state location; the tenant/client/secret values are read from the environment.
+
+**Never put `ARM_CLIENT_SECRET` into `backend.hcl`, Terraform files, Git, chat, screenshots or shell history that will be shared.** The service principal is a practical fallback for this short-lived classroom exercise. For real CI/CD, use workload identity / OIDC rather than distributing a long-lived client secret.
+
+If one shared service principal is used by the whole class, all participants effectively have the same Azure permissions. The unique participant IDs, resource-group names and state keys provide organizational separation, **not security isolation**.
+
+The trainer should rotate/revoke the shared credential after the workshop and grant the service principal only the permissions needed for the designated training scope plus `Storage Blob Data Contributor` on the state container.
+
+---
 
 ## Starter files
 
@@ -51,7 +112,8 @@ This folder contains:
 - `outputs.tf` — TODO for a useful deployment output;
 - `terraform.tfvars.example` — copy to `terraform.tfvars` and set your participant ID;
 - `backend.tf.example` — enable only when the exercise moves from local state to remote state;
-- `backend.hcl.example` — backend values supplied by the trainer.
+- `backend.user.hcl.example` — Azure CLI / participant-account backend configuration;
+- `backend.service-principal.hcl.example` — trainer-provided service-principal backend configuration.
 
 The repository already ignores Terraform state, `.terraform/`, saved plans and other local Terraform artifacts.
 
@@ -103,7 +165,7 @@ Add an output that prints the public IP address of the container group after dep
 
 ## First Terraform workflow
 
-Run:
+Make sure you have completed **Option A or Option B authentication** above, then run:
 
 ```bash
 terraform init
@@ -167,20 +229,49 @@ Each participant gets a different blob key:
 training/<participant_id>.tfstate
 ```
 
+The identity used for state access depends on the authentication option selected earlier:
+
+- **Option A:** your Azure CLI / Microsoft Entra user identity;
+- **Option B:** the trainer-provided service principal from the `ARM_*` environment variables.
+
 ## Enable the backend block
 
-Copy:
+First copy the backend block:
 
 ```bash
 cp backend.tf.example backend.tf
-cp backend.hcl.example backend.hcl
 ```
 
 PowerShell:
 
 ```powershell
 Copy-Item backend.tf.example backend.tf
-Copy-Item backend.hcl.example backend.hcl
+```
+
+Then copy the backend configuration matching your authentication option.
+
+### Option A — participant account / Azure CLI
+
+```bash
+cp backend.user.hcl.example backend.hcl
+```
+
+PowerShell:
+
+```powershell
+Copy-Item backend.user.hcl.example backend.hcl
+```
+
+### Option B — training service principal
+
+```bash
+cp backend.service-principal.hcl.example backend.hcl
+```
+
+PowerShell:
+
+```powershell
+Copy-Item backend.service-principal.hcl.example backend.hcl
 ```
 
 Edit `backend.hcl` and set:
@@ -188,7 +279,7 @@ Edit `backend.hcl` and set:
 - `storage_account_name` to the value supplied by the trainer;
 - `key` to `training/<your participant id>.tfstate`.
 
-Do not put credentials, account keys or secrets in this file.
+Do not put credentials, account keys or client secrets in this file.
 
 ## Migrate the existing state
 
@@ -219,9 +310,10 @@ In the clean folder:
 
 1. recreate your `terraform.tfvars` with the **same** participant ID;
 2. copy `backend.tf.example` to `backend.tf`;
-3. copy `backend.hcl.example` to `backend.hcl` and configure the **same** Storage Account and blob key;
-4. ensure the `.tf` resource configuration is the same as in your first folder;
-5. run:
+3. copy the same authentication-specific backend example you used earlier to `backend.hcl` and configure the **same** Storage Account and blob key;
+4. use the same authentication method as the first working directory;
+5. ensure the `.tf` resource configuration is the same as in your first folder;
+6. run:
 
 ```bash
 terraform init -backend-config=backend.hcl
@@ -238,7 +330,7 @@ In the second working directory, make one harmless tag change and apply it. Retu
 terraform plan
 ```
 
-Both directories now operate on the same remote state. This is the basic collaboration model that can later be used by CI/CD with a workload identity rather than a developer's interactive Azure CLI session.
+Both directories now operate on the same remote state. This is the basic collaboration model that can later be used by CI/CD with workload identity rather than a developer's interactive Azure CLI session or a distributed training secret.
 
 Azure Blob-backed Terraform state also supports state locking, which protects against two writers changing the same state concurrently.
 
@@ -257,13 +349,34 @@ Confirm in Azure that your personal `rg-tf-lab-<participant_id>` resource group 
 
 Do **not** delete the shared state Storage Account or `tfstate` container; they are trainer-owned lab infrastructure.
 
+If you used the shared service principal, remove the secret from your shell after the lab.
+
+### Bash / zsh
+
+```bash
+unset ARM_CLIENT_SECRET
+unset ARM_CLIENT_ID
+unset ARM_TENANT_ID
+unset ARM_SUBSCRIPTION_ID
+```
+
+### PowerShell
+
+```powershell
+Remove-Item Env:ARM_CLIENT_SECRET -ErrorAction SilentlyContinue
+Remove-Item Env:ARM_CLIENT_ID -ErrorAction SilentlyContinue
+Remove-Item Env:ARM_TENANT_ID -ErrorAction SilentlyContinue
+Remove-Item Env:ARM_SUBSCRIPTION_ID -ErrorAction SilentlyContinue
+```
+
 ## Discussion
 
 Be ready to explain:
 
+- which identity Terraform used to authenticate to Azure;
 - what Terraform state represents;
 - why local state is acceptable for this first isolated step but unsuitable for shared infrastructure;
 - what changed when the state was migrated to Azure Blob Storage;
 - why the clean working directory did not recreate the resources;
 - how the same pattern can be used by GitHub Actions or another CI/CD runner;
-- why state access should be tightly controlled.
+- why state access and service-principal credentials should be tightly controlled.
