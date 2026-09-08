@@ -26,7 +26,7 @@ p{font-size:24px;line-height:1.4;color:var(--muted);max-width:1100px}
 strong,b{color:#fff}
 .grid{display:grid;gap:22px}.grid.two{grid-template-columns:repeat(2,1fr)}.grid.three{grid-template-columns:repeat(3,1fr)}.grid.four{grid-template-columns:repeat(4,1fr)}
 .card{background:linear-gradient(160deg,rgba(22,33,61,.96),rgba(11,16,32,.92));border:1px solid rgba(255,255,255,.09);border-radius:24px;padding:24px 27px;box-shadow:0 12px 30px rgba(0,0,0,.2);display:flex;flex-direction:column;justify-content:center;min-height:150px}
-.card h3{color:#fff}.card p,.card li{font-size:20px}.card.highlight{border-color:rgba(79,209,197,.45);box-shadow:0 0 0 1px rgba(79,209,197,.14),0 16px 36px rgba(0,0,0,.25)}.card.warn{border-color:rgba(255,184,107,.45)}
+.card h3{color:#fff}.card p,.card li{font-size:20px}.card.warn{border-color:rgba(255,184,107,.45)}
 ul{margin:0;padding-left:25px}li{font-size:23px;line-height:1.34;margin:9px 0;color:var(--muted)}li::marker{color:var(--accent)}
 .flow{display:flex;align-items:stretch;gap:14px;margin-top:18px}.node{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:18px 18px;min-width:140px;flex:1;text-align:center;font-size:21px;color:#eaf2ff;display:flex;align-items:center;justify-content:center;min-height:96px}.node.stacknode{flex-direction:column;gap:5px}.arrow{align-self:center;color:var(--accent);font-size:32px;font-weight:800}.plus{align-self:center;color:var(--accent2);font-size:30px;font-weight:800}
 .pill{display:inline-block;border:1px solid rgba(79,209,197,.35);background:rgba(79,209,197,.1);border-radius:999px;padding:8px 15px;margin:5px 6px 5px 0;font-size:18px;color:#dffdfa}
@@ -102,7 +102,7 @@ ul{margin:0;padding-left:25px}li{font-size:23px;line-height:1.34;margin:9px 0;co
   <h2>Každá časť má jednu zrozumiteľnú zodpovednosť</h2>
   <div class="grid four">
     <div class="card"><h3>Connectors</h3><p>Komunikujú s konkrétnym zdrojom a mapujú jeho dáta.</p></div>
-    <div class="card highlight"><h3>Application</h3><p>Obsahuje zdrojovo neutrálny model a aplikačné use-cases.</p></div>
+    <div class="card"><h3>Application</h3><p>Obsahuje zdrojovo neutrálny model a aplikačné use-cases.</p></div>
     <div class="card"><h3>API</h3><p>Poskytuje stabilný HTTP kontrakt pre klienta.</p></div>
     <div class="card"><h3>Frontend</h3><p>Zobrazuje údaje, filtre a používateľské stavy.</p></div>
   </div>
@@ -114,7 +114,7 @@ ul{margin:0;padding-left:25px}li{font-size:23px;line-height:1.34;margin:9px 0;co
   <div class="kicker">Backend</div>
   <h2>.NET 10 + Azure Functions: jednoduchý backend bez zbytočnej platformovej vrstvy</h2>
   <div class="grid three">
-    <div class="card highlight"><h3>.NET 10</h3><p>Silné typovanie, DI, async I/O a dobrá izolácia integračných hraníc.</p></div>
+    <div class="card"><h3>.NET 10</h3><p>Silné typovanie, DI, async I/O a dobrá izolácia integračných hraníc.</p></div>
     <div class="card"><h3>Functions isolated</h3><p>HTTP API dnes, neskôr aj timer/background spracovanie bez zmeny aplikačného modelu.</p></div>
     <div class="card"><h3>Tenké triggery</h3><p>Function iba prijme vstup a zavolá aplikačnú logiku. Biznis pravidlá v nej nežijú.</p></div>
   </div>
@@ -126,7 +126,7 @@ ul{margin:0;padding-left:25px}li{font-size:23px;line-height:1.34;margin:9px 0;co
   <div class="kicker">Frontend</div>
   <h2>React + TypeScript s knižnicami, ktoré majú jasnú úlohu</h2>
   <div class="techrow">
-    <div class="card highlight"><h3>React + TypeScript + Vite</h3><p>Základ SPA, strict typovanie a rýchly development/build workflow.</p><div class="reason">Aplikačné stránky a komponenty bez vlastného frameworku navyše.</div></div>
+    <div class="card"><h3>React + TypeScript + Vite</h3><p>Základ SPA, strict typovanie a rýchly development/build workflow.</p><div class="reason">Aplikačné stránky a komponenty bez vlastného frameworku navyše.</div></div>
     <div class="card"><h3>Material UI + Data Grid</h3><p>Hotové UI komponenty a tabuľka vhodná pre dátovo orientovaný pracovný pohľad.</p><div class="reason">Nemá zmysel budovať vlastný component library ani grid.</div></div>
     <div class="card"><h3>TanStack Query</h3><p>Načítanie serverových dát, cache, loading/error stavy a invalidácia.</p><div class="reason">Server state neriešime cez ad-hoc globálny store.</div></div>
     <div class="card"><h3>React Router</h3><p>Routing a URL stav tam, kde má byť navigácia alebo filter zdieľateľný odkazom.</p><div class="reason">Frontend komunikuje iba s naším HTTP API.</div></div>
@@ -141,7 +141,7 @@ ul{margin:0;padding-left:25px}li{font-size:23px;line-height:1.34;margin:9px 0;co
     <div class="card"><h3>Entra ID</h3><p>Prihlásenie používateľa, tokeny pre API a managed identity pre Azure workloady.</p></div>
     <div class="card"><h3>Application Insights</h3><p>Frontend a backend telemetry sú oddelené, ale korelované cez trace context.</p></div>
     <div class="card"><h3>Automatické testy</h3><p>xUnit pre backend, Vitest/RTL pre frontend a Playwright pre vybrané E2E scenáre.</p></div>
-    <div class="card highlight"><h3>PostgreSQL neskôr</h3><p>Databázu pridáme až keď vznikne konkrétna potreba cache, synchronizácie, histórie alebo app-owned stavu.</p></div>
+    <div class="card"><h3>PostgreSQL neskôr</h3><p>Databázu pridáme až keď vznikne konkrétna potreba cache, synchronizácie, histórie alebo app-owned stavu.</p></div>
   </div>
   <div class="footer"><span>Cross-cutting concerns</span></div>
 </section>
@@ -186,7 +186,7 @@ ul{margin:0;padding-left:25px}li{font-size:23px;line-height:1.34;margin:9px 0;co
   <div class="kicker">Roadmapa · prvé issues</div>
   <h2>Najskôr vytvoríme kostru a prvý reálny end-to-end scenár</h2>
   <div class="roadmap">
-    <div class="card roadstep highlight"><div class="badge">Budúci issue A</div><h3>Bootstrap aplikácie</h3><ul><li>.NET/Functions backend scaffold</li><li>React/Vite frontend scaffold</li><li>základné prepojenie klient → API</li><li>CI už validuje reálne projekty</li></ul></div>
+    <div class="card roadstep"><div class="badge">Budúci issue A</div><h3>Bootstrap aplikácie</h3><ul><li>.NET/Functions backend scaffold</li><li>React/Vite frontend scaffold</li><li>základné prepojenie klient → API</li><li>CI už validuje reálne projekty</li></ul></div>
     <div class="card roadstep"><div class="badge">Budúci issue B</div><h3>Prvý Helpdesk vertical slice</h3><ul><li>WorkItem model</li><li>Helpdesk connector + explicit mapping</li><li>GET endpoint</li><li>React tabuľka s reálnymi dátami</li></ul></div>
     <div class="card roadstep"><div class="badge">Budúci issue C</div><h3>Použiteľný pracovný zoznam</h3><ul><li>search a filtre</li><li>loading / empty / error stavy</li><li>deep link do zdroja</li><li>základná UX/accessibility validácia</li></ul></div>
   </div>
@@ -199,7 +199,7 @@ ul{margin:0;padding-left:25px}li{font-size:23px;line-height:1.34;margin:9px 0;co
   <div class="roadmap">
     <div class="card roadstep"><div class="badge">Budúci issue D</div><h3>Entra authentication</h3><ul><li>prihlásenie SPA</li><li>protected API</li><li>token flow</li><li>autorizácia iba podľa schváleného modelu</li></ul></div>
     <div class="card roadstep"><div class="badge">Budúci issue E</div><h3>Observability</h3><ul><li>backend OpenTelemetry</li><li>browser Application Insights</li><li>trace correlation</li><li>bez citlivých payloadov v logoch</li></ul></div>
-    <div class="card roadstep highlight"><div class="badge">Budúci issue F</div><h3>Dev deployment</h3><ul><li>build/package aplikácie</li><li>GitHub Actions CD po merge</li><li>deployment do pripraveného dev prostredia</li><li>smoke validation</li></ul></div>
+    <div class="card roadstep"><div class="badge">Budúci issue F</div><h3>Dev deployment</h3><ul><li>build/package aplikácie</li><li>GitHub Actions CD po merge</li><li>deployment do pripraveného dev prostredia</li><li>smoke validation</li></ul></div>
   </div>
   <div class="footer"><span>Implementačný postup</span></div>
 </section>
@@ -208,7 +208,7 @@ ul{margin:0;padding-left:25px}li{font-size:23px;line-height:1.34;margin:9px 0;co
   <div class="kicker">Roadmapa · ďalšie zdroje</div>
   <h2>Planner a GitHub majú byť dôkazom, že architektúra funguje</h2>
   <div class="grid two">
-    <div class="card highlight"><h3>Budúci issue G · Planner connector</h3><p>Načítať Planner cez Microsoft Graph, explicitne namapovať do rovnakého WorkItem modelu a pridať zdroj do existujúceho zoznamu.</p></div>
+    <div class="card"><h3>Budúci issue G · Planner connector</h3><p>Načítať Planner cez Microsoft Graph, explicitne namapovať do rovnakého WorkItem modelu a pridať zdroj do existujúceho zoznamu.</p></div>
     <div class="card"><h3>Budúci issue H · GitHub Issues connector</h3><p>Načítať GitHub Issues, namapovať do rovnakého modelu a využiť existujúci API/UI kontrakt bez GitHub-specific logiky vo frontende.</p></div>
   </div>
   <div class="banner"><b>Architektonický test:</b> ak pridanie nového zdroja vyžaduje prepis základného UI alebo aplikačného modelu, hranice sme navrhli zle.</div>
@@ -219,7 +219,7 @@ ul{margin:0;padding-left:25px}li{font-size:23px;line-height:1.34;margin:9px 0;co
   <div class="kicker">Persistence až keď ju potrebujeme</div>
   <h2>Databáza je ďalší issue iba vtedy, keď rieši konkrétny problém</h2>
   <div class="grid two">
-    <div class="card highlight"><h3>Prvá verzia</h3><p>Helpdesk → connector → WorkItem → API → React. Bez aplikačnej databázy.</p></div>
+    <div class="card"><h3>Prvá verzia</h3><p>Helpdesk → connector → WorkItem → API → React. Bez aplikačnej databázy.</p></div>
     <div class="card"><h3>Neskorší issue</h3><p>PostgreSQL + EF Core až pri cache, scheduled synchronizácii, histórii, agregáciách alebo app-owned používateľskom stave.</p></div>
   </div>
   <p class="note">Aj potom zostávajú Helpdesk, Planner a GitHub systémami záznamu. Persistence v aplikácii nie je migrácia zdrojových systémov.</p>
@@ -232,7 +232,7 @@ ul{margin:0;padding-left:25px}li{font-size:23px;line-height:1.34;margin:9px 0;co
   <div class="grid three">
     <div class="card"><h3>Funguje</h3><p>Acceptance criteria sú splnené a výsledok sa dá reálne overiť.</p></div>
     <div class="card"><h3>Je overený</h3><p>Relevantné buildy, automatické testy a podľa potreby browser/smoke validácia prešli.</p></div>
-    <div class="card highlight"><h3>Je reviewovateľný</h3><p>PR je zameraný, neobsahuje neodsúhlasené architektonické odbočky a dokumentuje iba nové rozhodnutia.</p></div>
+    <div class="card"><h3>Je reviewovateľný</h3><p>PR je zameraný, neobsahuje neodsúhlasené architektonické odbočky a dokumentuje iba nové rozhodnutia.</p></div>
   </div>
   <div class="banner">Prezentácia ukazuje mapu. GitHub issues budú konkrétne, vykonateľné kroky, na ktorých bude agent pracovať.</div>
   <div class="footer"><span>Zhrnutie</span></div>
