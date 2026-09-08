@@ -166,9 +166,9 @@ ul{margin:0;padding-left:25px}li{font-size:23px;line-height:1.34;margin:9px 0;co
 
 <section class="slide">
   <div class="kicker">Implementačný princíp</div>
-  <h2>Každý GitHub issue má dodať kontrolovateľný kus fungujúceho riešenia</h2>
+  <h2>Každý implementačný celok má mať jasný cieľ a overiteľný výsledok</h2>
   <div class="process">
-    <div class="node stacknode"><b>Issue</b><span class="small">cieľ, scope, acceptance criteria</span></div>
+    <div class="node stacknode"><b>Implementačný celok</b><span class="small">cieľ, rozsah, očakávaný výsledok</span></div>
     <div class="arrow">→</div>
     <div class="node stacknode"><b>Plánovanie</b><span class="small">konkrétne súbory a kroky</span></div>
     <div class="arrow">→</div>
@@ -178,17 +178,17 @@ ul{margin:0;padding-left:25px}li{font-size:23px;line-height:1.34;margin:9px 0;co
     <div class="arrow">→</div>
     <div class="node stacknode"><b>PR</b><span class="small">reviewovateľná zmena</span></div>
   </div>
-  <div class="banner">ADR a standards určujú mantinely. Issue určuje konkrétny cieľ. Agent nemá medzi nimi „vymýšľať“ nové business pravidlá alebo source-system semantics.</div>
+  <div class="banner">ADR a standards určujú mantinely. Implementačný celok určuje konkrétny cieľ. Agent nemá medzi nimi „vymýšľať“ nové business pravidlá alebo source-system semantics.</div>
   <div class="footer"><span>AI-assisted implementation</span></div>
 </section>
 
 <section class="slide">
-  <div class="kicker">Roadmapa · prvé issues</div>
+  <div class="kicker">Roadmapa · prvé implementačné celky</div>
   <h2>Najskôr vytvoríme kostru a prvý reálny end-to-end scenár</h2>
   <div class="roadmap">
-    <div class="card roadstep"><div class="badge">Budúci issue A</div><h3>Bootstrap aplikácie</h3><ul><li>.NET/Functions backend scaffold</li><li>React/Vite frontend scaffold</li><li>základné prepojenie klient → API</li><li>CI už validuje reálne projekty</li></ul></div>
-    <div class="card roadstep"><div class="badge">Budúci issue B</div><h3>Prvý Helpdesk vertical slice</h3><ul><li>WorkItem model</li><li>Helpdesk connector + explicit mapping</li><li>GET endpoint</li><li>React tabuľka s reálnymi dátami</li></ul></div>
-    <div class="card roadstep"><div class="badge">Budúci issue C</div><h3>Použiteľný pracovný zoznam</h3><ul><li>search a filtre</li><li>loading / empty / error stavy</li><li>deep link do zdroja</li><li>základná UX/accessibility validácia</li></ul></div>
+    <div class="card roadstep"><div class="badge">Celok A</div><h3>Bootstrap aplikácie</h3><ul><li>.NET/Functions backend scaffold</li><li>React/Vite frontend scaffold</li><li>základné prepojenie klient → API</li><li>CI už validuje reálne projekty</li></ul></div>
+    <div class="card roadstep"><div class="badge">Celok B</div><h3>Prvý Helpdesk vertical slice</h3><ul><li>WorkItem model</li><li>Helpdesk connector + explicit mapping</li><li>GET endpoint</li><li>React tabuľka s reálnymi dátami</li></ul></div>
+    <div class="card roadstep"><div class="badge">Celok C</div><h3>Použiteľný pracovný zoznam</h3><ul><li>search a filtre</li><li>loading / empty / error stavy</li><li>deep link do zdroja</li><li>základná UX/accessibility validácia</li></ul></div>
   </div>
   <div class="footer"><span>Implementačný postup</span></div>
 </section>
@@ -197,9 +197,9 @@ ul{margin:0;padding-left:25px}li{font-size:23px;line-height:1.34;margin:9px 0;co
   <div class="kicker">Roadmapa · bezpečnosť a prevádzka</div>
   <h2>Keď funguje prvý tok dát, doplníme produkčne potrebné hranice</h2>
   <div class="roadmap">
-    <div class="card roadstep"><div class="badge">Budúci issue D</div><h3>Entra authentication</h3><ul><li>prihlásenie SPA</li><li>protected API</li><li>token flow</li><li>autorizácia iba podľa schváleného modelu</li></ul></div>
-    <div class="card roadstep"><div class="badge">Budúci issue E</div><h3>Observability</h3><ul><li>backend OpenTelemetry</li><li>browser Application Insights</li><li>trace correlation</li><li>bez citlivých payloadov v logoch</li></ul></div>
-    <div class="card roadstep"><div class="badge">Budúci issue F</div><h3>Dev deployment</h3><ul><li>build/package aplikácie</li><li>GitHub Actions CD po merge</li><li>deployment do pripraveného dev prostredia</li><li>smoke validation</li></ul></div>
+    <div class="card roadstep"><div class="badge">Celok D</div><h3>Entra authentication</h3><ul><li>prihlásenie SPA</li><li>protected API</li><li>token flow</li><li>autorizácia iba podľa schváleného modelu</li></ul></div>
+    <div class="card roadstep"><div class="badge">Celok E</div><h3>Observability</h3><ul><li>backend OpenTelemetry</li><li>browser Application Insights</li><li>trace correlation</li><li>bez citlivých payloadov v logoch</li></ul></div>
+    <div class="card roadstep"><div class="badge">Celok F</div><h3>Dev deployment</h3><ul><li>build/package aplikácie</li><li>GitHub Actions CD po merge</li><li>deployment do pripraveného dev prostredia</li><li>smoke validation</li></ul></div>
   </div>
   <div class="footer"><span>Implementačný postup</span></div>
 </section>
@@ -208,8 +208,8 @@ ul{margin:0;padding-left:25px}li{font-size:23px;line-height:1.34;margin:9px 0;co
   <div class="kicker">Roadmapa · ďalšie zdroje</div>
   <h2>Planner a GitHub majú byť dôkazom, že architektúra funguje</h2>
   <div class="grid two">
-    <div class="card"><h3>Budúci issue G · Planner connector</h3><p>Načítať Planner cez Microsoft Graph, explicitne namapovať do rovnakého WorkItem modelu a pridať zdroj do existujúceho zoznamu.</p></div>
-    <div class="card"><h3>Budúci issue H · GitHub Issues connector</h3><p>Načítať GitHub Issues, namapovať do rovnakého modelu a využiť existujúci API/UI kontrakt bez GitHub-specific logiky vo frontende.</p></div>
+    <div class="card"><h3>Celok G · Planner connector</h3><p>Načítať Planner cez Microsoft Graph, explicitne namapovať do rovnakého WorkItem modelu a pridať zdroj do existujúceho zoznamu.</p></div>
+    <div class="card"><h3>Celok H · GitHub Issues connector</h3><p>Načítať GitHub Issues, namapovať do rovnakého modelu a využiť existujúci API/UI kontrakt bez GitHub-specific logiky vo frontende.</p></div>
   </div>
   <div class="banner"><b>Architektonický test:</b> ak pridanie nového zdroja vyžaduje prepis základného UI alebo aplikačného modelu, hranice sme navrhli zle.</div>
   <div class="footer"><span>Rozširovanie riešenia</span></div>
@@ -217,10 +217,10 @@ ul{margin:0;padding-left:25px}li{font-size:23px;line-height:1.34;margin:9px 0;co
 
 <section class="slide">
   <div class="kicker">Persistence až keď ju potrebujeme</div>
-  <h2>Databáza je ďalší issue iba vtedy, keď rieši konkrétny problém</h2>
+  <h2>Databáza je samostatný implementačný celok iba vtedy, keď rieši konkrétny problém</h2>
   <div class="grid two">
     <div class="card"><h3>Prvá verzia</h3><p>Helpdesk → connector → WorkItem → API → React. Bez aplikačnej databázy.</p></div>
-    <div class="card"><h3>Neskorší issue</h3><p>PostgreSQL + EF Core až pri cache, scheduled synchronizácii, histórii, agregáciách alebo app-owned používateľskom stave.</p></div>
+    <div class="card"><h3>Možný ďalší celok</h3><p>PostgreSQL + EF Core až pri cache, scheduled synchronizácii, histórii, agregáciách alebo app-owned používateľskom stave.</p></div>
   </div>
   <p class="note">Aj potom zostávajú Helpdesk, Planner a GitHub systémami záznamu. Persistence v aplikácii nie je migrácia zdrojových systémov.</p>
   <div class="footer"><span>Staged persistence</span></div>
@@ -228,13 +228,13 @@ ul{margin:0;padding-left:25px}li{font-size:23px;line-height:1.34;margin:9px 0;co
 
 <section class="slide">
   <div class="kicker">Definition of Done</div>
-  <h2>Čo musí byť pravda na konci každého implementačného issue</h2>
+  <h2>Čo musí byť pravda na konci každého implementačného celku</h2>
   <div class="grid three">
     <div class="card"><h3>Funguje</h3><p>Acceptance criteria sú splnené a výsledok sa dá reálne overiť.</p></div>
     <div class="card"><h3>Je overený</h3><p>Relevantné buildy, automatické testy a podľa potreby browser/smoke validácia prešli.</p></div>
     <div class="card"><h3>Je reviewovateľný</h3><p>PR je zameraný, neobsahuje neodsúhlasené architektonické odbočky a dokumentuje iba nové rozhodnutia.</p></div>
   </div>
-  <div class="banner">Prezentácia ukazuje mapu. GitHub issues budú konkrétne, vykonateľné kroky, na ktorých bude agent pracovať.</div>
+  <div class="banner">Prezentácia ukazuje mapu. Jednotlivé implementačné celky sa pri realizácii rozdelia na konkrétne vykonateľné zadania pre agenta.</div>
   <div class="footer"><span>Zhrnutie</span></div>
 </section>
 
