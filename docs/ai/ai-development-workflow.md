@@ -37,7 +37,7 @@ Typical flow:
 Approved GitHub issue
   -> implementation
   -> tests / validation
-  -> pull request
+  -> draft pull request
   -> human review
   -> merge
 ```
@@ -53,6 +53,7 @@ Approved GitHub issue
   -> planning agent prepares a draft plan
   -> responsible developer reviews and approves the plan
   -> implementation
+  -> tests / validation
   -> draft pull request
   -> CI
   -> AI review when it provides useful additional confidence
@@ -72,6 +73,8 @@ Approved GitHub issue
   -> responsible developer approves the plan
   -> ADR when the change introduces a durable architectural decision
   -> implementation
+  -> tests / validation
+  -> draft pull request
   -> CI
   -> mandatory AI review
   -> human assessment of review findings
@@ -95,6 +98,7 @@ AI and automation may assist with:
 - implementing approved scope;
 - generating or updating tests;
 - preparing pull-request descriptions;
+- creating draft pull requests when explicitly permitted;
 - running build, test, lint, and validation commands;
 - reviewing pull requests;
 - drafting remediation plans;
@@ -149,7 +153,7 @@ docs/ai/
 └─ accepted-risk-log.md
 ```
 
-Stable prompts define reusable agent behavior. A task-specific launch prompt identifies the issue or PR, approved plan/version, work mode, branch, and any explicit permissions for that run.
+Stable prompts define reusable agent behavior. A task-specific launch prompt identifies the issue or PR, approved plan/version, work mode, branch mode, working branch, base branch, and any explicit Git or GitHub write permissions for that run.
 
 ## 7. Issue authoring
 
@@ -184,15 +188,31 @@ When a plan changes materially, update the canonical comment, increment the vers
 
 ## 9. Implementation
 
-The implementation agent uses `docs/ai/implementation-agent-prompt.md`.
+The implementation agent uses `docs/ai/implementation-agent-prompt.md` and is invoked by the responsible developer with a task-specific launch prompt after the issue is ready for implementation.
 
-The launch prompt selects one supported mode:
+The launch prompt selects exactly one supported mode:
 
 - direct implementation of a small issue;
 - implementation of an approved `Implementation Plan`;
 - implementation of an approved `Remediation Plan`.
 
-The implementation agent must run relevant validation and return factual evidence of what was executed.
+For standard and high-risk work, the launch prompt must identify the approved canonical `Implementation Plan` version. For remediation, it must identify the approved canonical `Remediation Plan`.
+
+The launch prompt also defines the operational context for the run:
+
+- branch mode;
+- working branch;
+- base branch;
+- explicitly allowed Git write operations, such as commit or push;
+- explicitly allowed GitHub write operations, such as creating a draft pull request.
+
+Git and GitHub write permissions are deny-by-default. The agent must not infer permission from available credentials, repository access, a checked-out branch, or installed tooling.
+
+The implementation agent must run relevant validation and return factual evidence of what was executed. It may create a pull request only after implementation and relevant validation have completed successfully and only when the launch prompt explicitly permits commit, push, and creation of a draft pull request.
+
+If those permissions are not granted, the agent must not commit, push, or write to GitHub. It performs the permitted local work and returns an implementation report together with a proposed pull-request body based on `.github/PULL_REQUEST_TEMPLATE.md`.
+
+When the agent is authorized to create a pull request, it creates a **draft** pull request only. It must never mark the PR ready for review, approve it, or merge it.
 
 ## 10. Pull requests
 
@@ -209,7 +229,9 @@ Every pull request should:
 
 Use `.github/PULL_REQUEST_TEMPLATE.md`.
 
-Human review and human merge approval remain mandatory.
+When an implementation agent creates the PR, it does so only after successful implementation and relevant validation, only with explicit commit, push, and draft-PR permissions, and always as a draft. For standard and high-risk work, the PR must reference the approved canonical `Implementation Plan` and its version.
+
+The implementation agent must not mark a PR ready for review, approve it, or merge it. Human review and human merge approval remain mandatory.
 
 ## 11. AI review
 
@@ -277,11 +299,15 @@ Example implementation launch prompt:
 ```text
 Implement GitHub issue #42 using `docs/ai/implementation-agent-prompt.md`.
 
+Task level: Standard, confirmed by the responsible developer.
 Work mode: Implement an approved implementation plan.
 Approved plan: canonical `Implementation Plan`, version 2.
+Branch mode: create a new branch.
 Working branch: feature/42-rm-list.
 Base branch: main.
-Do not merge the PR.
+Git permissions: commit and push are allowed.
+GitHub permissions: create a draft pull request after successful validation. No other GitHub writes are allowed.
+Do not mark the PR ready for review, approve it, or merge it.
 ```
 
 Example review launch prompt:
@@ -316,7 +342,9 @@ gh pr create \
 gh pr diff 57 --patch
 ```
 
-Agents must not approve or merge pull requests unless an explicit organizational policy grants that authority. This repository assumes those decisions remain human.
+The availability of GitHub CLI, repository credentials, or write access does not grant an agent permission to perform Git or GitHub writes. Commit, push, and draft-PR creation must be explicitly allowed by the task-specific launch prompt.
+
+When an implementation agent is allowed to create a pull request, it must use `--draft` or the equivalent API behavior. Agents must not mark pull requests ready for review, approve them, or merge them. This repository assumes those decisions remain human.
 
 ## 16. Security and data handling
 

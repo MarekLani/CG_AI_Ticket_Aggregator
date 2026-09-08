@@ -39,4 +39,4 @@ Use `docs/ai/implementation-plan-template.md`.
 
 Set the plan status to `Draft` and return the plan for review by the responsible developer. Do not present it as approved.
 
-At the end, provide one short task-specific launch prompt that can be used with `docs/ai/implementation-agent-prompt.md` after the plan has been approved.
+At the end, provide one short task-specific launch prompt that can be used with `docs/ai/implementation-agent-prompt.md` after the plan has been approved. Include the issue, work mode, approved plan version, branch mode, working branch, base branch, and any Git or GitHub write permissions explicitly supplied by the responsible developer. Do not grant commit, push, or GitHub write permissions unless the responsible developer explicitly provided them.

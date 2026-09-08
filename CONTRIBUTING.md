@@ -17,9 +17,9 @@ Open a pull request back to `main` and keep the branch scoped to one issue or on
 
 ## Pull requests
 
-Open a draft PR early for standard/high-risk work. The PR must reference the issue, identify the approved implementation plan when required, list validation performed and call out remaining risks.
+Open a draft PR for standard/high-risk work. When an implementation agent creates the PR, it does so only after implementation and relevant validation have completed successfully and only when the task-specific launch prompt explicitly permits commit, push, and draft-PR creation. The PR must reference the issue, identify the approved implementation plan when required, list validation performed and call out remaining risks.
 
-Human review and human merge approval are required.
+An implementation agent must not mark the PR ready for review, approve it, or merge it. Human review and human merge approval are required.
 
 ## Commits
 

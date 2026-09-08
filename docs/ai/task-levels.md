@@ -37,7 +37,7 @@ Typical examples:
 
 Typical flow:
 
-`approved issue -> planning agent -> human-approved Implementation Plan -> branch -> implementation -> draft PR -> CI -> AI review when useful -> human assessment -> fixes -> human review -> merge`
+`approved issue -> planning agent -> human-approved Implementation Plan -> branch -> implementation -> tests/validation -> draft PR -> CI -> AI review when useful -> human assessment -> fixes -> human review -> merge`
 
 The implementation plan should be concise and practical.
 
@@ -57,6 +57,6 @@ Typical examples:
 
 Typical flow:
 
-`approved issue -> full plan -> human approval -> ADR when needed -> implementation -> CI -> mandatory AI review -> human findings assessment -> remediation plan when needed -> human review -> merge`
+`approved issue -> full plan -> human approval -> ADR when needed -> implementation -> tests/validation -> draft PR -> CI -> mandatory AI review -> human findings assessment -> remediation plan when needed -> human review -> merge`
 
 Infrastructure and Terraform changes are high-risk by default unless a human explicitly classifies a narrowly scoped change otherwise.
