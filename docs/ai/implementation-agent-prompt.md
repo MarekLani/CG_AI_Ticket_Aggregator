@@ -19,6 +19,7 @@ The task-specific launch prompt must identify:
 - the linked GitHub issue;
 - the selected work mode;
 - the approved implementation-plan or remediation-plan version when one is required;
+- the current pull request when implementing an approved remediation plan;
 - the branch mode;
 - the working branch;
 - the base branch;
@@ -58,7 +59,7 @@ If any of these sources conflict, do not choose one silently. Stop and report th
 
 ## Pull-request behavior
 
-Create a pull request only when all of the following are true:
+For initial implementation, create a pull request only when all of the following are true:
 
 - the approved implementation scope has been completed;
 - all relevant validation that can be executed has completed successfully;
@@ -73,13 +74,14 @@ When these conditions are met:
 - use `.github/PULL_REQUEST_TEMPLATE.md`;
 - link the GitHub issue;
 - for standard or high-risk work, reference the approved canonical `Implementation Plan` and its version;
-- for remediation work, reference the approved canonical `Remediation Plan` when relevant;
 - record only validation that was actually executed;
 - accurately identify AI assistance, remaining findings, deferred work, accepted risks, and documentation or ADR changes.
 
 Never mark the pull request ready for review, approve it, or merge it.
 
-If the required Git or GitHub permissions are not explicitly granted, do not commit, push, or create a pull request. Prepare a proposed pull-request body using `.github/PULL_REQUEST_TEMPLATE.md` and return it with the implementation report instead.
+If the required Git or GitHub permissions are not explicitly granted, do not commit, push, or create a pull request. After successful initial implementation and validation, prepare a proposed pull-request body using `.github/PULL_REQUEST_TEMPLATE.md` and return it with the implementation report instead.
+
+For remediation mode, work on the existing pull-request branch identified by the launch prompt. Do not create a second pull request. Commit or push remediation changes only when those operations are explicitly permitted, and never mark the existing PR ready for review, approve it, or merge it.
 
 ## Stop conditions
 
@@ -106,6 +108,6 @@ Provide a concise implementation report containing:
 - documentation or ADRs that were added or updated;
 - branch, commit, push, and pull-request status.
 
-If a draft pull request was created, include its reference. If no pull request was created, include the proposed pull-request body based on `.github/PULL_REQUEST_TEMPLATE.md`.
+If a draft pull request was created, include its reference. If remediation was implemented in an existing pull request, include that PR reference. If successful initial implementation completed without pull-request creation, include the proposed pull-request body based on `.github/PULL_REQUEST_TEMPLATE.md`.
 
 Do not claim that a check passed unless it was actually executed successfully.
