@@ -1,0 +1,9 @@
+use_azuread_auth = true
+
+storage_account_name = "<TRAINER_PROVIDED>"
+container_name       = "tfstate"
+key                  = "training/m01.tfstate"
+
+# tenant_id, client_id and client_secret are read from
+# ARM_TENANT_ID, ARM_CLIENT_ID and ARM_CLIENT_SECRET.
+# Never put the client secret into this file.
