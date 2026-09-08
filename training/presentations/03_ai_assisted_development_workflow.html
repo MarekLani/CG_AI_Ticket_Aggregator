@@ -222,6 +222,66 @@ a{color:var(--accent);text-decoration:none;font-weight:700}a:hover{text-decorati
   <div class="footer"><span>Čomu sa vyhnúť</span></div>
 </section>
 
+<section class="slide">
+  <div class="kicker">Zhrnutie prvej fázy</div>
+  <h2>Aktuálny prístup: kontrolovaný vývoj s AI</h2>
+  <p class="lead">Začíname transparentne a s kontrolou človeka, nie plnou automatizáciou.</p>
+  <div class="flow" style="margin-top:22px">
+    <div class="node">Úloha</div><div class="arrow">→</div>
+    <div class="node">Planning prompt</div><div class="arrow">→</div>
+    <div class="node">Kontrola a schválenie človekom</div><div class="arrow">→</div>
+    <div class="node">Implementation prompt</div>
+  </div>
+  <div class="flow" style="margin-top:18px">
+    <div class="node">Testy a validácia</div><div class="arrow">→</div>
+    <div class="node">Review prompt</div><div class="arrow">→</div>
+    <div class="node">Rozhodnutie človeka o náprave</div><div class="arrow">→</div>
+    <div class="node">Merge človekom</div>
+  </div>
+  <div class="grid two" style="margin-top:24px">
+    <div class="card">
+      <h3>Developer zostáva orchestrátorom</h3>
+      <p>AI môže pripraviť plán, implementovať alebo kontrolovať zmenu, ale človek vedie tok práce a drží kontext, riziko aj rozhodnutia.</p>
+    </div>
+    <div class="card">
+      <h3>Prečo začíname takto</h3>
+      <ul>
+        <li>viditeľná cena a použitý kontext;</li>
+        <li>jasná učebná krivka pre tím;</li>
+        <li>jednoduchšie ladenie AI výstupov;</li>
+        <li>človek vlastní scope, riziko aj merge.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer"><span>Kontrolovaný AI-assisted SDLC</span></div>
+</section>
+<!-- Speaker note: Samostatný prompt run sa už dnes môže správať ako ľahký agent. Na zavedenie disciplinovaného vývoja s podporou AI preto nepotrebujeme hneď ťažkú orchestráciu. -->
+
+<section class="slide">
+  <div class="kicker">Ďalšia fáza</div>
+  <h2>Pokročilé agentné nástroje môžu proces zabaliť</h2>
+  <p class="lead">Keď tím rozumie workflow, časť opakovaných krokov sa dá presunúť do nástrojov a konfigurácie.</p>
+  <div class="grid two" style="margin-top:20px">
+    <div class="card">
+      <h3>Príklad smeru: Everything Claude Code / ECC</h3>
+      <p><a href="https://github.com/affaan-m/ECC">github.com/affaan-m/ECC</a></p>
+      <div class="module"><strong>Agents</strong><span>pomenované roly pre kroky, ktoré dnes spúšťame promptom — planner, reviewer, security reviewer, build fixer</span></div>
+      <div class="module"><strong>Skills</strong><span>znovupoužiteľné postupy a pravidlá, ktoré dnes opakovane vkladáme do promptov — TDD, API dizajn, review</span></div>
+      <div class="module"><strong>Commands</strong><span>skratky pre známe časti workflow, napríklad /plan alebo /code-review</span></div>
+      <div class="module"><strong>Hooks</strong><span>automatické kontroly okolo použitia nástrojov, napríklad pred zápisom súboru alebo po spustení testov</span></div>
+    </div>
+    <div class="card">
+      <h3>Čo to pridáva oproti dnešnému workflow</h3>
+      <div class="module"><strong>MCP</strong><span>riadený prístup k externým systémom a nástrojom namiesto ručného kopírovania kontextu</span></div>
+      <div class="module"><strong>Memory</strong><span>nadväzovanie práce, handoff medzi agentmi a zachytenie naučených vzorov</span></div>
+      <div class="module"><strong>Permissions</strong><span>hranice toho, čo môže konkrétny agent čítať, meniť alebo spúšťať</span></div>
+      <div class="banner" style="margin-top:16px"><b>Dôležité:</b> cieľom nie je maximálna autonómia, ale vhodná úroveň automatizácie pre daný tím, riziko a cenu.</div>
+    </div>
+  </div>
+  <div class="footer"><span>Budúce rozšírenie workflow</span></div>
+</section>
+<!-- Speaker note: Agentné toolkity môžu znížiť opakované promptovanie a podporiť viac automatizácie. Pridávajú však nové pohyblivé časti: konfiguráciu, permissions, pravidlá pre memory, bezpečnostné review a kontrolu nákladov. Preto sú vhodné ako ďalšia fáza, nie ako štartovací bod. -->
+
 </main>
 <div class="slideNo"></div>
 <div class="progress"></div>
