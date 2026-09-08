@@ -26,7 +26,6 @@ p{font-size:24px;line-height:1.4;color:var(--muted);max-width:1100px}
 strong,b{color:#fff}
 .grid{display:grid;gap:22px}.grid.two{grid-template-columns:repeat(2,1fr)}.grid.three{grid-template-columns:repeat(3,1fr)}.grid.four{grid-template-columns:repeat(4,1fr)}
 .card{background:linear-gradient(160deg,rgba(22,33,61,.96),rgba(11,16,32,.92));border:1px solid rgba(255,255,255,.09);border-radius:24px;padding:25px 27px;box-shadow:0 12px 30px rgba(0,0,0,.2);display:flex;flex-direction:column;justify-content:center}
-.card.highlight{border-color:rgba(79,209,197,.45);box-shadow:0 0 0 1px rgba(79,209,197,.14),0 16px 36px rgba(0,0,0,.25)}
 .card p,.card li{font-size:20px}.card .small{font-size:17px}
 ul{margin:0;padding-left:24px}li{font-size:23px;line-height:1.34;margin:8px 0;color:var(--muted)}li::marker{color:var(--accent)}
 .flow{display:flex;align-items:stretch;gap:14px;margin-top:18px}.node{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:18px 20px;min-width:130px;flex:1;text-align:center;display:flex;align-items:center;justify-content:center;font-size:21px;color:#eaf2ff}.arrow{align-self:center;color:var(--accent);font-size:32px;font-weight:800}
@@ -71,7 +70,7 @@ a{color:var(--accent);text-decoration:none;font-weight:700}a:hover{text-decorati
     <div class="node">5<br>Ďalšie funkcie aplikácie</div>
   </div>
   <div class="grid two" style="margin-top:28px">
-    <div class="card highlight"><h3>Na začiatku</h3><p>Vytvoríme iba základ aplikácie s ukážkovými dátami. Cieľom je mať čo najskôr funkčný frontend, backend a prvú zmenu spracovanú cez GitHub a AI agentov.</p></div>
+    <div class="card"><h3>Na začiatku</h3><p>Vytvoríme iba základ aplikácie s ukážkovými dátami. Cieľom je mať čo najskôr funkčný frontend, backend a prvú zmenu spracovanú cez GitHub a AI agentov.</p></div>
     <div class="card"><h3>Po technických blokoch</h3><p>Keď prejdeme kontajnery, Terraform, Azure hosting a GitHub Actions, vrátime sa k aplikácii a budeme pokračovať ďalšími implementačnými celkami.</p></div>
   </div>
   <div class="footer"><span>Program školenia</span><span>Od jednoduchého základu k ďalšiemu vývoju</span></div>
@@ -82,7 +81,7 @@ a{color:var(--accent);text-decoration:none;font-weight:700}a:hover{text-decorati
   <div class="kicker">1. blok</div>
   <h2>Aplikácia, GitHub a vývoj s podporou AI</h2>
   <div class="chapter">
-    <div class="card highlight">
+    <div class="card">
       <h3>Architektúra a technológie</h3>
       <ul>
         <li>čo rieši aplikácia Unified Work Items;</li>
@@ -110,7 +109,7 @@ a{color:var(--accent);text-decoration:none;font-weight:700}a:hover{text-decorati
   <div class="kicker">2. blok</div>
   <h2>Docker a lokálne vývojové prostredie</h2>
   <div class="chapter">
-    <div class="card highlight">
+    <div class="card">
       <h3>Základy kontajnerov</h3>
       <ul>
         <li>image a container;</li>
@@ -135,7 +134,7 @@ a{color:var(--accent);text-decoration:none;font-weight:700}a:hover{text-decorati
   <div class="kicker">3. blok</div>
   <h2>Terraform a Azure infraštruktúra</h2>
   <div class="chapter">
-    <div class="card highlight">
+    <div class="card">
       <h3>Infraštruktúra ako kód</h3>
       <ul>
         <li>Terraform konfigurácia a Azure provider;</li>
@@ -160,7 +159,7 @@ a{color:var(--accent);text-decoration:none;font-weight:700}a:hover{text-decorati
   <div class="kicker">4. blok</div>
   <h2>Azure hosting a GitHub Actions</h2>
   <div class="grid two">
-    <div class="card highlight">
+    <div class="card">
       <h3>Hosting aplikácie v Azure</h3>
       <ul>
         <li>aké možnosti hostingu máme pre backend a kontajnerové aplikácie;</li>
@@ -190,7 +189,7 @@ a{color:var(--accent);text-decoration:none;font-weight:700}a:hover{text-decorati
   <h2>Pokračovanie vo vývoji aplikácie</h2>
   <p>Po technických témach sa vrátime k Unified Work Items. Jednoduchý základ už máme lokálne aj v Azure a môžeme ho rozširovať o reálnu funkcionalitu podľa implementačných celkov z prezentácie 04.</p>
   <div class="grid three" style="margin-top:24px">
-    <div class="card highlight"><h3>Celok B · Helpdesk</h3><ul><li>model WorkItem;</li><li>konektor Helpdesku;</li><li>GET endpoint;</li><li>tabuľka s reálnymi dátami.</li></ul></div>
+    <div class="card"><h3>Celok B · Helpdesk</h3><ul><li>model WorkItem;</li><li>konektor Helpdesku;</li><li>GET endpoint;</li><li>tabuľka s reálnymi dátami.</li></ul></div>
     <div class="card"><h3>Celok C · Pracovný zoznam</h3><ul><li>vyhľadávanie a filtre;</li><li>načítavanie, prázdny výsledok a chyby;</li><li>odkaz do zdrojového systému;</li><li>základná kontrola použiteľnosti.</li></ul></div>
     <div class="card"><h3>Ďalej podľa času</h3><ul><li>Entra ID;</li><li>monitorovanie aplikácie;</li><li>Planner konektor;</li><li>GitHub Issues konektor.</li></ul></div>
   </div>
