@@ -28,7 +28,9 @@ The task-specific launch prompt must identify:
 
 Git and GitHub write permissions are deny-by-default. Do not infer permission from available credentials, repository access, a checked-out branch, or the presence of GitHub CLI.
 
-If commit, push, or draft-PR creation is not explicitly permitted, do not perform that operation. Local file changes and validation do not imply permission to create commits, push branches, or write to GitHub.
+For initial implementation, commit, push, and draft-PR creation are treated as one publication permission set. Unless the launch prompt explicitly permits all three, do not commit, push, or create a pull request. Local file changes and validation do not imply permission to publish the work.
+
+For remediation mode, commit and push remain individually deny-by-default and no second pull request is created.
 
 ## Before making changes
 
@@ -79,7 +81,7 @@ When these conditions are met:
 
 Never mark the pull request ready for review, approve it, or merge it.
 
-If the required Git or GitHub permissions are not explicitly granted, do not commit, push, or create a pull request. After successful initial implementation and validation, prepare a proposed pull-request body using `.github/PULL_REQUEST_TEMPLATE.md` and return it with the implementation report instead.
+If the complete publication permission set is not explicitly granted, do not commit, push, or create a pull request. After successful initial implementation and validation, prepare a proposed pull-request body using `.github/PULL_REQUEST_TEMPLATE.md` and return it with the implementation report instead.
 
 For remediation mode, work on the existing pull-request branch identified by the launch prompt. Do not create a second pull request. Commit or push remediation changes only when those operations are explicitly permitted, and never mark the existing PR ready for review, approve it, or merge it.
 
