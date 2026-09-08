@@ -31,12 +31,14 @@ ul{margin:0;padding-left:24px}li{font-size:23px;line-height:1.34;margin:8px 0;co
 a{color:var(--accent);text-decoration:none;font-weight:700}a:hover{text-decoration:underline}
 .exercise,.banner{margin-top:22px;border:1px solid rgba(255,184,107,.42);background:rgba(255,184,107,.08);border-radius:22px;padding:18px 22px}.exercise .label{font-size:15px;letter-spacing:.07em;text-transform:uppercase;color:var(--accent2);font-weight:800;margin-bottom:7px}.exercise p,.banner{font-size:21px;line-height:1.34;color:#e4eaf5}
 .chapter{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:stretch}.chapter .card{min-height:310px}
-.footer{position:absolute;left:66px;right:76px;bottom:20px;display:flex;align-items:center;justify-content:space-between;color:#788aa8;font-size:15px}
+.footer{position:absolute;left:96px;right:76px;bottom:20px;display:flex;align-items:center;justify-content:space-between;color:#788aa8;font-size:15px}
 .titleMark{position:absolute;right:76px;top:60px;color:rgba(255,255,255,.16);font-size:108px;font-weight:900;letter-spacing:-.08em}
 .progress{position:absolute;left:0;bottom:0;height:5px;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0;z-index:12}.slideNo{position:fixed;left:22px;bottom:20px;color:#7890ad;font-size:14px;z-index:20}
 .code{font-family:Consolas,Monaco,monospace;background:#050814;border:1px solid #273550;border-radius:18px;padding:20px;color:#d5e7ff;white-space:pre-wrap;font-size:20px;line-height:1.35}
 .compare{width:100%;border-collapse:separate;border-spacing:0 12px;font-size:21px}.compare th{text-align:left;color:#fff;padding:8px 14px}.compare td{background:rgba(255,255,255,.055);border-top:1px solid rgba(255,255,255,.09);border-bottom:1px solid rgba(255,255,255,.09);padding:14px;color:var(--muted)}.compare td:first-child{border-left:1px solid rgba(255,255,255,.09);border-radius:14px 0 0 14px;color:#fff;font-weight:650}.compare td:last-child{border-right:1px solid rgba(255,255,255,.09);border-radius:0 14px 14px 0}
 .pill{display:inline-block;border:1px solid rgba(79,209,197,.35);background:rgba(79,209,197,.1);border-radius:999px;padding:8px 15px;margin:5px 6px 5px 0;font-size:18px;color:#dffdfa}
+.context-stack{display:flex;flex-direction:column;align-items:center;gap:10px;padding:8px 0}.context-layer{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:12px 18px;text-align:center;color:#eaf2ff;font-size:18px;line-height:1.25}.context-layer:nth-child(1){width:58%}.context-layer:nth-child(2){width:68%}.context-layer:nth-child(3){width:78%}.context-layer:nth-child(4){width:88%}.context-layer:nth-child(5){width:100%}.danger-list li::marker{color:var(--danger)}
+.slide h1,.slide h2{max-width:min(1120px,calc(100vw - 420px))}
 @media print{body{overflow:visible;background:#0b1020}.slide{display:block;page-break-after:always;height:100vh}.slideNo,.progress{display:none}}
 
 </style>
@@ -135,13 +137,13 @@ a{color:var(--accent);text-decoration:none;font-weight:700}a:hover{text-decorati
   <div class="grid two">
     <div class="card">
       <h3>Vrstvy kontextu</h3>
-      <ul>
-        <li>business prehľad a hranice riešenia;</li>
-        <li>issue a akceptačné kritériá;</li>
-        <li>schválený implementačný plán;</li>
-        <li>štandardy, architektúra a ADR;</li>
-        <li>AGENTS.md, validačné príkazy a CI.</li>
-      </ul>
+      <div class="context-stack">
+        <div class="context-layer">business prehľad a hranice riešenia</div>
+        <div class="context-layer">issue a akceptačné kritériá</div>
+        <div class="context-layer">schválený implementačný plán</div>
+        <div class="context-layer">štandardy, architektúra a ADR</div>
+        <div class="context-layer">AGENTS.md, validačné príkazy a CI</div>
+      </div>
     </div>
     <div class="card">
       <h3>Prečo na tom záleží</h3>
@@ -199,16 +201,16 @@ a{color:var(--accent);text-decoration:none;font-weight:700}a:hover{text-decorati
   <div class="grid two">
     <div class="card">
       <h3>Procesné chyby</h3>
-      <ul>
+      <ul class="danger-list">
         <li>vibe coding bez rámca issue, jasného cieľa a validácie;</li>
         <li>rovnaký ťažkopádny postup pre každú drobnú zmenu;</li>
-        <li>samostatný agent na každý krok bez jasného dôvodu;</li>
-        <li>automatické zapracovanie všetkých nálezov z AI review.</li>
+        <li>automatické zapracovanie všetkých nálezov z AI review;</li>
+        <li>AI review ako náhrada review zodpovedného developera alebo iba formálne ľudské review.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Chyby v kontexte</h3>
-      <ul>
+      <ul class="danger-list">
         <li>neurčité zadania typu „oprav issue“ bez rozsahu;</li>
         <li>kritické pravidlá uložené iba v chate;</li>
         <li>agent, ktorý potichu rieši rozpory medzi zdrojmi;</li>
