@@ -6,10 +6,10 @@ Open `00_index.html` first, or open any individual deck directly.
 
 Decks:
 
-- `01_git_github_actions.html`
-- `02_terraform_iac.html`
+- `01_application_architecture_and_implementation.html`
+- `02_git_github_ai_development.html`
 - `03_containers_devcontainer_azure_hosting.html`
-- `04_application_stack_and_delivery.html`
+- `04_terraform_iac.html`
 
 Keyboard navigation inside decks: Arrow keys, PageUp/PageDown, Space.
 
