@@ -38,6 +38,7 @@ a{color:var(--accent);text-decoration:none;font-weight:700}a:hover{text-decorati
 .compare{width:100%;border-collapse:separate;border-spacing:0 12px;font-size:21px}.compare th{text-align:left;color:#fff;padding:8px 14px}.compare td{background:rgba(255,255,255,.055);border-top:1px solid rgba(255,255,255,.09);border-bottom:1px solid rgba(255,255,255,.09);padding:14px;color:var(--muted)}.compare td:first-child{border-left:1px solid rgba(255,255,255,.09);border-radius:14px 0 0 14px;color:#fff;font-weight:650}.compare td:last-child{border-right:1px solid rgba(255,255,255,.09);border-radius:0 14px 14px 0}
 .pill{display:inline-block;border:1px solid rgba(79,209,197,.35);background:rgba(79,209,197,.1);border-radius:999px;padding:8px 15px;margin:5px 6px 5px 0;font-size:18px;color:#dffdfa}
 .context-stack{display:flex;flex-direction:column;align-items:center;gap:10px;padding:8px 0}.context-layer{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:12px 18px;text-align:center;color:#eaf2ff;font-size:18px;line-height:1.25}.context-layer:nth-child(1){width:58%}.context-layer:nth-child(2){width:68%}.context-layer:nth-child(3){width:78%}.context-layer:nth-child(4){width:88%}.context-layer:nth-child(5){width:100%}.danger-list li::marker{color:var(--danger)}
+.capability-table{width:100%;border-collapse:separate;border-spacing:0 8px;font-size:18px}.capability-table td{background:rgba(255,255,255,.055);border-top:1px solid rgba(255,255,255,.09);border-bottom:1px solid rgba(255,255,255,.09);padding:10px 14px;color:var(--muted);line-height:1.24}.capability-table td:first-child{width:170px;border-left:1px solid rgba(255,255,255,.09);border-radius:12px 0 0 12px;color:#fff;font-weight:700}.capability-table td:last-child{border-right:1px solid rgba(255,255,255,.09);border-radius:0 12px 12px 0}.note{display:none}
 .slide h1,.slide h2{max-width:min(1120px,calc(100vw - 420px))}
 @media print{body{overflow:visible;background:#0b1020}.slide{display:block;page-break-after:always;height:100vh}.slideNo,.progress{display:none}}
 
@@ -223,64 +224,50 @@ a{color:var(--accent);text-decoration:none;font-weight:700}a:hover{text-decorati
 </section>
 
 <section class="slide">
-  <div class="kicker">Zhrnutie prvej fázy</div>
-  <h2>Aktuálny prístup: kontrolovaný vývoj s AI</h2>
-  <p class="lead">Začíname transparentne a s kontrolou človeka, nie plnou automatizáciou.</p>
-  <div class="flow" style="margin-top:22px">
-    <div class="node">Úloha</div><div class="arrow">→</div>
+  <div class="kicker">Záver · súčasný prístup</div>
+  <h2>Začíname kontrolovaným SDLC s podporou AI</h2>
+  <p class="lead">Najprv transparentnosť a ľudská kontrola. Developer zostáva orchestrátorom práce, AI pomáha v jasne oddelených krokoch.</p>
+  <div class="flow" style="margin-top:24px">
+    <div class="node">Pracovná úloha</div><div class="arrow">→</div>
     <div class="node">Planning prompt</div><div class="arrow">→</div>
-    <div class="node">Kontrola a schválenie človekom</div><div class="arrow">→</div>
+    <div class="node">Schválenie človekom</div><div class="arrow">→</div>
     <div class="node">Implementation prompt</div>
   </div>
-  <div class="flow" style="margin-top:18px">
+  <div class="flow" style="margin-top:14px">
     <div class="node">Testy a validácia</div><div class="arrow">→</div>
     <div class="node">Review prompt</div><div class="arrow">→</div>
-    <div class="node">Rozhodnutie človeka o náprave</div><div class="arrow">→</div>
+    <div class="node">Rozhodnutie o náprave</div><div class="arrow">→</div>
     <div class="node">Merge človekom</div>
   </div>
-  <div class="grid two" style="margin-top:24px">
-    <div class="card">
-      <h3>Developer zostáva orchestrátorom</h3>
-      <p>AI môže pripraviť plán, implementovať alebo kontrolovať zmenu, ale človek vedie tok práce a drží kontext, riziko aj rozhodnutia.</p>
-    </div>
-    <div class="card">
-      <h3>Prečo začíname takto</h3>
-      <ul>
-        <li>viditeľná cena a použitý kontext;</li>
-        <li>jasná učebná krivka pre tím;</li>
-        <li>jednoduchšie ladenie AI výstupov;</li>
-        <li>človek vlastní scope, riziko aj merge.</li>
-      </ul>
-    </div>
+  <div class="grid four" style="margin-top:24px">
+    <div class="card"><h3>Viditeľný kontext</h3><p>Je jasné, čo AI dostala ako vstup a prečo navrhla konkrétny postup.</p></div>
+    <div class="card"><h3>Kontrolované náklady</h3><p>Jednotlivé behy promptov sú oddelené, ľahšie sa sleduje rozsah a spotreba.</p></div>
+    <div class="card"><h3>Jednoduchšie ladenie</h3><p>Chybu vieme priradiť ku konkrétnemu kroku: plán, implementácia, test alebo review.</p></div>
+    <div class="card"><h3>Jasné vlastníctvo</h3><p>Človek vlastní scope, riziko, nálezy, nápravu aj finálne rozhodnutie.</p></div>
   </div>
+  <aside class="note">Samostatný beh promptu sa už dnes môže správať ako ľahký agent. Na zavedenie disciplinovaného AI-assisted developmentu nepotrebujeme hneď ťažkú orchestráciu.</aside>
   <div class="footer"><span>Kontrolovaný AI-assisted SDLC</span></div>
 </section>
-<!-- Speaker note: Samostatný prompt run sa už dnes môže správať ako ľahký agent. Na zavedenie disciplinovaného vývoja s podporou AI preto nepotrebujeme hneď ťažkú orchestráciu. -->
 
 <section class="slide">
-  <div class="kicker">Ďalšia fáza</div>
-  <h2>Pokročilé agentné nástroje môžu proces zabaliť</h2>
-  <p class="lead">Keď tím rozumie workflow, časť opakovaných krokov sa dá presunúť do nástrojov a konfigurácie.</p>
-  <div class="grid two" style="margin-top:20px">
-    <div class="card">
-      <h3>Príklad smeru: Everything Claude Code / ECC</h3>
-      <p><a href="https://github.com/affaan-m/ECC">github.com/affaan-m/ECC</a></p>
-      <div class="module"><strong>Agents</strong><span>pomenované roly pre kroky, ktoré dnes spúšťame promptom — planner, reviewer, security reviewer, build fixer</span></div>
-      <div class="module"><strong>Skills</strong><span>znovupoužiteľné postupy a pravidlá, ktoré dnes opakovane vkladáme do promptov — TDD, API dizajn, review</span></div>
-      <div class="module"><strong>Commands</strong><span>skratky pre známe časti workflow, napríklad /plan alebo /code-review</span></div>
-      <div class="module"><strong>Hooks</strong><span>automatické kontroly okolo použitia nástrojov, napríklad pred zápisom súboru alebo po spustení testov</span></div>
-    </div>
-    <div class="card">
-      <h3>Čo to pridáva oproti dnešnému workflow</h3>
-      <div class="module"><strong>MCP</strong><span>riadený prístup k externým systémom a nástrojom namiesto ručného kopírovania kontextu</span></div>
-      <div class="module"><strong>Memory</strong><span>nadväzovanie práce, handoff medzi agentmi a zachytenie naučených vzorov</span></div>
-      <div class="module"><strong>Permissions</strong><span>hranice toho, čo môže konkrétny agent čítať, meniť alebo spúšťať</span></div>
-      <div class="banner" style="margin-top:16px"><b>Dôležité:</b> cieľom nie je maximálna autonómia, ale vhodná úroveň automatizácie pre daný tím, riziko a cenu.</div>
-    </div>
-  </div>
-  <div class="footer"><span>Budúce rozšírenie workflow</span></div>
+  <div class="kicker">Záver · ďalšia fáza</div>
+  <h2>Čo pokročilejšie agentné nástroje pridávajú k dnešnému workflow</h2>
+  <p class="small" style="font-size:20px;margin:-8px 0 12px"><b>Príklad smeru:</b> Everything Claude Code / ECC · <a href="https://github.com/affaan-m/ECC">github.com/affaan-m/ECC</a></p>
+  <table class="capability-table" aria-label="Čo agentný tooling pridáva k dnešnému workflow">
+    <tbody>
+      <tr><td>Agents</td><td>Dnes planning, implementáciu a review spúšťame samostatnými promptmi. Agentné roly z nich robia pomenované a opakovateľné zodpovednosti — napríklad planner, reviewer, security reviewer alebo build fixer.</td></tr>
+      <tr><td>Skills</td><td>Dnes postupy ako TDD, API dizajn alebo review opisujeme v pravidlách a promptoch. Skills ich balia do znovupoužiteľných postupov, ktoré agent vie použiť bez opakovania celého zadania.</td></tr>
+      <tr><td>Commands</td><td>Dnes developer vyberie správny prompt a spustí konkrétny krok. Commands pridávajú krátke vstupné body ako <b>/plan</b> alebo <b>/code-review</b> pre známy workflow.</td></tr>
+      <tr><td>Hooks</td><td>Dnes kontroly pred alebo po práci závisia od promptu, CI alebo človeka. Hooks ich vedia automaticky spustiť pri udalosti, napríklad pred zápisom súboru alebo po spustení testov.</td></tr>
+      <tr><td>MCP</td><td>Dnes kontext často kopírujeme ručne alebo pracujeme iba s obsahom repozitára. MCP umožňuje riadený prístup k externým systémom a nástrojom.</td></tr>
+      <tr><td>Memory</td><td>Dnes kontinuitu drží aktuálny chat, repozitár a explicitný handoff. Memory môže uchovať dôležitý kontext medzi behmi, handoffmi a nadväzujúcou prácou.</td></tr>
+      <tr><td>Permissions</td><td>Dnes hranice určuje človek a všeobecné nastavenie nástroja. Permissions umožňujú explicitne obmedziť, čo konkrétna rola môže čítať, meniť alebo spúšťať.</td></tr>
+    </tbody>
+  </table>
+  <div class="banner" style="margin-top:12px"><b>Dôležité:</b> Cieľom nie je maximálna autonómia, ale vhodná úroveň automatizácie pre daný tím, riziko a cenu.</div>
+  <aside class="note">Takéto nástroje znižujú opakované promptovanie a podporujú viac automatizácie, ale prinášajú aj viac pohyblivých častí: konfiguráciu, permissions, memory policy, bezpečnostné review a kontrolu nákladov. Preto sú dobrá ďalšia fáza, nie štartovací bod.</aside>
+  <div class="footer"><span>Pokročilejší agentný tooling</span></div>
 </section>
-<!-- Speaker note: Agentné toolkity môžu znížiť opakované promptovanie a podporiť viac automatizácie. Pridávajú však nové pohyblivé časti: konfiguráciu, permissions, pravidlá pre memory, bezpečnostné review a kontrolu nákladov. Preto sú vhodné ako ďalšia fáza, nie ako štartovací bod. -->
 
 </main>
 <div class="slideNo"></div>
