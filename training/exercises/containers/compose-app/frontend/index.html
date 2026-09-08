@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ticket Aggregator Compose Lab</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 2rem; background: #0f172a; color: #e5e7eb; }
+    h1 { margin-bottom: .5rem; }
+    button { padding: .7rem 1rem; border: 0; border-radius: .5rem; cursor: pointer; }
+    .ticket { margin: .75rem 0; padding: 1rem; border: 1px solid #334155; border-radius: .75rem; background: #111827; }
+    .meta { color: #93c5fd; font-size: .9rem; }
+    .error { color: #fecaca; }
+  </style>
+</head>
+<body>
+  <h1>Ticket Aggregator Compose Lab</h1>
+  <p>Frontend container served by nginx. Data comes from a separate backend container.</p>
+  <button id="load">Load tickets from backend</button>
+  <div id="output"></div>
+
+  <script>
+    const output = document.querySelector('#output');
+    const button = document.querySelector('#load');
+
+    async function loadTickets() {
+      output.textContent = 'Loading...';
+      try {
+        const response = await fetch('http://localhost:3001/api/tickets');
+        if (!response.ok) throw new Error(`Backend returned ${response.status}`);
+        const data = await response.json();
+        output.innerHTML = data.tickets.map(ticket => `
+          <div class="ticket">
+            <strong>#${ticket.id} ${ticket.title}</strong>
+            <div class="meta">${ticket.source} · ${ticket.priority}</div>
+          </div>
+        `).join('') + `<p class="meta">Generated at ${data.generatedAt}</p>`;
+      } catch (error) {
+        output.innerHTML = `<p class="error">Backend call failed: ${error.message}</p>`;
+      }
+    }
+
+    button.addEventListener('click', loadTickets);
+    loadTickets();
+  </script>
+</body>
+</html>
