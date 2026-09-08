@@ -134,7 +134,7 @@ If authoritative sources conflict, an agent must not resolve the conflict silent
 
 ## 6. Standard AI resources
 
-The repository keeps stable prompts separate from task-specific launch prompts:
+The repository keeps stable prompts separate from task-specific launch prompts and human-only examples:
 
 ```text
 docs/ai/
@@ -150,10 +150,14 @@ docs/ai/
 ├─ review-checklist.md
 ├─ remediation-plan-template.md
 ├─ remediation-plan-prompt.md
-└─ accepted-risk-log.md
+├─ accepted-risk-log.md
+└─ examples/
+   └─ launch-prompt-cookbook.md   # human-only; excluded from normal agent context
 ```
 
 Stable prompts define reusable agent behavior. A task-specific launch prompt identifies the issue or PR, approved plan/version, work mode, branch mode, working branch, base branch, and any explicit Git or GitHub write permissions for that run.
+
+The examples directory exists only to help human developers compose those launch prompts. `AGENTS.md` explicitly excludes it from normal agent read/search context so examples do not consume tokens during normal execution.
 
 ## 7. Issue authoring
 
@@ -188,15 +192,16 @@ When a plan changes materially, update the canonical comment, increment the vers
 
 ## 9. Implementation
 
-The implementation agent uses `docs/ai/implementation-agent-prompt.md` and is invoked by the responsible developer with a task-specific launch prompt after the issue is ready for implementation.
+The implementation agent uses `docs/ai/implementation-agent-prompt.md` and is invoked by the responsible developer with a task-specific launch prompt after the issue or reviewed PR findings are ready for implementation.
 
 The launch prompt selects exactly one supported mode:
 
 - direct implementation of a small issue;
 - implementation of an approved `Implementation Plan`;
+- implementation of simple human-approved review fixes that do not require a separate remediation plan;
 - implementation of an approved `Remediation Plan`.
 
-For standard and high-risk work, the launch prompt must identify the approved canonical `Implementation Plan` version. For remediation, it must identify the approved canonical `Remediation Plan`.
+For standard and high-risk work, the launch prompt must identify the approved canonical `Implementation Plan` version. For simple review fixes, it must identify the existing PR and canonical `Review Findings Assessment`. For remediation, it must identify the existing PR and approved canonical `Remediation Plan`.
 
 The launch prompt also defines the operational context for the run:
 
@@ -208,11 +213,13 @@ The launch prompt also defines the operational context for the run:
 
 Git and GitHub write permissions are deny-by-default. The agent must not infer permission from available credentials, repository access, a checked-out branch, or installed tooling.
 
-The implementation agent must run relevant validation and return factual evidence of what was executed. It may create a pull request only after implementation and relevant validation have completed successfully and only when the launch prompt explicitly permits commit, push, and creation of a draft pull request.
+The implementation agent must run relevant validation and return factual evidence of what was executed. For initial implementation, it may create a pull request only after implementation and relevant validation have completed successfully and only when the launch prompt explicitly permits commit, push, and creation of a draft pull request.
 
-If those permissions are not granted, the agent must not commit, push, or write to GitHub. It performs the permitted local work and returns an implementation report together with a proposed pull-request body based on `.github/PULL_REQUEST_TEMPLATE.md`.
+If those initial-publication permissions are not granted, the agent must not commit, push, or write to GitHub. It performs the permitted local work and returns an implementation report together with a proposed pull-request body based on `.github/PULL_REQUEST_TEMPLATE.md`.
 
 When the agent is authorized to create a pull request, it creates a **draft** pull request only. It must never mark the PR ready for review, approve it, or merge it.
+
+For simple accepted review fixes and approved remediation, the agent works on the existing PR branch and never creates a second pull request. Commit and push are performed only when explicitly permitted by the launch prompt.
 
 ## 10. Pull requests
 
@@ -263,7 +270,7 @@ Only human-assessed findings may become remediation work.
 
 ## 13. Remediation planning
 
-Simple accepted findings can be fixed directly in the current PR.
+Simple accepted findings can be fixed directly in the current PR using the implementation agent's simple-review-fix mode when a human has explicitly accepted them.
 
 Use a separate remediation plan only when accepted findings require non-trivial, bounded work in the same PR.
 
@@ -284,40 +291,7 @@ Use `docs/ai/prompt-guidance.md`.
 
 Task-specific launch prompts should not duplicate repository documentation. They should identify only the concrete run context that the agent cannot reliably infer from authoritative sources.
 
-Example planning launch prompt:
-
-```text
-Prepare a draft implementation plan for GitHub issue #42 using
-`docs/ai/planning-agent-prompt.md`.
-
-Task level: Standard, confirmed by the responsible developer.
-Return the draft for human review. Do not write to GitHub.
-```
-
-Example implementation launch prompt:
-
-```text
-Implement GitHub issue #42 using `docs/ai/implementation-agent-prompt.md`.
-
-Task level: Standard, confirmed by the responsible developer.
-Work mode: Implement an approved implementation plan.
-Approved plan: canonical `Implementation Plan`, version 2.
-Branch mode: create a new branch.
-Working branch: feature/42-rm-list.
-Base branch: main.
-Git permissions: commit and push are allowed.
-GitHub permissions: create a draft pull request after successful validation. No other GitHub writes are allowed.
-Do not mark the PR ready for review, approve it, or merge it.
-```
-
-Example review launch prompt:
-
-```text
-Review pull request #57 using `docs/ai/review-agent-prompt.md`.
-Linked issue: #42.
-Task level: Standard.
-Return the review for human assessment; do not post it to GitHub.
-```
+Human developers can use the copy-ready examples in `docs/ai/examples/launch-prompt-cookbook.md`. The cookbook is intentionally excluded from normal agent context; the human should copy the appropriate example and send the resulting task-specific launch prompt rather than asking the agent to load the cookbook.
 
 ## 15. Git and GitHub working conventions
 

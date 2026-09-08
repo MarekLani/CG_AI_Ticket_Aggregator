@@ -22,9 +22,11 @@ For implementation runs, permissions are deny-by-default unless the launch promp
 
 An implementation agent may create a pull request only as a draft, only after implementation and relevant validation have completed successfully, and only when the launch prompt explicitly permits the complete publication permission set. Otherwise it prepares the proposed pull-request body without writing it to GitHub.
 
+For work on an existing pull request, such as simple accepted review fixes or approved remediation, the launch prompt should identify the PR and existing branch explicitly. Commit and push remain deny-by-default, and the agent must not create a second pull request.
+
 ## Do not duplicate durable context
 
-Do not paste entire engineering standards, architecture documents, or product rules into ad-hoc prompts.
+Do not paste entire engineering standards, architecture documents, issue bodies, approved plans, or product rules into ad-hoc prompts when the agent can read them from their authoritative source.
 
 Store durable rules in the appropriate authoritative source:
 
@@ -36,12 +38,8 @@ Store durable rules in the appropriate authoritative source:
 
 A launch prompt must never silently override an engineering standard, an ADR, or an approved plan.
 
-## Prefer explicit operational wording
+## Human-only launch-prompt examples
 
-Good:
+Copy-ready launch-prompt examples are maintained in `docs/ai/examples/launch-prompt-cookbook.md` for human developers.
 
-> Implement issue #42 using the latest approved `Implementation Plan`. Branch mode: create and use `feature/42-rm-list` from `main`. Commit and push are allowed. Create a draft pull request after successful validation. Do not mark the PR ready for review and do not merge it.
-
-Avoid vague instructions such as:
-
-> Fix the issue and improve anything else you see.
+That directory is deliberately excluded from normal agent context by `AGENTS.md`. Agents must not read or search the cookbook during normal issue authoring, planning, implementation, review, or remediation work unless the current task explicitly asks them to create, review, update, or use those examples.
