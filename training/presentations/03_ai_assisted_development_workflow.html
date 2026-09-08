@@ -251,19 +251,20 @@ a{color:var(--accent);text-decoration:none;font-weight:700}a:hover{text-decorati
 
 <section class="slide">
   <div class="kicker">Záver · ďalšia fáza</div>
-  <h2>Agentné nástroje vedia zabaliť proces do opakovateľných krokov</h2>
-  <div class="banner" style="margin-top:0"><b>Príklad:</b> Everything Claude Code / ECC · <a href="https://github.com/affaan-m/ECC">github.com/affaan-m/ECC</a>. Cieľom nie je maximálna autonómia, ale vhodná úroveň automatizácie pre tím, riziko a typ úlohy.</div>
-  <table class="capability-table" aria-label="Možnosti pokročilého agentného toolingu">
+  <h2>Čo pokročilejšie agentné nástroje pridávajú k dnešnému workflow</h2>
+  <p class="small" style="font-size:20px;margin:-8px 0 12px"><b>Príklad smeru:</b> Everything Claude Code / ECC · <a href="https://github.com/affaan-m/ECC">github.com/affaan-m/ECC</a></p>
+  <table class="capability-table" aria-label="Čo agentný tooling pridáva k dnešnému workflow">
     <tbody>
-      <tr><td>Agents</td><td>Samostatné roly pre kroky, ktoré dnes riadime promptmi: planner, reviewer, security reviewer alebo build fixer.</td></tr>
-      <tr><td>Skills</td><td>Znovupoužiteľné postupy a pravidlá, ktoré dnes opakovane pripomíname v zadaniach: TDD, API dizajn, review alebo bezpečnosť.</td></tr>
-      <tr><td>Commands</td><td>Skratky ako <b>/plan</b> alebo <b>/code-review</b>, ktoré spúšťajú známy workflow bez opakovaného kopírovania promptov.</td></tr>
-      <tr><td>Hooks</td><td>Automatické kontroly okolo práce s nástrojmi, napríklad pred zápisom súboru, spustením príkazu alebo ukončením úlohy.</td></tr>
-      <tr><td>MCP</td><td>Riadený prístup k externým systémom a nástrojom namiesto ručného kopírovania kontextu z GitHubu, ticketov alebo dokumentácie.</td></tr>
-      <tr><td>Memory</td><td>Nadväzovanie na prácu medzi behmi: handoff, rozhodnutia, opakované vzory a tímové dohody.</td></tr>
-      <tr><td>Permissions</td><td>Hranice pre jednotlivé roly: čo môžu čítať, zapisovať, spúšťať alebo meniť bez schválenia človeka.</td></tr>
+      <tr><td>Agents</td><td>Dnes planning, implementáciu a review spúšťame samostatnými promptmi. Agentné roly z nich robia pomenované a opakovateľné zodpovednosti — napríklad planner, reviewer, security reviewer alebo build fixer.</td></tr>
+      <tr><td>Skills</td><td>Dnes postupy ako TDD, API dizajn alebo review opisujeme v pravidlách a promptoch. Skills ich balia do znovupoužiteľných postupov, ktoré agent vie použiť bez opakovania celého zadania.</td></tr>
+      <tr><td>Commands</td><td>Dnes developer vyberie správny prompt a spustí konkrétny krok. Commands pridávajú krátke vstupné body ako <b>/plan</b> alebo <b>/code-review</b> pre známy workflow.</td></tr>
+      <tr><td>Hooks</td><td>Dnes kontroly pred alebo po práci závisia od promptu, CI alebo človeka. Hooks ich vedia automaticky spustiť pri udalosti, napríklad pred zápisom súboru alebo po spustení testov.</td></tr>
+      <tr><td>MCP</td><td>Dnes kontext často kopírujeme ručne alebo pracujeme iba s obsahom repozitára. MCP umožňuje riadený prístup k externým systémom a nástrojom.</td></tr>
+      <tr><td>Memory</td><td>Dnes kontinuitu drží aktuálny chat, repozitár a explicitný handoff. Memory môže uchovať dôležitý kontext medzi behmi, handoffmi a nadväzujúcou prácou.</td></tr>
+      <tr><td>Permissions</td><td>Dnes hranice určuje človek a všeobecné nastavenie nástroja. Permissions umožňujú explicitne obmedziť, čo konkrétna rola môže čítať, meniť alebo spúšťať.</td></tr>
     </tbody>
   </table>
+  <div class="banner" style="margin-top:12px"><b>Dôležité:</b> Cieľom nie je maximálna autonómia, ale vhodná úroveň automatizácie pre daný tím, riziko a cenu.</div>
   <aside class="note">Takéto nástroje znižujú opakované promptovanie a podporujú viac automatizácie, ale prinášajú aj viac pohyblivých častí: konfiguráciu, permissions, memory policy, bezpečnostné review a kontrolu nákladov. Preto sú dobrá ďalšia fáza, nie štartovací bod.</aside>
   <div class="footer"><span>Pokročilejší agentný tooling</span></div>
 </section>
