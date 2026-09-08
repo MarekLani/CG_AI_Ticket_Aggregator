@@ -3,20 +3,41 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Aplikačný stack a postup dodávky</title>
+<title>Architektúra riešenia a postup implementácie</title>
 <style>
 :root{
   --bg:#0b1020; --bg2:#111a33; --card:#16213d; --card2:#0f172a; --text:#eef4ff; --muted:#b9c7dd;
   --accent:#4fd1c5; --accent2:#ffb86b; --danger:#ff7a90; --ok:#8bd17c; --line:#30405f;
 }
-*{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at 15% 10%,#18345e 0,#0b1020 36%,#070b16 100%);color:var(--text);font-family:Segoe UI,Inter,Arial,sans-serif;overflow:hidden}
-.deck{height:100vh;width:100vw;position:relative}.slide{display:none;height:100vh;width:100vw;padding:58px 76px 70px;position:relative;overflow:hidden}.slide.active{display:block}.slide::before{content:"";position:absolute;inset:-80px -120px auto auto;width:460px;height:460px;border-radius:50%;background:rgba(79,209,197,.10);filter:blur(2px)}
-.kicker{font-size:20px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:18px}.title .kicker{font-size:22px}h1{font-size:68px;line-height:1.02;margin:0 0 26px;font-weight:800;max-width:1050px}h2{font-size:48px;line-height:1.08;margin:0 0 28px;font-weight:780;max-width:1120px}h3{font-size:30px;margin:0 0 14px}p{font-size:25px;line-height:1.42;color:var(--muted);max-width:1080px}.lead{font-size:30px;color:#dce8ff;max-width:1040px}.small{font-size:18px;color:#9fb0ca}.muted{color:var(--muted)}strong,b{color:#fff}.accent{color:var(--accent)}.orange{color:var(--accent2)}
-.grid{display:grid;gap:22px}.grid.two{grid-template-columns:1fr 1fr}.grid.three{grid-template-columns:repeat(3,1fr)}.grid.four{grid-template-columns:repeat(4,1fr)}.card{background:linear-gradient(160deg,rgba(22,33,61,.96),rgba(11,16,32,.92));border:1px solid rgba(255,255,255,.09);border-radius:24px;padding:26px 28px;box-shadow:0 12px 30px rgba(0,0,0,.2)}.card h3{color:#fff}.card p,.card li{font-size:21px}.card.highlight{border-color:rgba(79,209,197,.45);box-shadow:0 0 0 1px rgba(79,209,197,.14),0 16px 36px rgba(0,0,0,.25)}.card.warn{border-color:rgba(255,184,107,.45)}
-ul{margin:0;padding-left:25px}li{font-size:25px;line-height:1.36;margin:10px 0;color:var(--muted)}li::marker{color:var(--accent)}
-.flow{display:flex;align-items:stretch;gap:15px;margin-top:18px}.node{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:20px 22px;min-width:150px;flex:1;text-align:center;align-content:center;font-size:22px;color:#eaf2ff}.arrow{align-self:center;color:var(--accent);font-size:34px;font-weight:800}.stack{display:flex;flex-direction:column;gap:14px}.pill{display:inline-block;border:1px solid rgba(79,209,197,.35);background:rgba(79,209,197,.1);border-radius:999px;padding:8px 15px;margin:5px 6px 5px 0;font-size:18px;color:#dffdfa}.tag{display:inline-flex;align-items:center;gap:8px;border-radius:999px;background:rgba(255,255,255,.09);padding:9px 14px;font-size:18px;color:#d7e5fb;margin:4px}.code{font-family:Consolas,Monaco,monospace;background:#050814;border:1px solid #273550;border-radius:18px;padding:22px;color:#d5e7ff;white-space:pre-wrap;font-size:20px;line-height:1.35}.diagram{border:1px solid rgba(255,255,255,.1);border-radius:28px;padding:24px;background:rgba(255,255,255,.035)}
-.compare{width:100%;border-collapse:separate;border-spacing:0 12px;font-size:21px}.compare th{text-align:left;color:#fff;padding:8px 14px}.compare td{background:rgba(255,255,255,.055);border-top:1px solid rgba(255,255,255,.09);border-bottom:1px solid rgba(255,255,255,.09);padding:14px;color:var(--muted)}.compare td:first-child{border-left:1px solid rgba(255,255,255,.09);border-radius:14px 0 0 14px;color:#fff;font-weight:650}.compare td:last-child{border-right:1px solid rgba(255,255,255,.09);border-radius:0 14px 14px 0}.check{color:var(--ok);font-weight:800}.x{color:var(--danger);font-weight:800}.quote{font-size:36px;line-height:1.25;color:#fff;max-width:1000px}.quote:before{content:'“';color:var(--accent);font-size:72px;vertical-align:-20px;margin-right:4px}.quote:after{content:'”';color:var(--accent);font-size:72px;vertical-align:-20px;margin-left:4px}
-.telemetry{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:8px}.track{display:grid;grid-template-columns:1fr 58px 1fr;align-items:center;gap:16px}.sink{margin-top:24px;text-align:center}.sink .node{display:inline-block;min-width:620px}.note{margin-top:24px;font-size:22px;color:#b9c7dd;max-width:1120px}.footer{position:absolute;left:66px;right:76px;bottom:20px;display:flex;align-items:center;justify-content:space-between;color:#788aa8;font-size:15px}.progress{position:absolute;left:0;bottom:0;height:5px;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0}.controls{position:fixed;right:22px;bottom:18px;display:flex;gap:8px;z-index:10}.controls button{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.15);color:#fff;border-radius:12px;padding:8px 12px;cursor:pointer}.slideNo{position:fixed;left:22px;bottom:20px;color:#7890ad;font-size:14px;z-index:10}.sources li{font-size:18px}.titleMark{position:absolute;right:76px;top:60px;color:rgba(255,255,255,.16);font-size:112px;font-weight:900;letter-spacing:-.08em}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at 15% 10%,#18345e 0,#0b1020 36%,#070b16 100%);color:var(--text);font-family:Segoe UI,Inter,Arial,sans-serif;overflow:hidden}
+.deck{height:100vh;width:100vw;position:relative}
+.slide{display:none;height:100vh;width:100vw;padding:58px 76px 70px;position:relative;overflow:hidden}
+.slide.active{display:block}
+.slide::before{content:"";position:absolute;inset:-80px -120px auto auto;width:460px;height:460px;border-radius:50%;background:rgba(79,209,197,.10)}
+.kicker{font-size:20px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:18px}
+.title .kicker{font-size:22px}
+h1{font-size:66px;line-height:1.03;margin:0 0 26px;font-weight:800;max-width:1080px}
+h2{font-size:46px;line-height:1.09;margin:0 0 26px;font-weight:780;max-width:1120px}
+h3{font-size:28px;line-height:1.12;margin:0 0 12px}
+p{font-size:24px;line-height:1.4;color:var(--muted);max-width:1100px}
+.lead{font-size:30px;color:#dce8ff;max-width:1080px}
+.small{font-size:18px;color:#9fb0ca}
+strong,b{color:#fff}
+.grid{display:grid;gap:22px}.grid.two{grid-template-columns:repeat(2,1fr)}.grid.three{grid-template-columns:repeat(3,1fr)}.grid.four{grid-template-columns:repeat(4,1fr)}
+.card{background:linear-gradient(160deg,rgba(22,33,61,.96),rgba(11,16,32,.92));border:1px solid rgba(255,255,255,.09);border-radius:24px;padding:24px 27px;box-shadow:0 12px 30px rgba(0,0,0,.2);display:flex;flex-direction:column;justify-content:center;min-height:150px}
+.card h3{color:#fff}.card p,.card li{font-size:20px}.card.warn{border-color:rgba(255,184,107,.45)}
+ul{margin:0;padding-left:25px}li{font-size:23px;line-height:1.34;margin:9px 0;color:var(--muted)}li::marker{color:var(--accent)}
+.flow{display:flex;align-items:stretch;gap:14px;margin-top:18px}.node{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:18px 18px;min-width:140px;flex:1;text-align:center;font-size:21px;color:#eaf2ff;display:flex;align-items:center;justify-content:center;min-height:96px}.node.stacknode{flex-direction:column;gap:5px}.arrow{align-self:center;color:var(--accent);font-size:32px;font-weight:800}.plus{align-self:center;color:var(--accent2);font-size:30px;font-weight:800}
+.pill{display:inline-block;border:1px solid rgba(79,209,197,.35);background:rgba(79,209,197,.1);border-radius:999px;padding:8px 15px;margin:5px 6px 5px 0;font-size:18px;color:#dffdfa}
+.note{margin-top:22px;font-size:21px;color:#b9c7dd;max-width:1120px}
+.footer{position:absolute;left:66px;right:76px;bottom:20px;display:flex;align-items:center;justify-content:space-between;color:#788aa8;font-size:15px}
+.progress{position:absolute;left:0;bottom:0;height:5px;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0}.controls{position:fixed;right:22px;bottom:18px;display:flex;gap:8px;z-index:10}.controls button{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.15);color:#fff;border-radius:12px;padding:8px 12px;cursor:pointer}.slideNo{position:fixed;left:22px;bottom:20px;color:#7890ad;font-size:14px;z-index:10}.titleMark{position:absolute;right:76px;top:60px;color:rgba(255,255,255,.16);font-size:112px;font-weight:900;letter-spacing:-.08em}
+.arch{display:grid;grid-template-columns:1.05fr 46px 1fr 46px 1fr 46px 1fr;gap:12px;align-items:stretch;margin-top:16px}.archcol{display:flex;flex-direction:column;gap:12px}.arch .arrow{display:flex;align-items:center;justify-content:center}.arch .node{min-height:76px}.cross{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:18px}.cross .node{min-height:70px;border-color:rgba(79,209,197,.28);background:rgba(79,209,197,.065)}
+.techrow{display:grid;grid-template-columns:1fr 1fr;gap:22px}.techrow .card{min-height:210px}.reason{font-size:18px;color:#9fb0ca;margin-top:10px}
+.roadmap{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.roadstep{position:relative;padding-top:44px;min-height:255px}.roadstep .badge{position:absolute;top:16px;left:22px;font-size:14px;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);font-weight:800}.roadstep h3{font-size:25px}.roadstep p{font-size:19px;line-height:1.32}.roadstep ul{padding-left:20px}.roadstep li{font-size:18px;margin:6px 0}
+.process{display:grid;grid-template-columns:1fr 48px 1fr 48px 1fr 48px 1fr 48px 1fr;gap:10px;align-items:stretch;margin-top:22px}.process .node{min-width:0;font-size:19px;min-height:120px}
+.banner{margin-top:24px;border:1px solid rgba(79,209,197,.34);background:rgba(79,209,197,.08);border-radius:20px;padding:18px 22px;font-size:21px;color:#dffdfa;max-width:1120px}
 @media print{body{overflow:visible;background:#0b1020}.slide{display:block;page-break-after:always;height:100vh}.controls,.slideNo,.progress{display:none}}
 </style>
 </head>
@@ -24,227 +45,197 @@ ul{margin:0;padding-left:25px}li{font-size:25px;line-height:1.36;margin:10px 0;c
 <main class="deck">
 <section class="slide title">
   <div class="titleMark">04</div>
-  <div class="kicker">Application stack</div>
-  <h1>Aplikačný stack a postup dodávky</h1>
-  <p class="lead">Ako sa v jednom projekte spája React, Azure Functions, Entra ID, observability, testovanie, PostgreSQL a AI-assisted workflow.</p>
-  <div class="footer"><span>Application stack</span></div>
+  <div class="kicker">Architektúra a implementácia</div>
+  <h1>Architektúra riešenia a postup implementácie</h1>
+  <p class="lead">Ako je riešenie Unified Work Items navrhnuté, aké technológie používame a v akom poradí ho budeme implementovať.</p>
+  <div class="footer"><span>Unified Work Items</span></div>
 </section>
 
 <section class="slide">
-  <div class="kicker">Produktový scenár</div>
-  <h2>Jednotný pohľad na požiadavky z viacerých zdrojov</h2>
+  <div class="kicker">Cieľ riešenia</div>
+  <h2>Jeden pracovný pohľad namiesto troch samostatných systémov</h2>
   <div class="flow">
-    <div class="node">Helpdesk</div>
-    <div class="node">Planner</div>
-    <div class="node">GitHub Issues</div>
+    <div class="node stacknode"><b>Helpdesk</b><span class="small">požiadavky a incidenty</span></div>
+    <div class="node stacknode"><b>Planner</b><span class="small">tímové úlohy</span></div>
+    <div class="node stacknode"><b>GitHub Issues</b><span class="small">vývojová práca</span></div>
     <div class="arrow">→</div>
-    <div class="node">source connectors</div>
-    <div class="arrow">→</div>
-    <div class="node">WorkItem model</div>
-    <div class="arrow">→</div>
-    <div class="node">React UI</div>
+    <div class="node stacknode"><b>Unified Work Items</b><span class="small">jednotný pohľad iba na čítanie</span></div>
   </div>
-  <p>Zdrojové systémy zostávajú systémami záznamu. Aplikácia najprv poskytuje zjednotený pohľad, nie nový master systém pre požiadavky.</p>
-  <div class="footer"><span>Application stack</span></div>
+  <ul style="margin-top:26px">
+    <li>Zdrojové systémy zostávajú primárnym miestom správy údajov.</li>
+    <li>Aplikácia údaje načíta, zjednotí a sprístupní na vyhľadávanie a filtrovanie.</li>
+    <li>Prvá verzia nemení dáta v Helpdesku, Planneri ani GitHube.</li>
+  </ul>
+  <div class="footer"><span>Čo staviame</span></div>
 </section>
 
 <section class="slide">
-  <div class="kicker">Prvá vertikála</div>
-  <h2>Začať jednoducho: read-only Helpdesk flow</h2>
-  <div class="flow">
-    <div class="node">fake Helpdesk connector</div>
+  <div class="kicker">Logická architektúra</div>
+  <h2>Detaily jednotlivých zdrojov končia na úrovni konektorov</h2>
+  <div class="arch">
+    <div class="archcol">
+      <div class="node">Helpdesk</div>
+      <div class="node">Planner</div>
+      <div class="node">GitHub Issues</div>
+    </div>
     <div class="arrow">→</div>
-    <div class="node">jednotný WorkItem</div>
+    <div class="node stacknode"><b>Konektory zdrojov</b><span class="small">načítanie a mapovanie</span></div>
     <div class="arrow">→</div>
-    <div class="node">GET /api/work-items</div>
+    <div class="node stacknode"><b>Aplikačná vrstva</b><span class="small">model WorkItem + aplikačná logika</span></div>
     <div class="arrow">→</div>
-    <div class="node">MUI Data Grid</div>
+    <div class="archcol">
+      <div class="node">HTTP API</div>
+      <div class="node">React UI</div>
+    </div>
   </div>
-  <p>Prvý cieľ nie je kompletná integrácia, ale celý funkčný rez od zdroja cez API až po používateľský pohľad.</p>
-  <div class="footer"><span>Application stack</span></div>
+  <div class="cross">
+    <div class="node">Microsoft Entra ID</div>
+    <div class="node">Testovanie + observabilita</div>
+    <div class="node">GitHub Actions + Azure</div>
+  </div>
+  <p class="note">Nový zdroj sa pripojí cez konektor a namapuje na rovnaký model. Frontend preto nemusí poznať Graph, Oracle ani GitHub API.</p>
+  <div class="footer"><span>Architektúra</span></div>
 </section>
 
 <section class="slide">
-  <div class="kicker">Architektúra</div>
-  <h2>Jasné hranice sú dôležitejšie ako veľa vrstiev</h2>
-  <div class="grid three">
-    <div class="card highlight"><h3>Domain/Application</h3><p>Zdrojovo neutrálne modely, pravidlá a use-cases.</p></div>
-    <div class="card"><h3>Integrations</h3><p>Mapovanie Helpdesk, Planner a GitHub štruktúr na aplikačný model.</p></div>
-    <div class="card"><h3>API/UI</h3><p>HTTP kontrakt a používateľské zobrazenie bez znalosti detailov zdrojových systémov.</p></div>
+  <div class="kicker">Hranice riešenia</div>
+  <h2>Zodpovednosti jednotlivých vrstiev</h2>
+  <div class="grid four">
+    <div class="card"><h3>Konektory</h3><p>Komunikujú s konkrétnym zdrojom a mapujú jeho údaje.</p></div>
+    <div class="card"><h3>Aplikačná vrstva</h3><p>Obsahuje jednotný model nezávislý od zdroja a aplikačnú logiku.</p></div>
+    <div class="card"><h3>API</h3><p>Poskytuje stabilné HTTP rozhranie pre frontend.</p></div>
+    <div class="card"><h3>Frontend</h3><p>Zobrazuje pracovné položky, filtre a používateľské stavy.</p></div>
   </div>
-  <p class="small">Cieľom je čitateľná aplikácia, nie formálna architektúra pre vlastnú potrebu.</p>
-  <div class="footer"><span>Application stack</span></div>
+  <div class="banner"><b>Dôležitá hranica:</b> Azure infraštruktúra a jej Terraform definícia sa riešia v samostatnom infra repozitári. Tento repozitár definuje iba požiadavky aplikácie na infraštruktúru.</div>
+  <div class="footer"><span>Modulárny návrh</span></div>
 </section>
 
 <section class="slide">
   <div class="kicker">Backend</div>
-  <h2>.NET 10 + Azure Functions isolated</h2>
+  <h2>.NET 10 a Azure Functions pre backend aplikácie</h2>
   <div class="grid three">
-    <div class="card"><h3>Runtime</h3><p>.NET 10, Azure Functions isolated worker, HTTP API.</p></div>
-    <div class="card"><h3>Repo contract</h3><p>Root <b>UnifiedWorkItems.slnx</b> a <b>global.json</b> pri prvom scaffoldingu backendu.</p></div>
-    <div class="card"><h3>Boundary</h3><p>HTTP a source-specific SDK detaily nepatria do domain/application modelu.</p></div>
+    <div class="card"><h3>.NET 10</h3><p>Silné typovanie, DI, asynchrónne I/O a dobré oddelenie integračných rozhraní.</p></div>
+    <div class="card"><h3>Azure Functions (isolated)</h3><p>Dnes obsluhujú HTTP API; neskôr môžu slúžiť aj na časované spracovanie alebo spracovanie na pozadí bez zmeny aplikačného modelu.</p></div>
+    <div class="card"><h3>Tenké triggery</h3><p>Trigger prijme vstup a odovzdá ho aplikačnej logike. Biznis pravidlá zostávajú mimo triggerov.</p></div>
   </div>
-  <div class="footer"><span>Application stack</span></div>
+  <p class="note">Aplikačný model zostáva nezávislý od hostingu v Azure Functions.</p>
+  <div class="footer"><span>Technologická voľba</span></div>
 </section>
 
 <section class="slide">
   <div class="kicker">Frontend</div>
-  <h2>React stack je už štandardizovaný</h2>
-  <div>
-    <span class="pill">React</span><span class="pill">TypeScript strict</span><span class="pill">Vite</span><span class="pill">Material UI</span><span class="pill">MUI X Data Grid Community</span><span class="pill">TanStack Query</span><span class="pill">React Router</span><span class="pill">npm + package-lock</span>
+  <h2>Frontend: React, TypeScript a vybrané knižnice</h2>
+  <div class="techrow">
+    <div class="card"><h3>React + TypeScript + Vite</h3><p>Základ SPA, striktné typovanie a rýchly vývoj aj build.</p><div class="reason">Aplikačné stránky a komponenty bez ďalšej frameworkovej vrstvy.</div></div>
+    <div class="card"><h3>Material UI + Data Grid</h3><p>Hotové UI komponenty a tabuľka vhodná pre zoznam pracovných položiek.</p><div class="reason">Použijeme hotové komponenty namiesto vlastnej knižnice a gridu.</div></div>
+    <div class="card"><h3>TanStack Query</h3><p>Rieši načítanie dát z API, cache, stavy načítavania a chýb aj invalidáciu.</p><div class="reason">Serverový stav nemusíme riešiť vlastným globálnym storom.</div></div>
+    <div class="card"><h3>React Router</h3><p>Navigácia a stav v URL tam, kde má byť možné zdieľať konkrétny pohľad alebo filter.</p><div class="reason">Frontend komunikuje iba s naším HTTP API.</div></div>
   </div>
-  <p>Frontend komunikuje iba s aplikačným HTTP API. Nepája sa priamo na Helpdesk, Planner ani GitHub.</p>
-  <div class="footer"><span>Application stack</span></div>
+  <div class="footer"><span>Technologická voľba</span></div>
 </section>
 
 <section class="slide">
-  <div class="kicker">API boundary</div>
-  <h2>Stabilné API chráni frontend pred detailmi integrácií</h2>
-  <div class="grid two">
-    <div class="card"><h3>Za API</h3><p>Oracle/Helpdesk štruktúry, Graph, GitHub SDK, source-specific stavy a mapovanie.</p></div>
-    <div class="card highlight"><h3>Pred API</h3><p>Jednotný WorkItem model, stabilné filtre a predvídateľné loading, empty, error a populated stavy.</p></div>
+  <div class="kicker">Platformové rozhodnutia</div>
+  <h2>Autentifikácia, observabilita, testovanie a databáza</h2>
+  <div class="grid four">
+    <div class="card"><h3>Entra ID</h3><p>Prihlásenie používateľa, tokeny pre API a spravovaná identita pre služby v Azure.</p></div>
+    <div class="card"><h3>Application Insights</h3><p>Telemetria frontendu a backendu je oddelená, ale dá sa navzájom korelovať.</p></div>
+    <div class="card"><h3>Automatické testy</h3><p>xUnit pre backend, Vitest/RTL pre frontend a Playwright pre vybrané E2E scenáre.</p></div>
+    <div class="card"><h3>PostgreSQL neskôr</h3><p>Databázu pridáme až vtedy, keď vznikne konkrétna potreba cachovania, synchronizácie, histórie alebo stavu spravovaného aplikáciou.</p></div>
   </div>
-  <div class="footer"><span>Application stack</span></div>
+  <div class="footer"><span>Podporné oblasti</span></div>
 </section>
 
 <section class="slide">
-  <div class="kicker">Persistence</div>
-  <h2>Databáza nie je prvý krok</h2>
-  <div class="grid two">
-    <div class="card highlight"><h3>Fáza 1</h3><p>Bez aplikačnej databázy. Zdroj → connector → model → API → UI.</p></div>
-    <div class="card"><h3>Fáza 2</h3><p>PostgreSQL + EF Core + code-first migrácie až keď máme jasný dôvod: synchronizácia, cache, read model, história alebo používateľský stav.</p></div>
-  </div>
-  <div class="footer"><span>Application stack</span></div>
-</section>
-
-<section class="slide">
-  <div class="kicker">Identity</div>
-  <h2>Identitu riešime cez Microsoft Entra ID</h2>
-  <ul>
-    <li>OIDC pre interaktívne prihlásenie používateľa.</li>
-    <li>OAuth 2.0 tokeny pre chránené API.</li>
-    <li>Delegated access pri operáciách v mene používateľa.</li>
-    <li>Application access pre neinteraktívne integrácie a workloady.</li>
-    <li>Managed identities pre Azure service-to-service komunikáciu, kde je to možné.</li>
-  </ul>
-  <div class="footer"><span>Application stack</span></div>
-</section>
-
-<section class="slide">
-  <div class="kicker">Observability</div>
-  <h2>Telemetry spájame, ale zdroje hodnotíme oddelene</h2>
-  <div class="telemetry">
-    <div class="card highlight">
-      <h3>Frontend signály</h3>
-      <div class="track">
-        <div class="node">React v prehliadači<br><span class="small">Application Insights JS SDK</span></div>
-        <div class="arrow">→</div>
-        <div class="node">Frontend<br>Application Insights</div>
-      </div>
-      <p class="small">Užitočné pre UX, chyby v prehliadači a klientsky výkon. Nie je to dôveryhodný prevádzkový zdroj.</p>
-    </div>
-    <div class="card">
-      <h3>Backend telemetry</h3>
-      <div class="track">
-        <div class="node">Azure Functions<br><span class="small">OpenTelemetry</span></div>
-        <div class="arrow">→</div>
-        <div class="node">Backend<br>Application Insights</div>
-      </div>
-      <p class="small">Hlavný zdroj pre prevádzkové metriky, výnimky, requesty a závislosti.</p>
-    </div>
-  </div>
-  <div class="sink"><div class="node">Spoločný Log Analytics workspace</div></div>
-  <p class="note">Korelácia medzi frontend a backend časťou zostáva cez trace context/correlation ID, nie cez miešanie všetkej telemetry do jedného nerozlíšeného zdroja.</p>
-  <div class="footer"><span>Application stack</span></div>
-</section>
-
-<section class="slide">
-  <div class="kicker">Testing</div>
-  <h2>Testujeme správanie na správnej úrovni</h2>
-  <table class="compare">
-    <tr><th>Vrstva</th><th>Nástroj</th><th>Čo overuje</th></tr>
-    <tr><td>Backend</td><td>xUnit v3 + MTP</td><td>application logic, API boundary, connector mapping</td></tr>
-    <tr><td>Persistence</td><td>Testcontainers PostgreSQL</td><td>reálne PostgreSQL / Npgsql správanie</td></tr>
-    <tr><td>Frontend</td><td>Vitest + RTL + MSW</td><td>UI správanie s reálnym API klientom a kontrolovanou HTTP odpoveďou</td></tr>
-    <tr><td>E2E</td><td>Playwright</td><td>malý počet kritických používateľských scenárov</td></tr>
-  </table>
-  <div class="footer"><span>Application stack</span></div>
-</section>
-
-<section class="slide">
-  <div class="kicker">Local development</div>
-  <h2>Reprodukovateľný štart pre školenie aj vývoj</h2>
+  <div class="kicker">Vývoj a nasadenie</div>
+  <h2>Jednotný postup vývoja a nasadenia</h2>
   <div class="flow">
-    <div class="node">VS Code</div>
+    <div class="node stacknode"><b>Dev Container</b><span class="small">rovnaké nástroje a verzie</span></div>
     <div class="arrow">→</div>
-    <div class="node">Compose-backed Dev Container</div>
+    <div class="node stacknode"><b>Feature branch</b><span class="small">samostatná zmena</span></div>
     <div class="arrow">→</div>
-    <div class="node">npm run dev<br>:5173</div>
-    <div class="arrow">+</div>
-    <div class="node">func start<br>:7071</div>
+    <div class="node stacknode"><b>Pull request</b><span class="small">kontrola + CI</span></div>
+    <div class="arrow">→</div>
+    <div class="node stacknode"><b>main</b><span class="small">integračná vetva</span></div>
+    <div class="arrow">→</div>
+    <div class="node stacknode"><b>dev Azure</b><span class="small">nasadenie po merge</span></div>
   </div>
-  <p>Host potrebuje hlavne Docker a VS Code. Projektový toolchain definuje repozitár.</p>
-  <div class="footer"><span>Application stack</span></div>
+  <p class="note">GitHub Actions zabezpečuje build, testy a nasadenie aplikácie. Definícia Azure infraštruktúry v Terraforme zostáva v samostatnom infra repozitári.</p>
+  <div class="footer"><span>Vývoj a nasadenie</span></div>
 </section>
 
 <section class="slide">
-  <div class="kicker">CI/CD</div>
-  <h2>Najprv kvalita a dev deployment, produkcia neskôr</h2>
+  <div class="kicker">Pracovný postup</div>
+  <h2>Každý implementačný celok má jasný cieľ a overiteľný výsledok</h2>
+  <div class="process">
+    <div class="node stacknode"><b>Implementačný celok</b><span class="small">cieľ, rozsah, očakávaný výsledok</span></div>
+    <div class="arrow">→</div>
+    <div class="node stacknode"><b>Plánovanie</b><span class="small">konkrétne súbory a kroky</span></div>
+    <div class="arrow">→</div>
+    <div class="node stacknode"><b>Implementácia</b><span class="small">ucelená funkčná zmena</span></div>
+    <div class="arrow">→</div>
+    <div class="node stacknode"><b>Validácia</b><span class="small">testy, build, kontrola v prehliadači</span></div>
+    <div class="arrow">→</div>
+    <div class="node stacknode"><b>PR</b><span class="small">zmena pripravená na kontrolu</span></div>
+  </div>
+  <div class="banner">ADR a štandardy určujú pravidlá a hranice riešenia. Implementačný celok definuje konkrétny cieľ. Agent nemá dopĺňať vlastné biznis pravidlá ani meniť význam dát zo zdrojových systémov.</div>
+  <div class="footer"><span>Implementácia s AI agentom</span></div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Roadmapa · prvé implementačné celky</div>
+  <h2>Najskôr pripravíme základ aplikácie a prvý end-to-end tok</h2>
+  <div class="roadmap">
+    <div class="card roadstep"><div class="badge">Celok A</div><h3>Základ aplikácie</h3><ul><li>základ backendu v .NET 10 a Azure Functions</li><li>základ frontendu v Reacte a Vite</li><li>základné prepojenie klienta s API</li><li>CI zostaví a otestuje oba projekty</li></ul></div>
+    <div class="card roadstep"><div class="badge">Celok B</div><h3>Prvý end-to-end tok z Helpdesku</h3><ul><li>model WorkItem</li><li>konektor Helpdesku a explicitné mapovanie</li><li>GET endpoint</li><li>tabuľka v Reacte s reálnymi dátami</li></ul></div>
+    <div class="card roadstep"><div class="badge">Celok C</div><h3>Použiteľný pracovný zoznam</h3><ul><li>vyhľadávanie a filtre</li><li>stavy načítavania, prázdneho výsledku a chyby</li><li>odkaz do zdrojového systému</li><li>základná kontrola UX a prístupnosti</li></ul></div>
+  </div>
+  <div class="footer"><span>Implementačný postup</span></div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Roadmapa · bezpečnosť a prevádzka</div>
+  <h2>Po prvom funkčnom toku doplníme bezpečnosť, observabilitu a nasadenie</h2>
+  <div class="roadmap">
+    <div class="card roadstep"><div class="badge">Celok D</div><h3>Autentifikácia cez Entra ID</h3><ul><li>prihlásenie SPA</li><li>chránené API</li><li>získanie a odovzdanie tokenu</li><li>autorizácia iba podľa schváleného modelu</li></ul></div>
+    <div class="card roadstep"><div class="badge">Celok E</div><h3>Observabilita</h3><ul><li>OpenTelemetry v backende</li><li>Application Insights vo frontende</li><li>korelácia požiadaviek medzi frontendom a backendom</li><li>bez citlivých údajov v logoch</li></ul></div>
+    <div class="card roadstep"><div class="badge">Celok F</div><h3>Nasadenie do dev prostredia</h3><ul><li>build a balenie aplikácie</li><li>automatické nasadenie cez GitHub Actions po zlúčení do main</li><li>nasadenie do pripraveného dev prostredia</li><li>smoke test po nasadení</li></ul></div>
+  </div>
+  <div class="footer"><span>Implementačný postup</span></div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Roadmapa · ďalšie zdroje</div>
+  <h2>Planner a GitHub pripojíme cez rovnaký model a rozhrania</h2>
   <div class="grid two">
-    <div class="card highlight"><h3>Teraz</h3><p>CI beží na PR a po merge do main. CD beží iba pri push do main a cieli na dev prostredie.</p></div>
-    <div class="card"><h3>Neskôr</h3><p>Produkciu pridáme až s jasným release mechanizmom, typicky cez tag/release a samostatné schválenie.</p></div>
+    <div class="card"><h3>Celok G · Konektor pre Planner</h3><p>Načítať údaje z Plannera cez Microsoft Graph, namapovať ich na model WorkItem a pridať ich do existujúceho zoznamu.</p></div>
+    <div class="card"><h3>Celok H · Konektor pre GitHub Issues</h3><p>Načítať GitHub Issues, namapovať ich na model WorkItem a použiť existujúce API a UI bez logiky špecifickej pre GitHub vo frontende.</p></div>
   </div>
-  <p class="small">Main má byť chránený integračný branch. Práca prebieha cez krátko žijúce feature branche a reviewované PR.</p>
-  <div class="footer"><span>Application stack</span></div>
+  <div class="banner">Pridanie nového zdroja nemá vyžadovať zmenu základného UI ani aplikačného modelu.</div>
+  <div class="footer"><span>Rozširovanie riešenia</span></div>
 </section>
 
 <section class="slide">
-  <div class="kicker">Azure hosting</div>
-  <h2>Hosting vyberáme podľa workloadu, nie podľa módy</h2>
+  <div class="kicker">Databáza podľa potreby</div>
+  <h2>Databázu pridáme iba vtedy, keď rieši konkrétnu potrebu</h2>
   <div class="grid two">
-    <div class="card highlight"><h3>Unified Work Items</h3><p>Backend cieli na Azure Functions Flex. Pre túto malú internú API aplikáciu je to prirodzenejší model než vlastný runtime container.</p></div>
-    <div class="card"><h3>Iné workloads</h3><p>Azure Container Apps dávajú zmysel tam, kde je container image skutočný deployment artefakt a potrebujeme jeho životný cyklus prevádzkovať.</p></div>
+    <div class="card"><h3>Prvá verzia</h3><p>Helpdesk → konektor → WorkItem → API → React. Bez aplikačnej databázy.</p></div>
+    <div class="card"><h3>Neskôr podľa potreby</h3><p>PostgreSQL + EF Core až pri cachovaní, pravidelnej synchronizácii, histórii, agregáciách alebo stave spravovanom aplikáciou.</p></div>
   </div>
-  <div class="footer"><span>Application stack</span></div>
+  <p class="note">Aj po pridaní databázy zostávajú Helpdesk, Planner a GitHub primárnym miestom správy údajov. Databáza aplikácie nenahrádza zdrojové systémy.</p>
+  <div class="footer"><span>Databáza podľa potreby</span></div>
 </section>
 
 <section class="slide">
-  <div class="kicker">Infrastructure boundary</div>
-  <h2>Aplikačný repozitár definuje potreby, infra repozitár ich implementuje</h2>
-  <div class="flow">
-    <div class="node">ADR / standards</div>
-    <div class="arrow">→</div>
-    <div class="node">infrastructure requirements</div>
-    <div class="arrow">→</div>
-    <div class="node">samostatný Terraform repo</div>
-    <div class="arrow">→</div>
-    <div class="node">Azure resources</div>
-  </div>
-  <p>Názvy, SKU, sieťovanie, RBAC a topológiu Azure resources rieši infra repo. Aplikačný repo má zachytiť, čo aplikácia potrebuje a prečo.</p>
-  <div class="footer"><span>Application stack</span></div>
-</section>
-
-<section class="slide">
-  <div class="kicker">AI-assisted workflow</div>
-  <h2>AI má pomáhať s implementáciou, nie rozbíjať rozhodnutia</h2>
-  <ul>
-    <li>Issue zachytáva cieľ, hranice a akceptačné kritériá.</li>
-    <li>Implementation plan rozkladá prácu na kontrolovateľné kroky.</li>
-    <li>ADR a standards sú kanonický zdroj rozhodnutí.</li>
-    <li>Agent má rozhodnutia zachytávať stručne a odkazovať na existujúce dokumenty, nie duplikovať text.</li>
-  </ul>
-  <div class="footer"><span>Application stack</span></div>
-</section>
-
-<section class="slide">
-  <div class="kicker">Čo si odniesť</div>
-  <h2>Stack je dôležitý, ale ešte dôležitejší je spôsob práce</h2>
+  <div class="kicker">Definition of Done</div>
+  <h2>Čo musí byť splnené na konci každého implementačného celku</h2>
   <div class="grid three">
-    <div class="card"><h3>Malý rez</h3><p>Začať jedným funkčným scenárom a overiť celé prepojenie.</p></div>
-    <div class="card"><h3>Jasné hranice</h3><p>Oddeliť zdroje dát, aplikačný model, API, UI a infraštruktúru.</p></div>
-    <div class="card highlight"><h3>Priebežná kvalita</h3><p>Testy, observability a CI/CD zavádzať postupne, ale vedome.</p></div>
+    <div class="card"><h3>Funguje</h3><p>Akceptačné kritériá sú splnené a výsledok sa dá overiť.</p></div>
+    <div class="card"><h3>Je otestovaný</h3><p>Buildy a automatické testy prešli; podľa potreby aj kontrola v prehliadači alebo smoke test.</p></div>
+    <div class="card"><h3>Je pripravený na kontrolu</h3><p>PR má jasný rozsah, neobsahuje neodsúhlasené architektonické zmeny a dokumentuje iba nové rozhodnutia.</p></div>
   </div>
-  <div class="footer"><span>Application stack</span></div>
+  <div class="banner">Implementačné celky sa pri realizácii rozdelia na konkrétne zadania, ktoré môže agent samostatne spracovať.</div>
+  <div class="footer"><span>Zhrnutie</span></div>
 </section>
 
 </main>
