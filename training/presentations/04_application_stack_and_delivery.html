@@ -47,7 +47,7 @@ ul{margin:0;padding-left:25px}li{font-size:23px;line-height:1.34;margin:9px 0;co
   <div class="titleMark">04</div>
   <div class="kicker">Architektúra a implementácia</div>
   <h1>Architektúra riešenia a postup implementácie</h1>
-  <p class="lead">Ako je Unified Work Items navrhnutý, prečo používame vybrané technológie a v akom poradí budeme riešenie implementovať.</p>
+  <p class="lead">Ako je riešenie Unified Work Items navrhnuté, aké technológie používame a v akom poradí ho budeme implementovať.</p>
   <div class="footer"><span>Unified Work Items</span></div>
 </section>
 
@@ -59,10 +59,10 @@ ul{margin:0;padding-left:25px}li{font-size:23px;line-height:1.34;margin:9px 0;co
     <div class="node stacknode"><b>Planner</b><span class="small">tímové úlohy</span></div>
     <div class="node stacknode"><b>GitHub Issues</b><span class="small">vývojová práca</span></div>
     <div class="arrow">→</div>
-    <div class="node stacknode"><b>Unified Work Items</b><span class="small">jednotný read-only pohľad</span></div>
+    <div class="node stacknode"><b>Unified Work Items</b><span class="small">jednotný pohľad iba na čítanie</span></div>
   </div>
   <ul style="margin-top:26px">
-    <li>Zdrojové systémy zostávajú systémami záznamu.</li>
+    <li>Zdrojové systémy zostávajú primárnym miestom správy údajov.</li>
     <li>Aplikácia údaje načíta, zjednotí a sprístupní na vyhľadávanie a filtrovanie.</li>
     <li>Prvá verzia nemení dáta v Helpdesku, Planneri ani GitHube.</li>
   </ul>
@@ -71,7 +71,7 @@ ul{margin:0;padding-left:25px}li{font-size:23px;line-height:1.34;margin:9px 0;co
 
 <section class="slide">
   <div class="kicker">Logická architektúra</div>
-  <h2>Source-specific detaily končia na hranici konektora</h2>
+  <h2>Detaily jednotlivých zdrojov končia na úrovni konektorov</h2>
   <div class="arch">
     <div class="archcol">
       <div class="node">Helpdesk</div>
@@ -79,9 +79,9 @@ ul{margin:0;padding-left:25px}li{font-size:23px;line-height:1.34;margin:9px 0;co
       <div class="node">GitHub Issues</div>
     </div>
     <div class="arrow">→</div>
-    <div class="node stacknode"><b>Source connectors</b><span class="small">načítanie a mapovanie</span></div>
+    <div class="node stacknode"><b>Konektory zdrojov</b><span class="small">načítanie a mapovanie</span></div>
     <div class="arrow">→</div>
-    <div class="node stacknode"><b>Application</b><span class="small">WorkItem model + use-cases</span></div>
+    <div class="node stacknode"><b>Aplikačná vrstva</b><span class="small">model WorkItem + aplikačná logika</span></div>
     <div class="arrow">→</div>
     <div class="archcol">
       <div class="node">HTTP API</div>
@@ -90,151 +90,151 @@ ul{margin:0;padding-left:25px}li{font-size:23px;line-height:1.34;margin:9px 0;co
   </div>
   <div class="cross">
     <div class="node">Microsoft Entra ID</div>
-    <div class="node">Testing + observability</div>
+    <div class="node">Testovanie + observabilita</div>
     <div class="node">GitHub Actions + Azure</div>
   </div>
-  <p class="note">Výsledok: nový konektor má zapadnúť do rovnakého modelu bez toho, aby frontend musel poznať Graph, Oracle alebo GitHub API.</p>
+  <p class="note">Nový zdroj sa pripojí cez konektor a namapuje na rovnaký model. Frontend preto nemusí poznať Graph, Oracle ani GitHub API.</p>
   <div class="footer"><span>Architektúra</span></div>
 </section>
 
 <section class="slide">
   <div class="kicker">Hranice riešenia</div>
-  <h2>Každá časť má jednu zrozumiteľnú zodpovednosť</h2>
+  <h2>Zodpovednosti jednotlivých vrstiev</h2>
   <div class="grid four">
-    <div class="card"><h3>Connectors</h3><p>Komunikujú s konkrétnym zdrojom a mapujú jeho dáta.</p></div>
-    <div class="card"><h3>Application</h3><p>Obsahuje zdrojovo neutrálny model a aplikačné use-cases.</p></div>
-    <div class="card"><h3>API</h3><p>Poskytuje stabilný HTTP kontrakt pre klienta.</p></div>
-    <div class="card"><h3>Frontend</h3><p>Zobrazuje údaje, filtre a používateľské stavy.</p></div>
+    <div class="card"><h3>Konektory</h3><p>Komunikujú s konkrétnym zdrojom a mapujú jeho údaje.</p></div>
+    <div class="card"><h3>Aplikačná vrstva</h3><p>Obsahuje jednotný model nezávislý od zdroja a aplikačnú logiku.</p></div>
+    <div class="card"><h3>API</h3><p>Poskytuje stabilné HTTP rozhranie pre frontend.</p></div>
+    <div class="card"><h3>Frontend</h3><p>Zobrazuje pracovné položky, filtre a používateľské stavy.</p></div>
   </div>
-  <div class="banner"><b>Dôležitá hranica:</b> Azure/Terraform infraštruktúra sa implementuje v samostatnom infra repozitári. Tento repozitár definuje iba potreby aplikácie.</div>
+  <div class="banner"><b>Dôležitá hranica:</b> Azure infraštruktúra a jej Terraform definícia sa riešia v samostatnom infra repozitári. Tento repozitár definuje iba požiadavky aplikácie na infraštruktúru.</div>
   <div class="footer"><span>Modulárny návrh</span></div>
 </section>
 
 <section class="slide">
   <div class="kicker">Backend</div>
-  <h2>.NET 10 + Azure Functions: jednoduchý backend bez zbytočnej platformovej vrstvy</h2>
+  <h2>.NET 10 a Azure Functions pre backend aplikácie</h2>
   <div class="grid three">
-    <div class="card"><h3>.NET 10</h3><p>Silné typovanie, DI, async I/O a dobrá izolácia integračných hraníc.</p></div>
-    <div class="card"><h3>Functions isolated</h3><p>HTTP API dnes, neskôr aj timer/background spracovanie bez zmeny aplikačného modelu.</p></div>
-    <div class="card"><h3>Tenké triggery</h3><p>Function iba prijme vstup a zavolá aplikačnú logiku. Biznis pravidlá v nej nežijú.</p></div>
+    <div class="card"><h3>.NET 10</h3><p>Silné typovanie, DI, asynchrónne I/O a dobré oddelenie integračných rozhraní.</p></div>
+    <div class="card"><h3>Azure Functions (isolated)</h3><p>Dnes obsluhujú HTTP API; neskôr môžu slúžiť aj na časované spracovanie alebo spracovanie na pozadí bez zmeny aplikačného modelu.</p></div>
+    <div class="card"><h3>Tenké triggery</h3><p>Trigger prijme vstup a odovzdá ho aplikačnej logike. Biznis pravidlá zostávajú mimo triggerov.</p></div>
   </div>
-  <p class="note">Hosting je technický detail okolo aplikácie, nie dôvod viazať doménový model na Azure Functions.</p>
+  <p class="note">Aplikačný model zostáva nezávislý od hostingu v Azure Functions.</p>
   <div class="footer"><span>Technologická voľba</span></div>
 </section>
 
 <section class="slide">
   <div class="kicker">Frontend</div>
-  <h2>React + TypeScript s knižnicami, ktoré majú jasnú úlohu</h2>
+  <h2>Frontend: React, TypeScript a vybrané knižnice</h2>
   <div class="techrow">
-    <div class="card"><h3>React + TypeScript + Vite</h3><p>Základ SPA, strict typovanie a rýchly development/build workflow.</p><div class="reason">Aplikačné stránky a komponenty bez vlastného frameworku navyše.</div></div>
-    <div class="card"><h3>Material UI + Data Grid</h3><p>Hotové UI komponenty a tabuľka vhodná pre dátovo orientovaný pracovný pohľad.</p><div class="reason">Nemá zmysel budovať vlastný component library ani grid.</div></div>
-    <div class="card"><h3>TanStack Query</h3><p>Načítanie serverových dát, cache, loading/error stavy a invalidácia.</p><div class="reason">Server state neriešime cez ad-hoc globálny store.</div></div>
-    <div class="card"><h3>React Router</h3><p>Routing a URL stav tam, kde má byť navigácia alebo filter zdieľateľný odkazom.</p><div class="reason">Frontend komunikuje iba s naším HTTP API.</div></div>
+    <div class="card"><h3>React + TypeScript + Vite</h3><p>Základ SPA, striktné typovanie a rýchly vývoj aj build.</p><div class="reason">Aplikačné stránky a komponenty bez ďalšej frameworkovej vrstvy.</div></div>
+    <div class="card"><h3>Material UI + Data Grid</h3><p>Hotové UI komponenty a tabuľka vhodná pre zoznam pracovných položiek.</p><div class="reason">Použijeme hotové komponenty namiesto vlastnej knižnice a gridu.</div></div>
+    <div class="card"><h3>TanStack Query</h3><p>Rieši načítanie dát z API, cache, stavy načítavania a chýb aj invalidáciu.</p><div class="reason">Serverový stav nemusíme riešiť vlastným globálnym storom.</div></div>
+    <div class="card"><h3>React Router</h3><p>Navigácia a stav v URL tam, kde má byť možné zdieľať konkrétny pohľad alebo filter.</p><div class="reason">Frontend komunikuje iba s naším HTTP API.</div></div>
   </div>
   <div class="footer"><span>Technologická voľba</span></div>
 </section>
 
 <section class="slide">
   <div class="kicker">Platformové rozhodnutia</div>
-  <h2>Platformové technológie</h2>
+  <h2>Autentifikácia, observabilita, testovanie a databáza</h2>
   <div class="grid four">
-    <div class="card"><h3>Entra ID</h3><p>Prihlásenie používateľa, tokeny pre API a managed identity pre Azure workloady.</p></div>
-    <div class="card"><h3>Application Insights</h3><p>Frontend a backend telemetry sú oddelené, ale korelované cez trace context.</p></div>
+    <div class="card"><h3>Entra ID</h3><p>Prihlásenie používateľa, tokeny pre API a spravovaná identita pre služby v Azure.</p></div>
+    <div class="card"><h3>Application Insights</h3><p>Telemetria frontendu a backendu je oddelená, ale dá sa navzájom korelovať.</p></div>
     <div class="card"><h3>Automatické testy</h3><p>xUnit pre backend, Vitest/RTL pre frontend a Playwright pre vybrané E2E scenáre.</p></div>
-    <div class="card"><h3>PostgreSQL neskôr</h3><p>Databázu pridáme až keď vznikne konkrétna potreba cache, synchronizácie, histórie alebo app-owned stavu.</p></div>
+    <div class="card"><h3>PostgreSQL neskôr</h3><p>Databázu pridáme až vtedy, keď vznikne konkrétna potreba cachovania, synchronizácie, histórie alebo stavu spravovaného aplikáciou.</p></div>
   </div>
-  <div class="footer"><span>Cross-cutting concerns</span></div>
+  <div class="footer"><span>Podporné oblasti</span></div>
 </section>
 
 <section class="slide">
   <div class="kicker">Vývoj a nasadenie</div>
-  <h2>Repozitár definuje reprodukovateľný spôsob práce</h2>
+  <h2>Jednotný postup vývoja a nasadenia</h2>
   <div class="flow">
-    <div class="node stacknode"><b>Dev Container</b><span class="small">rovnaký toolchain</span></div>
+    <div class="node stacknode"><b>Dev Container</b><span class="small">rovnaké nástroje a verzie</span></div>
     <div class="arrow">→</div>
-    <div class="node stacknode"><b>Feature branch</b><span class="small">malá zmena</span></div>
+    <div class="node stacknode"><b>Feature branch</b><span class="small">samostatná zmena</span></div>
     <div class="arrow">→</div>
-    <div class="node stacknode"><b>Pull request</b><span class="small">review + CI</span></div>
+    <div class="node stacknode"><b>Pull request</b><span class="small">kontrola + CI</span></div>
     <div class="arrow">→</div>
-    <div class="node stacknode"><b>main</b><span class="small">integračný branch</span></div>
+    <div class="node stacknode"><b>main</b><span class="small">integračná vetva</span></div>
     <div class="arrow">→</div>
-    <div class="node stacknode"><b>dev Azure</b><span class="small">CD po merge</span></div>
+    <div class="node stacknode"><b>dev Azure</b><span class="small">nasadenie po merge</span></div>
   </div>
-  <p class="note">GitHub Actions rieši build, testy a aplikačný deployment. Azure resources a Terraform zostávajú zodpovednosťou infra repozitára.</p>
-  <div class="footer"><span>Delivery model</span></div>
+  <p class="note">GitHub Actions zabezpečuje build, testy a nasadenie aplikácie. Definícia Azure infraštruktúry v Terraforme zostáva v samostatnom infra repozitári.</p>
+  <div class="footer"><span>Vývoj a nasadenie</span></div>
 </section>
 
 <section class="slide">
-  <div class="kicker">Implementačný princíp</div>
-  <h2>Každý implementačný celok má mať jasný cieľ a overiteľný výsledok</h2>
+  <div class="kicker">Pracovný postup</div>
+  <h2>Každý implementačný celok má jasný cieľ a overiteľný výsledok</h2>
   <div class="process">
     <div class="node stacknode"><b>Implementačný celok</b><span class="small">cieľ, rozsah, očakávaný výsledok</span></div>
     <div class="arrow">→</div>
     <div class="node stacknode"><b>Plánovanie</b><span class="small">konkrétne súbory a kroky</span></div>
     <div class="arrow">→</div>
-    <div class="node stacknode"><b>Implementácia</b><span class="small">malý funkčný increment</span></div>
+    <div class="node stacknode"><b>Implementácia</b><span class="small">ucelená funkčná zmena</span></div>
     <div class="arrow">→</div>
-    <div class="node stacknode"><b>Validácia</b><span class="small">testy, build, browser</span></div>
+    <div class="node stacknode"><b>Validácia</b><span class="small">testy, build, kontrola v prehliadači</span></div>
     <div class="arrow">→</div>
-    <div class="node stacknode"><b>PR</b><span class="small">reviewovateľná zmena</span></div>
+    <div class="node stacknode"><b>PR</b><span class="small">zmena pripravená na kontrolu</span></div>
   </div>
-  <div class="banner">ADR a standards určujú mantinely. Implementačný celok určuje konkrétny cieľ. Agent nemá medzi nimi „vymýšľať“ nové business pravidlá alebo source-system semantics.</div>
-  <div class="footer"><span>AI-assisted implementation</span></div>
+  <div class="banner">ADR a štandardy určujú pravidlá a hranice riešenia. Implementačný celok definuje konkrétny cieľ. Agent nemá dopĺňať vlastné biznis pravidlá ani meniť význam dát zo zdrojových systémov.</div>
+  <div class="footer"><span>Implementácia s AI agentom</span></div>
 </section>
 
 <section class="slide">
   <div class="kicker">Roadmapa · prvé implementačné celky</div>
-  <h2>Najskôr vytvoríme kostru a prvý reálny end-to-end scenár</h2>
+  <h2>Najskôr pripravíme základ aplikácie a prvý end-to-end tok</h2>
   <div class="roadmap">
-    <div class="card roadstep"><div class="badge">Celok A</div><h3>Bootstrap aplikácie</h3><ul><li>.NET/Functions backend scaffold</li><li>React/Vite frontend scaffold</li><li>základné prepojenie klient → API</li><li>CI už validuje reálne projekty</li></ul></div>
-    <div class="card roadstep"><div class="badge">Celok B</div><h3>Prvý Helpdesk vertical slice</h3><ul><li>WorkItem model</li><li>Helpdesk connector + explicit mapping</li><li>GET endpoint</li><li>React tabuľka s reálnymi dátami</li></ul></div>
-    <div class="card roadstep"><div class="badge">Celok C</div><h3>Použiteľný pracovný zoznam</h3><ul><li>search a filtre</li><li>loading / empty / error stavy</li><li>deep link do zdroja</li><li>základná UX/accessibility validácia</li></ul></div>
+    <div class="card roadstep"><div class="badge">Celok A</div><h3>Základ aplikácie</h3><ul><li>základ backendu v .NET 10 a Azure Functions</li><li>základ frontendu v Reacte a Vite</li><li>základné prepojenie klienta s API</li><li>CI zostaví a otestuje oba projekty</li></ul></div>
+    <div class="card roadstep"><div class="badge">Celok B</div><h3>Prvý end-to-end tok z Helpdesku</h3><ul><li>model WorkItem</li><li>konektor Helpdesku a explicitné mapovanie</li><li>GET endpoint</li><li>tabuľka v Reacte s reálnymi dátami</li></ul></div>
+    <div class="card roadstep"><div class="badge">Celok C</div><h3>Použiteľný pracovný zoznam</h3><ul><li>vyhľadávanie a filtre</li><li>stavy načítavania, prázdneho výsledku a chyby</li><li>odkaz do zdrojového systému</li><li>základná kontrola UX a prístupnosti</li></ul></div>
   </div>
   <div class="footer"><span>Implementačný postup</span></div>
 </section>
 
 <section class="slide">
   <div class="kicker">Roadmapa · bezpečnosť a prevádzka</div>
-  <h2>Keď funguje prvý tok dát, doplníme produkčne potrebné hranice</h2>
+  <h2>Po prvom funkčnom toku doplníme bezpečnosť, observabilitu a nasadenie</h2>
   <div class="roadmap">
-    <div class="card roadstep"><div class="badge">Celok D</div><h3>Entra authentication</h3><ul><li>prihlásenie SPA</li><li>protected API</li><li>token flow</li><li>autorizácia iba podľa schváleného modelu</li></ul></div>
-    <div class="card roadstep"><div class="badge">Celok E</div><h3>Observability</h3><ul><li>backend OpenTelemetry</li><li>browser Application Insights</li><li>trace correlation</li><li>bez citlivých payloadov v logoch</li></ul></div>
-    <div class="card roadstep"><div class="badge">Celok F</div><h3>Dev deployment</h3><ul><li>build/package aplikácie</li><li>GitHub Actions CD po merge</li><li>deployment do pripraveného dev prostredia</li><li>smoke validation</li></ul></div>
+    <div class="card roadstep"><div class="badge">Celok D</div><h3>Autentifikácia cez Entra ID</h3><ul><li>prihlásenie SPA</li><li>chránené API</li><li>získanie a odovzdanie tokenu</li><li>autorizácia iba podľa schváleného modelu</li></ul></div>
+    <div class="card roadstep"><div class="badge">Celok E</div><h3>Observabilita</h3><ul><li>OpenTelemetry v backende</li><li>Application Insights vo frontende</li><li>korelácia požiadaviek medzi frontendom a backendom</li><li>bez citlivých údajov v logoch</li></ul></div>
+    <div class="card roadstep"><div class="badge">Celok F</div><h3>Nasadenie do dev prostredia</h3><ul><li>build a balenie aplikácie</li><li>automatické nasadenie cez GitHub Actions po zlúčení do main</li><li>nasadenie do pripraveného dev prostredia</li><li>smoke test po nasadení</li></ul></div>
   </div>
   <div class="footer"><span>Implementačný postup</span></div>
 </section>
 
 <section class="slide">
   <div class="kicker">Roadmapa · ďalšie zdroje</div>
-  <h2>Planner a GitHub majú byť dôkazom, že architektúra funguje</h2>
+  <h2>Planner a GitHub pripojíme cez rovnaký model a rozhrania</h2>
   <div class="grid two">
-    <div class="card"><h3>Celok G · Planner connector</h3><p>Načítať Planner cez Microsoft Graph, explicitne namapovať do rovnakého WorkItem modelu a pridať zdroj do existujúceho zoznamu.</p></div>
-    <div class="card"><h3>Celok H · GitHub Issues connector</h3><p>Načítať GitHub Issues, namapovať do rovnakého modelu a využiť existujúci API/UI kontrakt bez GitHub-specific logiky vo frontende.</p></div>
+    <div class="card"><h3>Celok G · Konektor pre Planner</h3><p>Načítať údaje z Plannera cez Microsoft Graph, namapovať ich na model WorkItem a pridať ich do existujúceho zoznamu.</p></div>
+    <div class="card"><h3>Celok H · Konektor pre GitHub Issues</h3><p>Načítať GitHub Issues, namapovať ich na model WorkItem a použiť existujúce API a UI bez logiky špecifickej pre GitHub vo frontende.</p></div>
   </div>
-  <div class="banner"><b>Architektonický test:</b> ak pridanie nového zdroja vyžaduje prepis základného UI alebo aplikačného modelu, hranice sme navrhli zle.</div>
+  <div class="banner">Pridanie nového zdroja nemá vyžadovať zmenu základného UI ani aplikačného modelu.</div>
   <div class="footer"><span>Rozširovanie riešenia</span></div>
 </section>
 
 <section class="slide">
-  <div class="kicker">Persistence až keď ju potrebujeme</div>
-  <h2>Databáza je samostatný implementačný celok iba vtedy, keď rieši konkrétny problém</h2>
+  <div class="kicker">Databáza podľa potreby</div>
+  <h2>Databázu pridáme iba vtedy, keď rieši konkrétnu potrebu</h2>
   <div class="grid two">
-    <div class="card"><h3>Prvá verzia</h3><p>Helpdesk → connector → WorkItem → API → React. Bez aplikačnej databázy.</p></div>
-    <div class="card"><h3>Možný ďalší celok</h3><p>PostgreSQL + EF Core až pri cache, scheduled synchronizácii, histórii, agregáciách alebo app-owned používateľskom stave.</p></div>
+    <div class="card"><h3>Prvá verzia</h3><p>Helpdesk → konektor → WorkItem → API → React. Bez aplikačnej databázy.</p></div>
+    <div class="card"><h3>Neskôr podľa potreby</h3><p>PostgreSQL + EF Core až pri cachovaní, pravidelnej synchronizácii, histórii, agregáciách alebo stave spravovanom aplikáciou.</p></div>
   </div>
-  <p class="note">Aj potom zostávajú Helpdesk, Planner a GitHub systémami záznamu. Persistence v aplikácii nie je migrácia zdrojových systémov.</p>
-  <div class="footer"><span>Staged persistence</span></div>
+  <p class="note">Aj po pridaní databázy zostávajú Helpdesk, Planner a GitHub primárnym miestom správy údajov. Databáza aplikácie nenahrádza zdrojové systémy.</p>
+  <div class="footer"><span>Databáza podľa potreby</span></div>
 </section>
 
 <section class="slide">
   <div class="kicker">Definition of Done</div>
-  <h2>Čo musí byť pravda na konci každého implementačného celku</h2>
+  <h2>Čo musí byť splnené na konci každého implementačného celku</h2>
   <div class="grid three">
-    <div class="card"><h3>Funguje</h3><p>Acceptance criteria sú splnené a výsledok sa dá reálne overiť.</p></div>
-    <div class="card"><h3>Je overený</h3><p>Relevantné buildy, automatické testy a podľa potreby browser/smoke validácia prešli.</p></div>
-    <div class="card"><h3>Je reviewovateľný</h3><p>PR je zameraný, neobsahuje neodsúhlasené architektonické odbočky a dokumentuje iba nové rozhodnutia.</p></div>
+    <div class="card"><h3>Funguje</h3><p>Akceptačné kritériá sú splnené a výsledok sa dá overiť.</p></div>
+    <div class="card"><h3>Je otestovaný</h3><p>Buildy a automatické testy prešli; podľa potreby aj kontrola v prehliadači alebo smoke test.</p></div>
+    <div class="card"><h3>Je pripravený na kontrolu</h3><p>PR má jasný rozsah, neobsahuje neodsúhlasené architektonické zmeny a dokumentuje iba nové rozhodnutia.</p></div>
   </div>
-  <div class="banner">Prezentácia ukazuje mapu. Jednotlivé implementačné celky sa pri realizácii rozdelia na konkrétne vykonateľné zadania pre agenta.</div>
+  <div class="banner">Implementačné celky sa pri realizácii rozdelia na konkrétne zadania, ktoré môže agent samostatne spracovať.</div>
   <div class="footer"><span>Zhrnutie</span></div>
 </section>
 
