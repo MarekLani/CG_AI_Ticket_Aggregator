@@ -24,12 +24,12 @@ p{font-size:24px;line-height:1.4;color:var(--muted);max-width:1100px}
 .lead{font-size:30px;color:#dce8ff;max-width:1080px}
 .small{font-size:18px;color:#9fb0ca}
 strong,b{color:#fff}
-.grid{display:grid;gap:22px}.grid.two{grid-template-columns:repeat(2,1fr)}.grid.four{grid-template-columns:repeat(4,1fr)}
+.grid{display:grid;gap:22px}.grid.two{grid-template-columns:repeat(2,1fr)}.grid.three{grid-template-columns:repeat(3,1fr)}.grid.four{grid-template-columns:repeat(4,1fr)}
 .card{background:linear-gradient(160deg,rgba(22,33,61,.96),rgba(11,16,32,.92));border:1px solid rgba(255,255,255,.09);border-radius:24px;padding:25px 27px;box-shadow:0 12px 30px rgba(0,0,0,.2);display:flex;flex-direction:column;justify-content:center}
 .card.highlight{border-color:rgba(79,209,197,.45);box-shadow:0 0 0 1px rgba(79,209,197,.14),0 16px 36px rgba(0,0,0,.25)}
 .card p,.card li{font-size:20px}.card .small{font-size:17px}
 ul{margin:0;padding-left:24px}li{font-size:23px;line-height:1.34;margin:8px 0;color:var(--muted)}li::marker{color:var(--accent)}
-.flow{display:flex;align-items:stretch;gap:14px;margin-top:18px}.node{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:18px 20px;min-width:135px;flex:1;text-align:center;display:flex;align-items:center;justify-content:center;font-size:21px;color:#eaf2ff}.arrow{align-self:center;color:var(--accent);font-size:32px;font-weight:800}
+.flow{display:flex;align-items:stretch;gap:14px;margin-top:18px}.node{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:18px 20px;min-width:130px;flex:1;text-align:center;display:flex;align-items:center;justify-content:center;font-size:21px;color:#eaf2ff}.arrow{align-self:center;color:var(--accent);font-size:32px;font-weight:800}
 .step{position:relative;padding-top:46px;min-height:220px}.step .badge{position:absolute;top:16px;left:24px;font-size:14px;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);font-weight:800}.step h3{font-size:25px}.step p{font-size:19px;line-height:1.34}
 .module{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:15px 18px;border-radius:18px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.10);margin-top:12px}.module strong{font-size:20px}.module span{font-size:18px;color:var(--muted)}
 a{color:var(--accent);text-decoration:none;font-weight:700}a:hover{text-decoration:underline}
@@ -49,13 +49,13 @@ a{color:var(--accent);text-decoration:none;font-weight:700}a:hover{text-decorati
   <div class="titleMark">00</div>
   <div class="kicker">Cloud a AI Development</div>
   <h1>Čomu sa budeme venovať</h1>
-  <p class="lead">Architektúra aplikácie, Git a GitHub, vývoj s podporou AI, kontajnery a Dev Container, Terraform, Azure hosting a GitHub Actions.</p>
+  <p class="lead">Prejdeme architektúru aplikácie a spôsob vývoja, vytvoríme jej jednoduchý základ, pripravíme lokálne a cloudové prostredie a potom sa k aplikácii vrátime a budeme ju ďalej rozvíjať.</p>
   <div class="flow" style="margin-top:38px">
-    <div class="node">Aplikácia</div><div class="arrow">→</div>
-    <div class="node">GitHub a AI vývoj</div><div class="arrow">→</div>
-    <div class="node">Docker a Dev Container</div><div class="arrow">→</div>
-    <div class="node">Terraform</div><div class="arrow">→</div>
-    <div class="node">Azure a GitHub Actions</div>
+    <div class="node">Architektúra a GitHub</div><div class="arrow">→</div>
+    <div class="node">Jednoduchý základ aplikácie</div><div class="arrow">→</div>
+    <div class="node">Docker a Terraform</div><div class="arrow">→</div>
+    <div class="node">Azure a GitHub Actions</div><div class="arrow">→</div>
+    <div class="node">Ďalší vývoj aplikácie</div>
   </div>
   <div class="footer"><span>Unified Work Items</span><span>Program školenia</span></div>
 </section>
@@ -63,14 +63,18 @@ a{color:var(--accent);text-decoration:none;font-weight:700}a:hover{text-decorati
 <section class="slide">
   <div class="kicker">Nadväznosť tém</div>
   <h2>Ako jednotlivé časti spolu súvisia</h2>
-  <div class="grid four">
-    <div class="card step highlight"><div class="badge">01</div><h3>Aplikácia a spôsob vývoja</h3><p>Najprv si ukážeme riešenie, jeho technológie a spôsob práce s GitHubom a AI agentmi.</p></div>
-    <div class="card step"><div class="badge">02</div><h3>Lokálne prostredie</h3><p>Keď poznáme repozitár a aplikáciu, prejdeme Docker, Compose a Dev Container.</p></div>
-    <div class="card step"><div class="badge">03</div><h3>Infraštruktúra</h3><p>Následne si ukážeme, ako Azure infraštruktúru definovať a meniť pomocou Terraformu.</p></div>
-    <div class="card step"><div class="badge">04</div><h3>Hosting a automatizácia</h3><p>Na záver spojíme Azure hosting s buildom, testami a nasadením cez GitHub Actions.</p></div>
+  <div class="flow" style="margin-top:26px">
+    <div class="node">1<br>Riešenie a spôsob vývoja</div><div class="arrow">→</div>
+    <div class="node">2<br>Prvý jednoduchý výsledok</div><div class="arrow">→</div>
+    <div class="node">3<br>Lokálne prostredie a infraštruktúra</div><div class="arrow">→</div>
+    <div class="node">4<br>Hosting a automatizácia</div><div class="arrow">→</div>
+    <div class="node">5<br>Ďalšie funkcie aplikácie</div>
   </div>
-  <div class="exercise"><div class="label">Praktická časť</div><p>Po každej väčšej téme bude nasledovať cvičenie, v ktorom si prebrané princípy vyskúšame na repozitári a pripravenom projekte.</p></div>
-  <div class="footer"><span>Program školenia</span><span>Témy na seba postupne nadväzujú</span></div>
+  <div class="grid two" style="margin-top:28px">
+    <div class="card highlight"><h3>Na začiatku</h3><p>Vytvoríme iba základ aplikácie s ukážkovými dátami. Cieľom je mať čo najskôr funkčný frontend, backend a prvú zmenu spracovanú cez GitHub a AI agentov.</p></div>
+    <div class="card"><h3>Po technických blokoch</h3><p>Keď prejdeme kontajnery, Terraform, Azure hosting a GitHub Actions, vrátime sa k aplikácii a budeme pokračovať ďalšími implementačnými celkami.</p></div>
+  </div>
+  <div class="footer"><span>Program školenia</span><span>Od jednoduchého základu k ďalšiemu vývoju</span></div>
 </section>
 
 <section class="slide">
@@ -97,8 +101,8 @@ a{color:var(--accent);text-decoration:none;font-weight:700}a:hover{text-decorati
       <div class="module"><div><strong>Prezentácia 01</strong><br><span>Git, GitHub a GitHub Actions</span></div><a href="01_git_github_actions.html">Otvoriť →</a></div>
     </div>
   </div>
-  <div class="exercise"><div class="label">Cvičenie</div><p>Na pripravenej úlohe si prejdeme postup <b>Issue → plán → implementácia → validácia → Draft PR → review</b>.</p></div>
-  <div class="footer"><span>1. blok</span><span>Aplikácia a spôsob vývoja</span></div>
+  <div class="exercise"><div class="label">Prvé cvičenie</div><p>Vytvoríme jednoduchý základ aplikácie: backendové API s ukážkovými dátami typu <b>WorkItem</b> a React stránku, ktorá ich zobrazí. Bez reálnych konektorov a bez zložitej funkcionality. Zmenu prejdeme cez <b>Issue → plán → implementácia → validácia → Draft PR → review</b>.</p></div>
+  <div class="footer"><span>1. blok</span><span>Jednoduchý základ aplikácie</span></div>
 </section>
 
 <section class="slide">
@@ -119,7 +123,7 @@ a{color:var(--accent);text-decoration:none;font-weight:700}a:hover{text-decorati
     <div class="card">
       <h3>Dev Container</h3>
       <p>Dev Container nám umožní mať vývojové nástroje, potrebné verzie runtime a ďalšie závislosti popísané priamo v repozitári.</p>
-      <p>Nadväzuje na predchádzajúci blok: pracujeme už s konkrétnym projektom a pripravíme si jednotné prostredie pre ďalšiu prácu.</p>
+      <p>Pracujeme už s aplikáciou z prvého bloku, takže si môžeme hneď overiť rozdiel medzi lokálnym prostredím a prostredím pripraveným v kontajneri.</p>
     </div>
   </div>
   <div class="exercise"><div class="label">Cvičenie</div><p>Spustíme kontajnery, pozrieme si Docker Compose a otvoríme projekt vo VS Code Dev Containeri.</p></div>
@@ -143,7 +147,7 @@ a{color:var(--accent);text-decoration:none;font-weight:700}a:hover{text-decorati
     </div>
     <div class="card">
       <h3>Prepojenie s aplikáciou</h3>
-      <p>V tomto bode už poznáme aplikáciu aj jej lokálne prostredie. Môžeme preto konkrétne pomenovať služby, ktoré potrebuje v Azure, a ukázať, ako sa vytvárajú a menia cez Terraform.</p>
+      <p>V tomto bode už máme jednoduchú aplikáciu aj lokálne prostredie. Môžeme preto konkrétne pomenovať služby, ktoré potrebuje v Azure, a ukázať, ako sa vytvárajú a menia cez Terraform.</p>
       <p class="small">Terraform implementácia infraštruktúry je oddelená od aplikačného repozitára.</p>
     </div>
   </div>
@@ -176,14 +180,23 @@ a{color:var(--accent);text-decoration:none;font-weight:700}a:hover{text-decorati
       <div class="module"><div><strong>Prezentácia 01</strong><br><span>GitHub Actions a CI/CD</span></div><a href="01_git_github_actions.html">Otvoriť →</a></div>
     </div>
   </div>
-  <div class="flow" style="margin-top:24px">
-    <div class="node">Zmena v kóde</div><div class="arrow">→</div>
-    <div class="node">Build a testy</div><div class="arrow">→</div>
-    <div class="node">Infraštruktúra</div><div class="arrow">→</div>
-    <div class="node">Nasadenie</div>
-  </div>
-  <div class="module" style="margin-top:20px"><div><strong>Prezentácie</strong><br><span>Priama navigácia na jednotlivé témy.</span></div><div><a href="01_git_github_actions.html">01</a>&nbsp;&nbsp; <a href="02_terraform_iac.html">02</a>&nbsp;&nbsp; <a href="03_containers_devcontainer_azure_hosting.html">03</a>&nbsp;&nbsp; <a href="04_application_stack_and_delivery.html">04</a></div></div>
+  <div class="exercise"><div class="label">Cvičenie</div><p>Prepojíme build, testy a nasadenie a jednoduchú aplikáciu z úvodu dostaneme do pripraveného dev prostredia. Toto je prvé nasadenie, nie koniec vývoja.</p></div>
   <div class="footer"><span>4. blok</span><span>Azure hosting a automatizácia</span></div>
+</section>
+
+<section class="slide">
+  <div class="titleMark">05</div>
+  <div class="kicker">5. blok</div>
+  <h2>Pokračovanie vo vývoji aplikácie</h2>
+  <p>Po technických témach sa vrátime k Unified Work Items. Jednoduchý základ už máme lokálne aj v Azure a môžeme ho rozširovať o reálnu funkcionalitu podľa implementačných celkov z prezentácie 04.</p>
+  <div class="grid three" style="margin-top:24px">
+    <div class="card highlight"><h3>Celok B · Helpdesk</h3><ul><li>model WorkItem;</li><li>konektor Helpdesku;</li><li>GET endpoint;</li><li>tabuľka s reálnymi dátami.</li></ul></div>
+    <div class="card"><h3>Celok C · Pracovný zoznam</h3><ul><li>vyhľadávanie a filtre;</li><li>načítavanie, prázdny výsledok a chyby;</li><li>odkaz do zdrojového systému;</li><li>základná kontrola použiteľnosti.</li></ul></div>
+    <div class="card"><h3>Ďalej podľa času</h3><ul><li>Entra ID;</li><li>monitorovanie aplikácie;</li><li>Planner konektor;</li><li>GitHub Issues konektor.</li></ul></div>
+  </div>
+  <div class="exercise"><div class="label">Ďalší vývoj</div><p>Vyberieme ďalší ucelený krok a znovu použijeme rovnaký postup: <b>Issue → plán → implementácia → testy → PR → review</b>. Rozdiel je, že teraz už pracujeme s pripraveným vývojovým prostredím, infraštruktúrou a automatizáciou.</p></div>
+  <div class="module" style="margin-top:18px"><div><strong>Prezentácie</strong><br><span>Priama navigácia na jednotlivé témy.</span></div><div><a href="01_git_github_actions.html">01</a>&nbsp;&nbsp; <a href="02_terraform_iac.html">02</a>&nbsp;&nbsp; <a href="03_containers_devcontainer_azure_hosting.html">03</a>&nbsp;&nbsp; <a href="04_application_stack_and_delivery.html">04</a></div></div>
+  <div class="footer"><span>5. blok</span><span>Ďalšie implementačné celky</span></div>
 </section>
 
 </main>
