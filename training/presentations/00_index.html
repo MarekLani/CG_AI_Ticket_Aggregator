@@ -37,8 +37,8 @@ a{color:var(--accent);text-decoration:none;font-weight:700}a:hover{text-decorati
 .footer{position:absolute;left:66px;right:76px;bottom:20px;display:flex;align-items:center;justify-content:space-between;color:#788aa8;font-size:15px}
 .titleMark{position:absolute;right:76px;top:60px;color:rgba(255,255,255,.16);font-size:108px;font-weight:900;letter-spacing:-.08em}
 .progress{position:absolute;left:0;bottom:0;height:5px;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0;z-index:12}
-.controls{position:fixed;right:22px;bottom:18px;display:flex;gap:8px;z-index:20}.controls button{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.15);color:#fff;border-radius:12px;padding:8px 12px;cursor:pointer}.slideNo{position:fixed;left:22px;bottom:20px;color:#7890ad;font-size:14px;z-index:20}
-@media print{body{overflow:visible;background:#0b1020}.slide{display:block;page-break-after:always;height:100vh}.controls,.slideNo,.progress{display:none}}
+.slideNo{position:fixed;left:22px;bottom:20px;color:#7890ad;font-size:14px;z-index:20}
+@media print{body{overflow:visible;background:#0b1020}.slide{display:block;page-break-after:always;height:100vh}.slideNo,.progress{display:none}}
 </style>
 </head>
 <body>
@@ -207,7 +207,6 @@ a{color:var(--accent);text-decoration:none;font-weight:700}a:hover{text-decorati
 
 </main>
 <div class="slideNo" id="slideNo"></div>
-<div class="controls"><button id="prev" aria-label="Predchádzajúci slide">←</button><button id="next" aria-label="Nasledujúci slide">→</button></div>
 <div class="progress" id="progress"></div>
 <script>
 const slides=[...document.querySelectorAll('.slide')];
@@ -220,8 +219,6 @@ function show(index){
 }
 function next(){show(current+1)}
 function prev(){show(current-1)}
-document.getElementById('next').addEventListener('click',next);
-document.getElementById('prev').addEventListener('click',prev);
 document.addEventListener('keydown',event=>{
   if(['ArrowRight','PageDown',' '].includes(event.key)){event.preventDefault();next();}
   if(['ArrowLeft','PageUp'].includes(event.key)){event.preventDefault();prev();}
