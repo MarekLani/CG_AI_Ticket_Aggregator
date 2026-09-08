@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proces vývoja s podporou AI</title>
+<style>
+
+:root{--bg:#0b1020;--bg2:#111a33;--card:#16213d;--text:#eef4ff;--muted:#b9c7dd;--accent:#4fd1c5;--accent2:#ffb86b;--danger:#ff7a90;--ok:#8bd17c;--line:#30405f}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at 15% 10%,#18345e 0,#0b1020 36%,#070b16 100%);color:var(--text);font-family:Segoe UI,Inter,Arial,sans-serif;overflow:hidden}
+.deck{height:100vh;width:100vw;position:relative}
+.slide{display:none;height:100vh;width:100vw;padding:58px 76px 70px;position:relative;overflow:hidden}
+.slide.active{display:block}
+.slide::before{content:"";position:absolute;inset:-80px -120px auto auto;width:460px;height:460px;border-radius:50%;background:rgba(79,209,197,.10)}
+.kicker{font-size:20px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:18px}
+.title .kicker{font-size:22px}
+h1{font-size:66px;line-height:1.03;margin:0 0 26px;font-weight:800;max-width:1120px}
+h2{font-size:48px;line-height:1.08;margin:0 0 28px;font-weight:780;max-width:1120px}
+h3{font-size:29px;line-height:1.15;margin:0 0 12px;color:#fff}
+p{font-size:24px;line-height:1.4;color:var(--muted);max-width:1100px}
+.lead{font-size:30px;color:#dce8ff;max-width:1080px}
+.small{font-size:18px;color:#9fb0ca}
+strong,b{color:#fff}
+.grid{display:grid;gap:22px}.grid.two{grid-template-columns:repeat(2,1fr)}.grid.three{grid-template-columns:repeat(3,1fr)}.grid.four{grid-template-columns:repeat(4,1fr)}
+.card{background:linear-gradient(160deg,rgba(22,33,61,.96),rgba(11,16,32,.92));border:1px solid rgba(255,255,255,.09);border-radius:24px;padding:25px 27px;box-shadow:0 12px 30px rgba(0,0,0,.2);display:flex;flex-direction:column;justify-content:center}
+.card p,.card li{font-size:20px}.card .small{font-size:17px}
+ul{margin:0;padding-left:24px}li{font-size:23px;line-height:1.34;margin:8px 0;color:var(--muted)}li::marker{color:var(--accent)}
+.flow{display:flex;align-items:stretch;gap:14px;margin-top:18px}.node{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:18px 20px;min-width:130px;flex:1;text-align:center;display:flex;align-items:center;justify-content:center;font-size:21px;color:#eaf2ff}.arrow{align-self:center;color:var(--accent);font-size:32px;font-weight:800}
+.module{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:15px 18px;border-radius:18px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.10);margin-top:12px}.module strong{font-size:20px}.module span{font-size:18px;color:var(--muted)}
+a{color:var(--accent);text-decoration:none;font-weight:700}a:hover{text-decoration:underline}
+.exercise,.banner{margin-top:22px;border:1px solid rgba(255,184,107,.42);background:rgba(255,184,107,.08);border-radius:22px;padding:18px 22px}.exercise .label{font-size:15px;letter-spacing:.07em;text-transform:uppercase;color:var(--accent2);font-weight:800;margin-bottom:7px}.exercise p,.banner{font-size:21px;line-height:1.34;color:#e4eaf5}
+.chapter{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:stretch}.chapter .card{min-height:310px}
+.footer{position:absolute;left:66px;right:76px;bottom:20px;display:flex;align-items:center;justify-content:space-between;color:#788aa8;font-size:15px}
+.titleMark{position:absolute;right:76px;top:60px;color:rgba(255,255,255,.16);font-size:108px;font-weight:900;letter-spacing:-.08em}
+.progress{position:absolute;left:0;bottom:0;height:5px;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0;z-index:12}.slideNo{position:fixed;left:22px;bottom:20px;color:#7890ad;font-size:14px;z-index:20}
+.code{font-family:Consolas,Monaco,monospace;background:#050814;border:1px solid #273550;border-radius:18px;padding:20px;color:#d5e7ff;white-space:pre-wrap;font-size:20px;line-height:1.35}
+.compare{width:100%;border-collapse:separate;border-spacing:0 12px;font-size:21px}.compare th{text-align:left;color:#fff;padding:8px 14px}.compare td{background:rgba(255,255,255,.055);border-top:1px solid rgba(255,255,255,.09);border-bottom:1px solid rgba(255,255,255,.09);padding:14px;color:var(--muted)}.compare td:first-child{border-left:1px solid rgba(255,255,255,.09);border-radius:14px 0 0 14px;color:#fff;font-weight:650}.compare td:last-child{border-right:1px solid rgba(255,255,255,.09);border-radius:0 14px 14px 0}
+.pill{display:inline-block;border:1px solid rgba(79,209,197,.35);background:rgba(79,209,197,.1);border-radius:999px;padding:8px 15px;margin:5px 6px 5px 0;font-size:18px;color:#dffdfa}
+@media print{body{overflow:visible;background:#0b1020}.slide{display:block;page-break-after:always;height:100vh}.slideNo,.progress{display:none}}
+
+</style>
+</head>
+<body>
+<main class="deck">
+
+<section class="slide title">
+  <div class="titleMark">03</div>
+  <div class="kicker">Vývoj s podporou AI</div>
+  <h1>Proces vývoja s podporou AI</h1>
+  <p class="lead">Pragmatický tímový model, v ktorom AI zrýchľuje vývoj a pomáha s kvalitou, ale rozhodnutia a zodpovednosť zostávajú na ľuďoch.</p>
+  <div class="flow" style="margin-top:34px">
+    <div class="node">Jasný rozsah</div><div class="arrow">→</div>
+    <div class="node">Postup podľa rizika</div><div class="arrow">→</div>
+    <div class="node">AI ako pomoc pri práci</div><div class="arrow">→</div>
+    <div class="node">Človek ako vlastník rozhodnutí</div>
+  </div>
+  <div class="footer"><span>Proces vývoja s podporou AI</span></div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Cieľ modelu</div>
+  <h2>Zrýchliť vývoj bez straty kontroly</h2>
+  <div class="grid three">
+    <div class="card"><h3>Rýchlejší štart práce</h3><p>AI pomáha pripraviť návrh issue, implementačný plán, testy, zhrnutie zmeny alebo review.</p></div>
+    <div class="card"><h3>Rovnaké štandardy</h3><p>Každá zmena prechádza rovnakými pravidlami, testami a kontrolami bez ohľadu na to, či ju pripravil človek alebo AI.</p></div>
+    <div class="card"><h3>Jasná zodpovednosť</h3><p>Každá úloha má vlastníka z tímu. AI môže navrhovať a vykonávať, ale nerozhoduje o rozsahu, riziku ani merge.</p></div>
+  </div>
+  <div class="banner"><b>Pointa:</b> Nejde o to zapojiť čo najviac agentov. Dôležité je zvoliť najjednoduchší postup, ktorý dáva primeranú istotu, že zmena bude správna, otestovaná a bezpečná.</div>
+  <div class="footer"><span>Cieľ modelu</span></div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Základné princípy</div>
+  <h2>AI pomáha s prácou, nie so zodpovednosťou</h2>
+  <div class="grid two">
+    <div class="card">
+      <h3>Práca je ukotvená v GitHube a repozitári</h3>
+      <ul>
+        <li>GitHub issue definuje očakávaný výsledok.</li>
+        <li>Schválený implementačný plán určuje spôsob realizácie, ak ho úloha vyžaduje.</li>
+        <li>Štandardy, architektúra a ADR určujú dlhodobo platné pravidlá.</li>
+        <li>Build, testy a CI dokazujú, že zmena prešla overením.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Kľúčové rozhodnutia zostávajú na človeku</h3>
+      <ul>
+        <li>Schvaľuje business rozsah a implementačný plán.</li>
+        <li>Vyhodnocuje nálezy z AI review.</li>
+        <li>Rozhoduje o bezpečnostne citlivom správaní.</li>
+        <li>Robí záverečné review a rozhoduje o merge.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="banner"><b>Pravidlo zastavenia:</b> ak je úloha nejednoznačná, je v konflikte so štandardmi alebo vyžaduje širší zásah, agent nemá improvizovať.</div>
+  <div class="footer"><span>Zodpovednosť</span></div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Model podľa rizika</div>
+  <h2>Miera kontroly rastie s dopadom možnej chyby</h2>
+  <div class="grid three">
+    <div class="card"><h3>Úroveň 1 · Malá úloha</h3><p>Text, drobný UI zásah, jednoduchý bug fix, dokumentácia alebo menší refactoring.</p><p><b>Typicky:</b> issue → implementácia → testy → PR review.</p></div>
+    <div class="card"><h3>Úroveň 2 · Štandardná úloha</h3><p>Nový používateľský tok, zmena backendu, zásah do viacerých súborov alebo samostatná časť funkcionality.</p><p><b>Typicky:</b> issue → schválený plán → implementácia → CI → AI review podľa prínosu → review developera.</p></div>
+    <div class="card"><h3>Úroveň 3 · Vysoké riziko</h3><p>Identita, dáta, migrácie, verejné API, infraštruktúra alebo zmeny naprieč modulmi.</p><p><b>Typicky:</b> úplný plán, povinné AI review a plán nápravy pri netriviálnych nálezoch.</p></div>
+  </div>
+  <div class="footer"><span>Postup podľa rizika</span></div>
+</section>
+
+<section class="slide">
+  <div class="kicker">End-to-end postup</div>
+  <h2>AI môže pomáhať vo viacerých krokoch</h2>
+  <div class="flow">
+    <div class="node">Issue</div><div class="arrow">→</div>
+    <div class="node">Implementation Plan</div><div class="arrow">→</div>
+    <div class="node">Schválenie človekom</div><div class="arrow">→</div>
+    <div class="node">Implementácia</div><div class="arrow">→</div>
+    <div class="node">CI + review</div>
+  </div>
+  <div class="flow" style="margin-top:22px">
+    <div class="node">Vyhodnotenie nálezov</div><div class="arrow">→</div>
+    <div class="node">Jednoduchá oprava alebo remediation plan</div><div class="arrow">→</div>
+    <div class="node">Oprava</div><div class="arrow">→</div>
+    <div class="node">Finálne review</div><div class="arrow">→</div>
+    <div class="node">Merge človekom</div>
+  </div>
+  <div class="banner"><b>Dôležité:</b> AI môže pripraviť návrh alebo realizovať zmenu, ale scope, riziko, plány, nálezy aj merge zostávajú na rozhodnutí človeka.</div>
+  <div class="footer"><span>End-to-end postup</span></div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Kontext pre agentov</div>
+  <h2>Dobré výsledky vznikajú z konzistentného kontextu</h2>
+  <div class="grid two">
+    <div class="card">
+      <h3>Vrstvy kontextu</h3>
+      <ul>
+        <li>business prehľad a hranice riešenia;</li>
+        <li>issue a akceptačné kritériá;</li>
+        <li>schválený implementačný plán;</li>
+        <li>štandardy, architektúra a ADR;</li>
+        <li>AGENTS.md, validačné príkazy a CI.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Prečo na tom záleží</h3>
+      <ul>
+        <li>prompty môžu byť kratšie a konkrétnejšie;</li>
+        <li>pravidlá nie sú uzamknuté v jednom AI nástroji;</li>
+        <li>rozpory medzi zdrojmi sú viditeľné;</li>
+        <li>dôležité rozhodnutia nezostávajú iba v chate.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer"><span>Kontext pre agentov</span></div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Praktické pravidlá</div>
+  <h2>Udržateľné používanie AI vo vývoji</h2>
+  <div class="grid two">
+    <div class="card">
+      <h3>Nastaviť proces</h3>
+      <ul>
+        <li>pri každej úlohe určiť úroveň rizika;</li>
+        <li>udržať väzbu issue → plán → PR → review;</li>
+        <li>prompt používať ako spúšťaciu inštrukciu, nie ako sklad všetkých pravidiel;</li>
+        <li>rozlišovať povinné opravy od voliteľných zlepšení.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Dať agentom hranice</h3>
+      <ul>
+        <li>implementovať iba schválený rozsah;</li>
+        <li>nevymýšľať business pravidlá;</li>
+        <li>nepracovať so secrets ani produkčnými dátami;</li>
+        <li>zastaviť prácu pri konflikte alebo nejasnosti.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer"><span>Pravidlá práce</span></div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Dôkazy o výsledku</div>
+  <h2>Agent má na konci ukázať, čo sa naozaj stalo</h2>
+  <div class="grid three">
+    <div class="card"><h3>Čo sa zmenilo</h3><p>Zhrnutie zmenených súborov, správania systému a hraníc scope.</p></div>
+    <div class="card"><h3>Ako je to overené</h3><p>Zoznam skutočne spustených príkazov a výsledkov testov alebo CI.</p></div>
+    <div class="card"><h3>Čo zostáva otvorené</h3><p>Riziká, predpoklady, odchýlky od plánu alebo veci, ktoré vyžadujú človeka.</p></div>
+  </div>
+  <div class="footer"><span>Dôkazy a kontrola</span></div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Čomu sa vyhnúť</div>
+  <h2>Najčastejšie chyby pri vývoji s podporou AI</h2>
+  <div class="grid two">
+    <div class="card">
+      <h3>Procesné chyby</h3>
+      <ul>
+        <li>vibe coding bez rámca issue, jasného cieľa a validácie;</li>
+        <li>rovnaký ťažkopádny postup pre každú drobnú zmenu;</li>
+        <li>samostatný agent na každý krok bez jasného dôvodu;</li>
+        <li>automatické zapracovanie všetkých nálezov z AI review.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Chyby v kontexte</h3>
+      <ul>
+        <li>neurčité zadania typu „oprav issue“ bez rozsahu;</li>
+        <li>kritické pravidlá uložené iba v chate;</li>
+        <li>agent, ktorý potichu rieši rozpory medzi zdrojmi;</li>
+        <li>prístup agentov k secrets, produkčným dátam alebo nekontrolovanému merge.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="banner">Rýchla práca s AI môže byť užitočná pri experimente, ale tímový vývoj potrebuje jasný rozsah, dohľadateľné rozhodnutia a overiteľný výsledok.</div>
+  <div class="footer"><span>Čomu sa vyhnúť</span></div>
+</section>
+
+</main>
+<div class="slideNo"></div>
+<div class="progress"></div>
+<script>
+
+const slides=[...document.querySelectorAll('.slide')];
+let current=0;
+const prog=document.querySelector('.progress');
+const num=document.querySelector('.slideNo');
+function show(index){
+  current=Math.max(0,Math.min(index,slides.length-1));
+  slides.forEach((slide,i)=>slide.classList.toggle('active',i===current));
+  num.textContent=`${current+1} / ${slides.length}`;
+  prog.style.width=`${((current+1)/slides.length)*100}%`;
+  history.replaceState(null,'','#'+(current+1));
+}
+function next(){show(current+1)}
+function prev(){show(current-1)}
+document.addEventListener('keydown',event=>{
+  if(['ArrowRight','PageDown',' '].includes(event.key)){event.preventDefault();next();}
+  if(['ArrowLeft','PageUp'].includes(event.key)){event.preventDefault();prev();}
+  if(event.key==='Home'){event.preventDefault();show(0);}
+  if(event.key==='End'){event.preventDefault();show(slides.length-1);}
+});
+const start=parseInt(location.hash.slice(1),10);
+show(isNaN(start)?0:start-1);
+
+</script>
+</body>
+</html>
