@@ -35,8 +35,6 @@ ul{margin:0;padding-left:24px}li{font-size:23px;line-height:1.34;margin:8px 0;co
 a{color:var(--accent);text-decoration:none;font-weight:700}a:hover{text-decoration:underline}
 .exercise{margin-top:22px;border:1px solid rgba(255,184,107,.42);background:rgba(255,184,107,.08);border-radius:22px;padding:18px 22px}.exercise .label{font-size:15px;letter-spacing:.07em;text-transform:uppercase;color:var(--accent2);font-weight:800;margin-bottom:7px}.exercise p{font-size:21px;line-height:1.34;margin:0;color:#e4eaf5}
 .chapter{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:stretch}.chapter .card{min-height:310px}
-.tag{display:inline-flex;align-items:center;border-radius:999px;background:rgba(79,209,197,.10);border:1px solid rgba(79,209,197,.30);padding:8px 13px;font-size:17px;color:#dffdfa;margin:4px 5px 4px 0}
-.note{margin-top:18px;font-size:20px;color:#9fb0ca}
 .footer{position:absolute;left:66px;right:76px;bottom:20px;display:flex;align-items:center;justify-content:space-between;color:#788aa8;font-size:15px}
 .titleMark{position:absolute;right:76px;top:60px;color:rgba(255,255,255,.16);font-size:108px;font-weight:900;letter-spacing:-.08em}
 .progress{position:absolute;left:0;bottom:0;height:5px;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0;z-index:12}
@@ -85,14 +83,14 @@ a{color:var(--accent);text-decoration:none;font-weight:700}a:hover{text-decorati
       <ul>
         <li>čo rieši aplikácia Unified Work Items;</li>
         <li>frontend, backend, aplikačná vrstva a konektory;</li>
-        <li>použité technológie, autentifikácia, testovanie a observabilita.</li>
+        <li>použité technológie, autentifikácia, testovanie a monitorovanie aplikácie.</li>
       </ul>
       <div class="module"><div><strong>Prezentácia 04</strong><br><span>Architektúra riešenia a postup implementácie</span></div><a href="04_application_stack_and_delivery.html">Otvoriť →</a></div>
     </div>
     <div class="card">
-      <h3>GitHub a AI-assisted development</h3>
+      <h3>GitHub a vývoj s podporou AI</h3>
       <ul>
-        <li>Git, branches, Issues a Pull Requests;</li>
+        <li>Git, vetvy, Issues a Pull Requests;</li>
         <li>plánovanie zmeny a práca s AI agentmi;</li>
         <li>implementácia, validácia, review a Draft PR.</li>
       </ul>
@@ -120,7 +118,7 @@ a{color:var(--accent);text-decoration:none;font-weight:700}a:hover{text-decorati
     </div>
     <div class="card">
       <h3>Dev Container</h3>
-      <p>Dev Container nám umožní mať vývojové nástroje, runtime a potrebné závislosti popísané priamo v repozitári.</p>
+      <p>Dev Container nám umožní mať vývojové nástroje, potrebné verzie runtime a ďalšie závislosti popísané priamo v repozitári.</p>
       <p>Nadväzuje na predchádzajúci blok: pracujeme už s konkrétnym projektom a pripravíme si jednotné prostredie pre ďalšiu prácu.</p>
     </div>
   </div>
@@ -134,10 +132,10 @@ a{color:var(--accent);text-decoration:none;font-weight:700}a:hover{text-decorati
   <h2>Terraform a Azure infraštruktúra</h2>
   <div class="chapter">
     <div class="card highlight">
-      <h3>Infrastructure as Code</h3>
+      <h3>Infraštruktúra ako kód</h3>
       <ul>
         <li>Terraform konfigurácia a Azure provider;</li>
-        <li>resources, premenné, outputs a moduly;</li>
+        <li>resources, premenné, výstupy a moduly;</li>
         <li>state a jeho uloženie;</li>
         <li>terraform init, validate, plan a apply.</li>
       </ul>
@@ -163,7 +161,7 @@ a{color:var(--accent);text-decoration:none;font-weight:700}a:hover{text-decorati
       <ul>
         <li>aké možnosti hostingu máme pre backend a kontajnerové aplikácie;</li>
         <li>Azure Functions Flex a Azure Container Apps;</li>
-        <li>ako súvisí runtime aplikácie s pripravenou infraštruktúrou.</li>
+        <li>ako spôsob behu aplikácie súvisí s pripravenou infraštruktúrou.</li>
       </ul>
       <div class="module"><div><strong>Prezentácia 03</strong><br><span>Azure hosting</span></div><a href="03_containers_devcontainer_azure_hosting.html">Otvoriť →</a></div>
     </div>
@@ -172,7 +170,7 @@ a{color:var(--accent);text-decoration:none;font-weight:700}a:hover{text-decorati
       <ul>
         <li>build a automatické testy;</li>
         <li>kontroly pri pull requeste;</li>
-        <li>práca s prostrediami a deploymentom;</li>
+        <li>práca s prostrediami a nasadením;</li>
         <li>ako na seba nadväzujú zmena v kóde, validácia a nasadenie.</li>
       </ul>
       <div class="module"><div><strong>Prezentácia 01</strong><br><span>GitHub Actions a CI/CD</span></div><a href="01_git_github_actions.html">Otvoriť →</a></div>
