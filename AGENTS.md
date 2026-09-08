@@ -32,6 +32,14 @@ When working in a directory that contains a more specific `AGENTS.md`, read and 
 - Canonical project documentation under `docs/`, approved ADRs/standards, and the relevant GitHub issue/plan take precedence over presentation content.
 - When presentation work is explicitly requested, read `training/presentations/AGENTS.md` before editing that folder.
 
+### Human-only prompt examples are excluded from normal context
+
+`docs/ai/examples/` contains copy-ready launch-prompt examples for human developers. It is reference material, not agent instructions or an authoritative project source.
+
+- Do not read, search, summarize, index, or use files under `docs/ai/examples/` during normal issue authoring, planning, implementation, review, or remediation work.
+- Read those examples only when the current task explicitly asks you to create, review, update, or use the human launch-prompt examples.
+- Stable prompts under `docs/ai/`, the relevant GitHub issue or PR, approved plans, standards, architecture documentation, ADRs, code, and tests take precedence over example text.
+
 Area-specific standards:
 
 - all code: `docs/standards/coding/general.md`
