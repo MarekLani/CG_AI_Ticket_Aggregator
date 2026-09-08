@@ -1,22 +1,13 @@
-# Technology stack presentations
+# Training presentations
 
-Training-only HTML presentations for the Unified Work Items workshop.
+Open `00_index.html` first. It is the agenda deck and links to the topic decks in the recommended training order.
 
-Open `00_index.html` first, or open any individual deck directly.
+## Recommended order
 
-Decks:
+1. `01_application_architecture_and_implementation.html` — architecture, technology choices and implementation roadmap.
+2. `02_git_github_actions.html` — Git, GitHub, pull requests, review and GitHub Actions.
+3. `03_ai_assisted_development_workflow.html` — team workflow for development with AI support, risk levels, human approvals, review and remediation.
+4. `04_containers_devcontainer_azure_hosting.html` — containers, Docker, Dev Container and Azure hosting models.
+5. `05_terraform_iac.html` — Terraform and Infrastructure as Code.
 
-- `01_application_architecture_and_implementation.html` — application architecture and implementation units
-- `02_git_github_ai_development.html` — Git, GitHub, AI-supported development and GitHub Actions
-- `03_containers_devcontainer_azure_hosting.html` — containers, Dev Container and Azure hosting
-- `04_terraform_iac.html` — Terraform and Infrastructure as Code
-
-The numbering follows the first time each topic is used in the training flow. Some decks are revisited later for related topics.
-
-Keyboard navigation inside decks: Arrow keys, PageUp/PageDown, Space.
-
-## Important
-
-These files are **training material, not canonical application documentation**. Product requirements, architecture, ADRs, engineering standards, and implementation decisions under `docs/` and the relevant GitHub issues remain authoritative.
-
-Normal planning, implementation, and review agents must not load this folder as context unless the task explicitly asks them to work on the training presentations. See the root `AGENTS.md` and this folder's `AGENTS.md`.
+The agenda deck intentionally shows that some topics are revisited later. GitHub Actions and Azure hosting are used again when the first application deployment is discussed, and the architecture/implementation roadmap is used again when the training returns to further application development.
